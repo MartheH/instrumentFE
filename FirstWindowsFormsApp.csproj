@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Title>My First Windows App</Title>
+    <Company>My Company Ltd.</Company>
+    <Description>This is my first appication for windows using windows forms.</Description>
+    <Copyright>This is mine!</Copyright>
+  </PropertyGroup>
+
+</Project>
