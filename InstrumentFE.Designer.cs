@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 1000D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(2D, 500D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(4D, 0D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRegistered = new System.Windows.Forms.TabPage();
@@ -61,8 +63,8 @@
             this.textBoxSummary = new System.Windows.Forms.TextBox();
             this.labelMeasureTime = new System.Windows.Forms.Label();
             this.textBoxRegister = new System.Windows.Forms.TextBox();
-            this.statusStripReady = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStripSensorData = new System.Windows.Forms.StatusStrip();
+            this.statusLabelSensorData = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.maskedTextBoxSerialNumber = new System.Windows.Forms.MaskedTextBox();
             this.labelComment = new System.Windows.Forms.Label();
@@ -76,24 +78,32 @@
             this.labelSerialNumber = new System.Windows.Forms.Label();
             this.labelSensorName = new System.Windows.Forms.Label();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.buttonDisconnect = new System.Windows.Forms.Button();
+            this.buttonComConnect = new System.Windows.Forms.Button();
+            this.textBoxComReceived = new System.Windows.Forms.TextBox();
+            this.labelBaudRate = new System.Windows.Forms.Label();
+            this.labelComPort = new System.Windows.Forms.Label();
+            this.comboBoxBaud = new System.Windows.Forms.ComboBox();
+            this.comboBoxComPort = new System.Windows.Forms.ComboBox();
+            this.statusStripConnection = new System.Windows.Forms.StatusStrip();
+            this.statusLabelConnection = new System.Windows.Forms.ToolStripStatusLabel();
             this.buttonReadScaled = new System.Windows.Forms.Button();
             this.buttonReadState = new System.Windows.Forms.Button();
             this.buttonWriteConfiguration = new System.Windows.Forms.Button();
             this.buttonReadConfiguration = new System.Windows.Forms.Button();
             this.textBoxSend = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
             this.labelIPAddress = new System.Windows.Forms.Label();
             this.checkBoxCaseSensitive = new System.Windows.Forms.CheckBox();
             this.textBoxCommunication = new System.Windows.Forms.TextBox();
             this.textBoxIP = new System.Windows.Forms.TextBox();
             this.textBoxPort = new System.Windows.Forms.TextBox();
-            this.buttonSend = new System.Windows.Forms.Button();
+            this.buttonConnect = new System.Windows.Forms.Button();
             this.tabPageLists = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tabPageChart = new System.Windows.Forms.TabPage();
+            this.listBoxServers = new System.Windows.Forms.ListBox();
+            this.tabPageGraph = new System.Windows.Forms.TabPage();
             this.buttonAddXY = new System.Windows.Forms.Button();
             this.labelY = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
@@ -112,10 +122,11 @@
             this.tabControl1.SuspendLayout();
             this.tabPageRegistered.SuspendLayout();
             this.panelUnit.SuspendLayout();
-            this.statusStripReady.SuspendLayout();
+            this.statusStripSensorData.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
+            this.statusStripConnection.SuspendLayout();
             this.tabPageLists.SuspendLayout();
-            this.tabPageChart.SuspendLayout();
+            this.tabPageGraph.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -125,13 +136,12 @@
             this.tabControl1.Controls.Add(this.tabPageRegistered);
             this.tabControl1.Controls.Add(this.tabPageConnection);
             this.tabControl1.Controls.Add(this.tabPageLists);
-            this.tabControl1.Controls.Add(this.tabPageChart);
+            this.tabControl1.Controls.Add(this.tabPageGraph);
             this.tabControl1.Location = new System.Drawing.Point(0, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(963, 461);
+            this.tabControl1.Size = new System.Drawing.Size(963, 482);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.MouseHover += new System.EventHandler(this.tabControl1_MouseHover);
             // 
             // tabPageRegistered
@@ -149,7 +159,7 @@
             this.tabPageRegistered.Controls.Add(this.textBoxSummary);
             this.tabPageRegistered.Controls.Add(this.labelMeasureTime);
             this.tabPageRegistered.Controls.Add(this.textBoxRegister);
-            this.tabPageRegistered.Controls.Add(this.statusStripReady);
+            this.tabPageRegistered.Controls.Add(this.statusStripSensorData);
             this.tabPageRegistered.Controls.Add(this.textBoxComment);
             this.tabPageRegistered.Controls.Add(this.maskedTextBoxSerialNumber);
             this.tabPageRegistered.Controls.Add(this.labelComment);
@@ -165,7 +175,7 @@
             this.tabPageRegistered.Location = new System.Drawing.Point(4, 29);
             this.tabPageRegistered.Name = "tabPageRegistered";
             this.tabPageRegistered.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRegistered.Size = new System.Drawing.Size(955, 428);
+            this.tabPageRegistered.Size = new System.Drawing.Size(955, 449);
             this.tabPageRegistered.TabIndex = 0;
             this.tabPageRegistered.Text = "Sensor Data";
             this.tabPageRegistered.UseVisualStyleBackColor = true;
@@ -189,7 +199,7 @@
             // 
             this.buttonRegisterNew.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonRegisterNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonRegisterNew.Location = new System.Drawing.Point(396, 219);
+            this.buttonRegisterNew.Location = new System.Drawing.Point(396, 211);
             this.buttonRegisterNew.Name = "buttonRegisterNew";
             this.buttonRegisterNew.Size = new System.Drawing.Size(131, 39);
             this.buttonRegisterNew.TabIndex = 14;
@@ -213,7 +223,7 @@
             // 
             this.buttonSaveChanges.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonSaveChanges.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveChanges.Location = new System.Drawing.Point(396, 264);
+            this.buttonSaveChanges.Location = new System.Drawing.Point(396, 256);
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(131, 39);
             this.buttonSaveChanges.TabIndex = 15;
@@ -248,7 +258,7 @@
             // 
             this.buttonOpenFIle.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonOpenFIle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonOpenFIle.Location = new System.Drawing.Point(806, 309);
+            this.buttonOpenFIle.Location = new System.Drawing.Point(809, 309);
             this.buttonOpenFIle.Name = "buttonOpenFIle";
             this.buttonOpenFIle.Size = new System.Drawing.Size(143, 39);
             this.buttonOpenFIle.TabIndex = 18;
@@ -298,7 +308,7 @@
             // labelAlarmL
             // 
             this.labelAlarmL.AutoSize = true;
-            this.labelAlarmL.Location = new System.Drawing.Point(10, 146);
+            this.labelAlarmL.Location = new System.Drawing.Point(10, 143);
             this.labelAlarmL.Name = "labelAlarmL";
             this.labelAlarmL.Size = new System.Drawing.Size(60, 20);
             this.labelAlarmL.TabIndex = 29;
@@ -306,17 +316,18 @@
             // 
             // textBoxAlarmL
             // 
-            this.textBoxAlarmL.Location = new System.Drawing.Point(82, 143);
-            this.textBoxAlarmL.MaxLength = 4;
+            this.textBoxAlarmL.Location = new System.Drawing.Point(82, 140);
+            this.textBoxAlarmL.MaxLength = 5;
             this.textBoxAlarmL.Name = "textBoxAlarmL";
             this.textBoxAlarmL.Size = new System.Drawing.Size(96, 27);
             this.textBoxAlarmL.TabIndex = 13;
+            this.textBoxAlarmL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAlarmL_KeyPress);
             this.textBoxAlarmL.MouseHover += new System.EventHandler(this.textBoxAlarmL_MouseHover);
             // 
             // labelAlarmH
             // 
             this.labelAlarmH.AutoSize = true;
-            this.labelAlarmH.Location = new System.Drawing.Point(12, 113);
+            this.labelAlarmH.Location = new System.Drawing.Point(12, 109);
             this.labelAlarmH.Name = "labelAlarmH";
             this.labelAlarmH.Size = new System.Drawing.Size(64, 20);
             this.labelAlarmH.TabIndex = 27;
@@ -324,17 +335,18 @@
             // 
             // textBoxAlarmH
             // 
-            this.textBoxAlarmH.Location = new System.Drawing.Point(82, 110);
-            this.textBoxAlarmH.MaxLength = 4;
+            this.textBoxAlarmH.Location = new System.Drawing.Point(82, 106);
+            this.textBoxAlarmH.MaxLength = 5;
             this.textBoxAlarmH.Name = "textBoxAlarmH";
             this.textBoxAlarmH.Size = new System.Drawing.Size(96, 27);
             this.textBoxAlarmH.TabIndex = 12;
+            this.textBoxAlarmH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAlarmH_KeyPress);
             this.textBoxAlarmH.MouseHover += new System.EventHandler(this.textBoxAlarmH_MouseHover);
             // 
             // textBoxLRV
             // 
             this.textBoxLRV.Location = new System.Drawing.Point(82, 3);
-            this.textBoxLRV.MaxLength = 1234534;
+            this.textBoxLRV.MaxLength = 5;
             this.textBoxLRV.Name = "textBoxLRV";
             this.textBoxLRV.Size = new System.Drawing.Size(96, 27);
             this.textBoxLRV.TabIndex = 9;
@@ -344,7 +356,7 @@
             // labelLRV
             // 
             this.labelLRV.AutoSize = true;
-            this.labelLRV.Location = new System.Drawing.Point(17, 10);
+            this.labelLRV.Location = new System.Drawing.Point(10, 10);
             this.labelLRV.Name = "labelLRV";
             this.labelLRV.Size = new System.Drawing.Size(34, 20);
             this.labelLRV.TabIndex = 21;
@@ -353,7 +365,7 @@
             // textBoxURV
             // 
             this.textBoxURV.Location = new System.Drawing.Point(82, 36);
-            this.textBoxURV.MaxLength = 4555555;
+            this.textBoxURV.MaxLength = 5;
             this.textBoxURV.Name = "textBoxURV";
             this.textBoxURV.Size = new System.Drawing.Size(96, 27);
             this.textBoxURV.TabIndex = 10;
@@ -363,7 +375,7 @@
             // labelUnit
             // 
             this.labelUnit.AutoSize = true;
-            this.labelUnit.Location = new System.Drawing.Point(17, 77);
+            this.labelUnit.Location = new System.Drawing.Point(11, 75);
             this.labelUnit.Name = "labelUnit";
             this.labelUnit.Size = new System.Drawing.Size(36, 20);
             this.labelUnit.TabIndex = 25;
@@ -372,7 +384,7 @@
             // labelURV
             // 
             this.labelURV.AutoSize = true;
-            this.labelURV.Location = new System.Drawing.Point(17, 39);
+            this.labelURV.Location = new System.Drawing.Point(10, 43);
             this.labelURV.Name = "labelURV";
             this.labelURV.Size = new System.Drawing.Size(37, 20);
             this.labelURV.TabIndex = 24;
@@ -380,7 +392,7 @@
             // 
             // textBoxUnit
             // 
-            this.textBoxUnit.Location = new System.Drawing.Point(82, 74);
+            this.textBoxUnit.Location = new System.Drawing.Point(82, 69);
             this.textBoxUnit.MaxLength = 4;
             this.textBoxUnit.Name = "textBoxUnit";
             this.textBoxUnit.Size = new System.Drawing.Size(96, 27);
@@ -416,23 +428,23 @@
             this.textBoxRegister.Size = new System.Drawing.Size(338, 125);
             this.textBoxRegister.TabIndex = 20;
             // 
-            // statusStripReady
+            // statusStripSensorData
             // 
-            this.statusStripReady.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStripReady.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStripReady.Location = new System.Drawing.Point(3, 399);
-            this.statusStripReady.Name = "statusStripReady";
-            this.statusStripReady.Size = new System.Drawing.Size(949, 26);
-            this.statusStripReady.TabIndex = 16;
-            this.statusStripReady.Text = "statusStrip1";
+            this.statusStripSensorData.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStripSensorData.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabelSensorData});
+            this.statusStripSensorData.Location = new System.Drawing.Point(3, 420);
+            this.statusStripSensorData.Name = "statusStripSensorData";
+            this.statusStripSensorData.Size = new System.Drawing.Size(949, 26);
+            this.statusStripSensorData.TabIndex = 16;
+            this.statusStripSensorData.Text = "Ready";
             // 
-            // toolStripStatusLabel1
+            // statusLabelSensorData
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.MouseHover += new System.EventHandler(this.FormMain_Load);
+            this.statusLabelSensorData.Name = "statusLabelSensorData";
+            this.statusLabelSensorData.Size = new System.Drawing.Size(219, 20);
+            this.statusLabelSensorData.Text = "toolStripStatusLabelSensorData";
+            this.statusLabelSensorData.MouseHover += new System.EventHandler(this.FormMain_Load);
             // 
             // textBoxComment
             // 
@@ -550,81 +562,171 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.buttonDisconnect);
+            this.tabPageConnection.Controls.Add(this.buttonComConnect);
+            this.tabPageConnection.Controls.Add(this.textBoxComReceived);
+            this.tabPageConnection.Controls.Add(this.labelBaudRate);
+            this.tabPageConnection.Controls.Add(this.labelComPort);
+            this.tabPageConnection.Controls.Add(this.comboBoxBaud);
+            this.tabPageConnection.Controls.Add(this.comboBoxComPort);
+            this.tabPageConnection.Controls.Add(this.statusStripConnection);
             this.tabPageConnection.Controls.Add(this.buttonReadScaled);
             this.tabPageConnection.Controls.Add(this.buttonReadState);
             this.tabPageConnection.Controls.Add(this.buttonWriteConfiguration);
             this.tabPageConnection.Controls.Add(this.buttonReadConfiguration);
             this.tabPageConnection.Controls.Add(this.textBoxSend);
-            this.tabPageConnection.Controls.Add(this.textBox3);
             this.tabPageConnection.Controls.Add(this.labelPort);
             this.tabPageConnection.Controls.Add(this.labelIPAddress);
             this.tabPageConnection.Controls.Add(this.checkBoxCaseSensitive);
             this.tabPageConnection.Controls.Add(this.textBoxCommunication);
             this.tabPageConnection.Controls.Add(this.textBoxIP);
             this.tabPageConnection.Controls.Add(this.textBoxPort);
-            this.tabPageConnection.Controls.Add(this.buttonSend);
+            this.tabPageConnection.Controls.Add(this.buttonConnect);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 29);
             this.tabPageConnection.Name = "tabPageConnection";
             this.tabPageConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConnection.Size = new System.Drawing.Size(955, 428);
+            this.tabPageConnection.Size = new System.Drawing.Size(955, 449);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
+            // buttonDisconnect
+            // 
+            this.buttonDisconnect.BackColor = System.Drawing.Color.Silver;
+            this.buttonDisconnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonDisconnect.Location = new System.Drawing.Point(719, 135);
+            this.buttonDisconnect.Name = "buttonDisconnect";
+            this.buttonDisconnect.Size = new System.Drawing.Size(142, 36);
+            this.buttonDisconnect.TabIndex = 30;
+            this.buttonDisconnect.Text = "Disconnect";
+            this.buttonDisconnect.UseVisualStyleBackColor = false;
+            // 
+            // buttonComConnect
+            // 
+            this.buttonComConnect.BackColor = System.Drawing.Color.Silver;
+            this.buttonComConnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonComConnect.Location = new System.Drawing.Point(540, 135);
+            this.buttonComConnect.Name = "buttonComConnect";
+            this.buttonComConnect.Size = new System.Drawing.Size(162, 36);
+            this.buttonComConnect.TabIndex = 29;
+            this.buttonComConnect.Text = "Connect";
+            this.buttonComConnect.UseVisualStyleBackColor = false;
+            this.buttonComConnect.Click += new System.EventHandler(this.buttonComConnect_Click);
+            // 
+            // textBoxComReceived
+            // 
+            this.textBoxComReceived.Location = new System.Drawing.Point(540, 190);
+            this.textBoxComReceived.Multiline = true;
+            this.textBoxComReceived.Name = "textBoxComReceived";
+            this.textBoxComReceived.ReadOnly = true;
+            this.textBoxComReceived.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxComReceived.Size = new System.Drawing.Size(390, 212);
+            this.textBoxComReceived.TabIndex = 28;
+            // 
+            // labelBaudRate
+            // 
+            this.labelBaudRate.AutoSize = true;
+            this.labelBaudRate.Location = new System.Drawing.Point(523, 84);
+            this.labelBaudRate.Name = "labelBaudRate";
+            this.labelBaudRate.Size = new System.Drawing.Size(77, 20);
+            this.labelBaudRate.TabIndex = 27;
+            this.labelBaudRate.Text = "Baud Rate";
+            // 
+            // labelComPort
+            // 
+            this.labelComPort.AutoSize = true;
+            this.labelComPort.Location = new System.Drawing.Point(525, 22);
+            this.labelComPort.Name = "labelComPort";
+            this.labelComPort.Size = new System.Drawing.Size(70, 20);
+            this.labelComPort.TabIndex = 26;
+            this.labelComPort.Text = "Com Port";
+            // 
+            // comboBoxBaud
+            // 
+            this.comboBoxBaud.FormattingEnabled = true;
+            this.comboBoxBaud.Items.AddRange(new object[] {
+            "2400",
+            "4800",
+            "9600",
+            "19200",
+            "38400",
+            "57600"});
+            this.comboBoxBaud.Location = new System.Drawing.Point(609, 76);
+            this.comboBoxBaud.Name = "comboBoxBaud";
+            this.comboBoxBaud.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxBaud.TabIndex = 25;
+            // 
+            // comboBoxComPort
+            // 
+            this.comboBoxComPort.FormattingEnabled = true;
+            this.comboBoxComPort.Location = new System.Drawing.Point(609, 14);
+            this.comboBoxComPort.Name = "comboBoxComPort";
+            this.comboBoxComPort.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxComPort.TabIndex = 24;
+            // 
+            // statusStripConnection
+            // 
+            this.statusStripConnection.BackColor = System.Drawing.Color.Transparent;
+            this.statusStripConnection.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStripConnection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabelConnection});
+            this.statusStripConnection.Location = new System.Drawing.Point(3, 420);
+            this.statusStripConnection.Name = "statusStripConnection";
+            this.statusStripConnection.Size = new System.Drawing.Size(949, 26);
+            this.statusStripConnection.TabIndex = 17;
+            this.statusStripConnection.Text = "Connection";
+            // 
+            // statusLabelConnection
+            // 
+            this.statusLabelConnection.Name = "statusLabelConnection";
+            this.statusLabelConnection.Size = new System.Drawing.Size(169, 20);
+            this.statusLabelConnection.Text = "Waiting for connection...";
+            // 
             // buttonReadScaled
             // 
-            this.buttonReadScaled.Location = new System.Drawing.Point(19, 257);
+            this.buttonReadScaled.Location = new System.Drawing.Point(19, 324);
             this.buttonReadScaled.Name = "buttonReadScaled";
             this.buttonReadScaled.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadScaled.TabIndex = 12;
+            this.buttonReadScaled.TabIndex = 8;
             this.buttonReadScaled.Text = "Read Scaled";
             this.buttonReadScaled.UseVisualStyleBackColor = true;
             this.buttonReadScaled.Click += new System.EventHandler(this.buttonReadScaled_Click);
             // 
             // buttonReadState
             // 
-            this.buttonReadState.Location = new System.Drawing.Point(19, 224);
+            this.buttonReadState.Location = new System.Drawing.Point(19, 291);
             this.buttonReadState.Name = "buttonReadState";
             this.buttonReadState.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadState.TabIndex = 11;
+            this.buttonReadState.TabIndex = 7;
             this.buttonReadState.Text = "Read State";
             this.buttonReadState.UseVisualStyleBackColor = true;
             this.buttonReadState.Click += new System.EventHandler(this.buttonReadState_Click);
             // 
             // buttonWriteConfiguration
             // 
-            this.buttonWriteConfiguration.Location = new System.Drawing.Point(19, 191);
+            this.buttonWriteConfiguration.Location = new System.Drawing.Point(19, 258);
             this.buttonWriteConfiguration.Name = "buttonWriteConfiguration";
             this.buttonWriteConfiguration.Size = new System.Drawing.Size(189, 27);
-            this.buttonWriteConfiguration.TabIndex = 10;
+            this.buttonWriteConfiguration.TabIndex = 6;
             this.buttonWriteConfiguration.Text = "Write Configuration";
             this.buttonWriteConfiguration.UseVisualStyleBackColor = true;
             // 
             // buttonReadConfiguration
             // 
-            this.buttonReadConfiguration.Location = new System.Drawing.Point(19, 158);
+            this.buttonReadConfiguration.Location = new System.Drawing.Point(19, 225);
             this.buttonReadConfiguration.Name = "buttonReadConfiguration";
             this.buttonReadConfiguration.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadConfiguration.TabIndex = 9;
+            this.buttonReadConfiguration.TabIndex = 5;
             this.buttonReadConfiguration.Text = "Read Configuration";
             this.buttonReadConfiguration.UseVisualStyleBackColor = true;
             this.buttonReadConfiguration.Click += new System.EventHandler(this.buttonReadConfiguration_Click);
             // 
             // textBoxSend
             // 
-            this.textBoxSend.Location = new System.Drawing.Point(189, 95);
+            this.textBoxSend.Location = new System.Drawing.Point(119, 174);
             this.textBoxSend.Name = "textBoxSend";
             this.textBoxSend.Size = new System.Drawing.Size(125, 27);
-            this.textBoxSend.TabIndex = 8;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(610, 324);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(195, 81);
-            this.textBox3.TabIndex = 7;
+            this.textBoxSend.TabIndex = 22;
             // 
             // labelPort
             // 
@@ -650,52 +752,55 @@
             this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 378);
             this.checkBoxCaseSensitive.Name = "checkBoxCaseSensitive";
             this.checkBoxCaseSensitive.Size = new System.Drawing.Size(124, 24);
-            this.checkBoxCaseSensitive.TabIndex = 4;
+            this.checkBoxCaseSensitive.TabIndex = 22;
             this.checkBoxCaseSensitive.Text = "Case Sensitive";
             this.checkBoxCaseSensitive.UseVisualStyleBackColor = true;
             // 
             // textBoxCommunication
             // 
-            this.textBoxCommunication.Location = new System.Drawing.Point(482, 19);
+            this.textBoxCommunication.Location = new System.Drawing.Point(265, 6);
             this.textBoxCommunication.Multiline = true;
             this.textBoxCommunication.Name = "textBoxCommunication";
+            this.textBoxCommunication.ReadOnly = true;
             this.textBoxCommunication.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxCommunication.Size = new System.Drawing.Size(467, 299);
-            this.textBoxCommunication.TabIndex = 3;
+            this.textBoxCommunication.Size = new System.Drawing.Size(243, 299);
+            this.textBoxCommunication.TabIndex = 23;
             // 
             // textBoxIP
             // 
             this.textBoxIP.Location = new System.Drawing.Point(119, 19);
             this.textBoxIP.Name = "textBoxIP";
-            this.textBoxIP.Size = new System.Drawing.Size(195, 27);
-            this.textBoxIP.TabIndex = 2;
+            this.textBoxIP.Size = new System.Drawing.Size(140, 27);
+            this.textBoxIP.TabIndex = 1;
             // 
             // textBoxPort
             // 
             this.textBoxPort.Location = new System.Drawing.Point(119, 62);
             this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.Size = new System.Drawing.Size(195, 27);
-            this.textBoxPort.TabIndex = 1;
+            this.textBoxPort.Size = new System.Drawing.Size(140, 27);
+            this.textBoxPort.TabIndex = 2;
             this.textBoxPort.Text = "5000";
             // 
-            // buttonSend
+            // buttonConnect
             // 
-            this.buttonSend.Location = new System.Drawing.Point(6, 99);
-            this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(121, 27);
-            this.buttonSend.TabIndex = 0;
-            this.buttonSend.Text = "Send";
-            this.buttonSend.UseVisualStyleBackColor = true;
-            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
+            this.buttonConnect.BackColor = System.Drawing.Color.Silver;
+            this.buttonConnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonConnect.Location = new System.Drawing.Point(19, 120);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(240, 36);
+            this.buttonConnect.TabIndex = 3;
+            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.UseVisualStyleBackColor = false;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click_1);
             // 
             // tabPageLists
             // 
             this.tabPageLists.Controls.Add(this.button1);
             this.tabPageLists.Controls.Add(this.textBox1);
-            this.tabPageLists.Controls.Add(this.listBox1);
+            this.tabPageLists.Controls.Add(this.listBoxServers);
             this.tabPageLists.Location = new System.Drawing.Point(4, 29);
             this.tabPageLists.Name = "tabPageLists";
-            this.tabPageLists.Size = new System.Drawing.Size(955, 428);
+            this.tabPageLists.Size = new System.Drawing.Size(955, 449);
             this.tabPageLists.TabIndex = 2;
             this.tabPageLists.Text = "Lists";
             this.tabPageLists.UseVisualStyleBackColor = true;
@@ -714,33 +819,34 @@
             this.textBox1.Location = new System.Drawing.Point(669, 47);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(237, 212);
             this.textBox1.TabIndex = 1;
             // 
-            // listBox1
+            // listBoxServers
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(18, 27);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(205, 264);
-            this.listBox1.TabIndex = 0;
+            this.listBoxServers.FormattingEnabled = true;
+            this.listBoxServers.ItemHeight = 20;
+            this.listBoxServers.Location = new System.Drawing.Point(8, 24);
+            this.listBoxServers.Name = "listBoxServers";
+            this.listBoxServers.Size = new System.Drawing.Size(405, 264);
+            this.listBoxServers.TabIndex = 0;
             // 
-            // tabPageChart
+            // tabPageGraph
             // 
-            this.tabPageChart.Controls.Add(this.buttonAddXY);
-            this.tabPageChart.Controls.Add(this.labelY);
-            this.tabPageChart.Controls.Add(this.labelX);
-            this.tabPageChart.Controls.Add(this.textBoxYValue);
-            this.tabPageChart.Controls.Add(this.textBoxXValue);
-            this.tabPageChart.Controls.Add(this.chart1);
-            this.tabPageChart.Location = new System.Drawing.Point(4, 29);
-            this.tabPageChart.Name = "tabPageChart";
-            this.tabPageChart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageChart.Size = new System.Drawing.Size(955, 428);
-            this.tabPageChart.TabIndex = 3;
-            this.tabPageChart.Text = "Chart";
-            this.tabPageChart.UseVisualStyleBackColor = true;
+            this.tabPageGraph.Controls.Add(this.buttonAddXY);
+            this.tabPageGraph.Controls.Add(this.labelY);
+            this.tabPageGraph.Controls.Add(this.labelX);
+            this.tabPageGraph.Controls.Add(this.textBoxYValue);
+            this.tabPageGraph.Controls.Add(this.textBoxXValue);
+            this.tabPageGraph.Controls.Add(this.chart1);
+            this.tabPageGraph.Location = new System.Drawing.Point(4, 29);
+            this.tabPageGraph.Name = "tabPageGraph";
+            this.tabPageGraph.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGraph.Size = new System.Drawing.Size(955, 449);
+            this.tabPageGraph.TabIndex = 3;
+            this.tabPageGraph.Text = "Graph";
+            this.tabPageGraph.UseVisualStyleBackColor = true;
             // 
             // buttonAddXY
             // 
@@ -786,25 +892,26 @@
             // 
             // chart1
             // 
-            chartArea1.AxisX.LabelStyle.Format = "mm:ss";
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.LabelStyle.Format = "mm:ss";
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Cursor = System.Windows.Forms.Cursors.AppStarting;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(-4, 0);
             this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsXValueIndexed = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(587, 419);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.Points.Add(dataPoint6);
+            series2.Points.Add(dataPoint7);
+            series2.Points.Add(dataPoint8);
+            series2.Points.Add(dataPoint9);
+            series2.Points.Add(dataPoint10);
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(963, 450);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
@@ -877,7 +984,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(975, 504);
+            this.ClientSize = new System.Drawing.Size(975, 522);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -888,7 +995,6 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FirstWFA";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormMain_KeyPress);
@@ -897,14 +1003,16 @@
             this.tabPageRegistered.PerformLayout();
             this.panelUnit.ResumeLayout(false);
             this.panelUnit.PerformLayout();
-            this.statusStripReady.ResumeLayout(false);
-            this.statusStripReady.PerformLayout();
+            this.statusStripSensorData.ResumeLayout(false);
+            this.statusStripSensorData.PerformLayout();
             this.tabPageConnection.ResumeLayout(false);
             this.tabPageConnection.PerformLayout();
+            this.statusStripConnection.ResumeLayout(false);
+            this.statusStripConnection.PerformLayout();
             this.tabPageLists.ResumeLayout(false);
             this.tabPageLists.PerformLayout();
-            this.tabPageChart.ResumeLayout(false);
-            this.tabPageChart.PerformLayout();
+            this.tabPageGraph.ResumeLayout(false);
+            this.tabPageGraph.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
@@ -914,7 +1022,7 @@
         }
 
         #endregion
-        private StatusStrip statusStripReady;
+        private StatusStrip statusStripSensorData;
         private MenuStrip menuStrip2;
         private TabControl tabControl1;
         private TabPage tabPageRegistered;
@@ -931,7 +1039,7 @@
         private Label labelSignalType;
         private Label labelRegisterDate;
         private ComboBox comboBoxSignalType;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel statusLabelSensorData;
         private TextBox textBoxComment;
         private MaskedTextBox maskedTextBoxSerialNumber;
         private ContextMenuStrip contextMenuStrip1;
@@ -940,7 +1048,7 @@
         private TextBox textBoxCommunication;
         private TextBox textBoxIP;
         private TextBox textBoxPort;
-        private Button buttonSend;
+        private Button buttonConnect;
         private Label labelMeasureTime;
         private Label labelUnit;
         private Label labelURV;
@@ -955,8 +1063,7 @@
         private ComboBox comboBoxMeasureType;
         private CheckBox checkBoxCaseSensitive;
         private TabPage tabPageLists;
-        private ListBox listBox1;
-        private TextBox textBox3;
+        private ListBox listBoxServers;
         private Label labelPort;
         private Label labelIPAddress;
         private TextBox textBoxSend;
@@ -978,7 +1085,7 @@
         private Button buttonReadState;
         private Button buttonWriteConfiguration;
         private Button buttonReadConfiguration;
-        private TabPage tabPageChart;
+        private TabPage tabPageGraph;
         private Button buttonAddXY;
         private Label labelY;
         private Label labelX;
@@ -987,5 +1094,14 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Timer timerReadScaled;
         private ComboBox comboBoxOptions;
+        private StatusStrip statusStripConnection;
+        private ToolStripStatusLabel statusLabelConnection;
+        private Button buttonDisconnect;
+        private Button buttonComConnect;
+        private TextBox textBoxComReceived;
+        private Label labelBaudRate;
+        private Label labelComPort;
+        private ComboBox comboBoxBaud;
+        private ComboBox comboBoxComPort;
     }
 }
