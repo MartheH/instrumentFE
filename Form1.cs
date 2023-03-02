@@ -1,18 +1,21 @@
+using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.Win32;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml.Serialization;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FirstWindowsFormsApp
 {
     public partial class FormMain : Form
     {
         // Constants
-
-        readonly int[] numbers = new int[7] { 5, 3, 7, 25, 26, 32, 43 };
 
         string[] analogSignals = new string[] { "0-5VDC", "0-10VDC", "0-15VDC", "0-20VDC" };
         string[] digitalSignals = new string[] { "5VCD", "10VDC", "15VDC", "20VDC" };
@@ -21,11 +24,7 @@ namespace FirstWindowsFormsApp
 
         //Variables
 
-        string fileNameInstrumentList = "register.csv";
-
-        //char ch = 'a';
-        //string surfaceArea;
-        //int radius;
+        string fileNameInstrumentList = ("register.csv");
 
         double lrvValue = 0.0;
         double urvValue = 0.0;
@@ -37,6 +36,8 @@ namespace FirstWindowsFormsApp
         int fieldbusIndex = 0;
 
         DateTime sessionStartTime;
+
+        int xTimeValue = 0;
 
         List<string> servers = new List<string>();
         List<Instrument> instrumentList = new List<Instrument>();
@@ -62,23 +63,24 @@ namespace FirstWindowsFormsApp
             sessionStartTime = DateTime.Now;
             toolStripStatusLabel1.Text = "Ready";
             comboBoxSignalType.Text = "";
-            comboBoxSignalType.Text = "";
+            textBoxRegister.Text = "";
+            //comboBoxMeasureType.Text = "";
 
 
-            //Loas instrument.csv file
+            //Load instrument.csv file
             string instrumentLine = "";
             string[] instrumentLineParts;
             var inputFile = new StreamReader(fileNameInstrumentList);
 
-            if (inputFile != null) 
+            if (inputFile != null)
             {
-                while (!inputFile.EndOfStream) 
-                
+                while (!inputFile.EndOfStream)
+
                 {
                     instrumentLine = inputFile.ReadLine();
                     instrumentLineParts = instrumentLine.Split(';');
 
-                    Instrument instrument = new Instrument( instrumentLineParts[0],
+                    Instrument instrument = new Instrument(instrumentLineParts[0],
                                                             instrumentLineParts[1],
                                                             instrumentLineParts[2],
                                                             instrumentLineParts[3],
@@ -95,17 +97,22 @@ namespace FirstWindowsFormsApp
                     textBoxRegister.Text = instrumentLine.ToString();
                 }
 
-                
+
                 inputFile.Close();
 
             }
+
         }
 
-        private void Form1KeyPress(object sender, KeyPressEventArgs e)
+        // funker ikke
+        private void FormMain_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             if (e.KeyChar == '+')
+            {
                 this.Height += 15;
-            this.Width += 2;
+                this.Width += 2;
+            }
 
 
             if (e.KeyChar == '-')
@@ -121,82 +128,113 @@ namespace FirstWindowsFormsApp
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonRegisterNew_Click(object sender, EventArgs e)
         {
-            // if (radioButtnRefisterNew.Cheched)
-            //if (FormDataVerdified())
-            //{ }
 
-            //Add an index
-            //RegisterIndex++;
-            //textBoxRegister.AppendText(RegisterIndex + "\r\n");
-
-            AddTexnInTextRegister();
-
-            if (buttonRegisterNew.Text == "Register New") ;
+            AddTextInTextRegister();
+            
+            if (comboBoxInstrumentName.SelectedIndex <0)
             {
-                if (comboBoxSignalType.Text == "Analog")
+                //MessageBox.Show("Missing instruement name");
+                //comboBoxInstrumentName.Focus();
+            }
+
+            if (comboBoxSignalType.Text == "Analog")
+            {
+                if (textBoxLRV.Text == "")
                 {
-                    if ((textBoxLRV.Text == "" || (textBoxURV.Text) == ""))
+                    MessageBox.Show("Missing LRV-range!");
+                    textBoxLRV.Focus();
+                }
+                
+
+                else if (textBoxURV.Text== "")
+                {
+                    MessageBox.Show("Missing URV-range");
+                    textBoxURV.Focus();
+                }
+            }
+
+
+
+                    if (textBoxLRV.SelectionLength == 0)
+                    {
+                        //MessageBox.Show("Missing Range!");
+                        //textBoxLRV.Focus();
+
+                    }
+                    /*
+                    else if (textBoxURV.SelectionLength == 0)
                     {
                         MessageBox.Show("Missing Range!");
-                        
-                        if (textBoxLRV.SelectionLength== 0)
-                        {
-                            MessageBox.Show("Missing Range!");
-                            textBoxLRV.Focus();
+                        textBoxURV.Focus();
 
-                        }
+                    }
+                    
+                    //
+                    
 
-                        else if (textBoxURV.SelectionLength == 0)
-                        {
-                            MessageBox.Show("Missing Range!");
-                            textBoxURV.Focus();
+                    switch (buttonRegisterNew.Text)
+                    {
+                        case "RegisterNew":
+                            AddTexnInTextRegister();
+                            break;
 
-                        }
+                        case "Delete":
+                            textBoxRegister.Text = "";
+                            //textBoxLabelSensorName.Text = "";
+                            comboBoxInstrumentName.Text = "";
+                            maskedTextBoxSerialNumber.Text = "";
+                            checkBoxRegistered.Checked = false;
+                            comboBoxSignalType.Text = "";
+                            listboxOptions.Text = "";
+                            textBoxComment.Text = "";
+                            break;
 
-                        
+                        case "Fieldbus":
+                            comboBoxMeasureType.Items.AddRange(fieldbusSignals);
+                            panelUnit.Visible = false;
+                            fieldbusIndex++;
+                            break;
+
+                        default:
+                            break;
+
+
+                    if (buttonRegisterNew.Text == "Register New") ;
+            {
+                
+
+
                     }
 
+                            */
 
-                }
-
-
-            }
-
-            if (buttonRegisterNew.Text == "Delete")
-            {
-                textBoxRegister.Text = "";
-                textBoxLabelSensorName.Text = "";
-                maskedTextBoxSerialNumber.Text = "";
-                checkBoxRegistered.Checked = false;
-                comboBoxSignalType.Text = "";
-                listboxOptions.Text = "";
-                textBoxComment.Text = "";
-            }
-
+      /*
             if (buttonRegisterNew.Text == "Save Changes")
             {
                 textBoxRegister.Text = "";
-                AddTexnInTextRegister();
+                AddTextInTextRegister();
             }
 
             RegisterIndex++;
-
+      */
         }
-
-        private void AddTexnInTextRegister()
+      
+    
+        // Metods
+        private void AddTextInTextRegister()
         {
-            if (NewInstrument(textBoxLabelSensorName.Text))
-            {
+            textBoxRegister.Text = "";
+            //if (NewInstrument(textBoxLabelSensorName.Text))
+            if (NewInstrument(comboBoxInstrumentName.Text))
+                {
 
-
-
-                Instrument instrument = new Instrument(textBoxLabelSensorName.Text,
+                Instrument instrument = new Instrument( comboBoxInstrumentName.Text,
                                                         maskedTextBoxSerialNumber.Text,
                                                         comboBoxSignalType.Text,
                                                         comboBoxMeasureType.Text,
-                                                        listboxOptions.Text,
+                                                        comboBoxOptions.Text,
                                                         textBoxComment.Text,
                                                         lrvValue,
                                                         urvValue,
@@ -204,23 +242,13 @@ namespace FirstWindowsFormsApp
                 instrumentList.Add(instrument);
                 textBoxRegister.AppendText(instrument.ToString());
             }
-
+            // else if (NewInstrument(comboBoxInstrumentName.Text) == comboBoxInstrumentName) { }
             else
             {
-                MessageBox.Show("Sensor Name exist", "Register Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxLabelSensorName.Focus();
+                MessageBox.Show("Instrument name exist", "Register Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                comboBoxInstrumentName.Focus();
             }
 
-            /*
-            textBoxRegister.AppendText("+RegisterIndex+ "] +)
-            textBoxRegister.AppendText("Sensor Name: " + textBoxLabelSensorName.Text + "\r\n");
-            textBoxRegister.AppendText("Serial Number: " + maskedTextBoxSerialNumber.Text + "\r\n");
-            textBoxRegister.AppendText("Registered: " + checkBoxRegistered.Checked + "\r\n");
-            textBoxRegister.AppendText("Register Date: " + dateTimePickerRegisterDate.Text + "\r\n");
-            textBoxRegister.AppendText("Signal Type: " + comboBoxSignalType.Text + "\r\n");
-            textBoxRegister.AppendText("Options: " + listboxOptions.Text + "\r\n");
-            textBoxRegister.AppendText("Comment: " + textBoxComment.Text + "\r\n");
-            */
         }
 
         public bool NewInstrument(string sensorName)
@@ -228,51 +256,36 @@ namespace FirstWindowsFormsApp
             bool newInstrument = true;
             instrumentList.ForEach(delegate (Instrument instrument)
             {
-                if (instrument.SensorName== sensorName)
+                if (instrument.SensorName == sensorName)
                 {
-                    newInstrument= false;
+                    newInstrument = false;
                 }
 
             });
             return newInstrument;
         }
 
-        private void radioButtonDelete_CheckedChanged(object sender, EventArgs e)
+
+        private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
-            buttonRegisterNew.Text = "Delete";
+            textBoxRegister.Text = "";
+            AddTextInTextRegister();
+
         }
 
-        private void radioButtonSaveChanges_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonRegisterNew.Text = "Save Changes";
-        }
-
-        private void radioButtonRegisterNew_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonRegisterNew.Text = "Register New";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-            
-            
-            
-            
-            
-            
             //compare two text inputs
-            //bool textEqual = false;
+
+            /*
 
             if (checkBoxCaseSensitive.Checked)
             {
-                //textEqual = textBox1.Text.Equals(textBox2.Text);
+                
                 textBoxCommunication.Text = textBoxPort.Text.Equals(textBoxIP.Text) ? "String are equal\r\n" : "Strings are not equal\r\n";
             }
 
             else
             {
-                //textEqual = textBox1.Text.Equals(textBox2.Text, StringComparison.InvariantCultureIgnoreCase);
+                
                 textBoxCommunication.Text = textBoxPort.Text.Equals(textBoxIP.Text, StringComparison.InvariantCultureIgnoreCase) ? "String are equal\r\n" : "Strings are not equal\r\n";
             }
 
@@ -306,50 +319,10 @@ namespace FirstWindowsFormsApp
 
 
             }
-
-
-            /*
-            if (textEqual)
-            {
-                textBoxResult.Text = "Strings are equal";
-            }
-            else
-            {
-                textBoxResult.Text = "Strings are not equal";
-            }
-
             */
 
-
-            //Int64 testIntLong = Convert.ToInt64(textBox2.Text);
-
-            //uint testInt = (uint)testIntLong;
-
-            //textBoxResult.AppendText(""+testInt);
-
-            //int radius = 5;
-            // radius = Convert.ToInt32(textBox2.Text);
-            //double surface = Math.PI * Math.Pow(radius, 2);
-            //string surfaceArea = "Circle surface area= ";
-
-            //for (int i = 0; i < 10; i++)
-            //{
-            //textBoxResult.AppendText("" + i + "\r\n");
-            //}
-
-            //string[] seperateParts = { "Unit345", "10.0" };
-
-            //foreach (string seperatePart in seperateParts)
-            //{
-            ///textBoxResult.AppendText(seperatePart + "\r\n");
-            //seperateParts.Append
-            //}
-
-            //int test = 53;
-            //ch = (char)test;
-        }
-
-        private void textBoxLabelSensorName_MouseHover(object sender, EventArgs e)
+        // MouseHover
+        private void comboBoxInstrumentName_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Enter sensor name";
         }
@@ -381,23 +354,53 @@ namespace FirstWindowsFormsApp
 
         private void comboBoxSignalType_MouseHover(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "Choose Signal Type";
+            toolStripStatusLabel1.Text = "Choose signal type";
         }
 
         private void textBoxComment_MouseHover(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "Write comment";
+            toolStripStatusLabel1.Text = "Write comments";
         }
 
-        private void listboxOptions_MouseHover(object sender, EventArgs e)
+        private void comboBoxMeasureType_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Choose measure type";
+        }
+
+        private void comboBoxOptions_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Choose options";
         }
 
+        private void textBoxLRV_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Write LRV-value";
+        }
+
+        private void textBoxURV_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Write URV-value";
+        }
+
+        private void textBoxUnit_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Write unit";
+        }
+
+        private void textBoxAlarmH_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Set a hight level value";
+        }
+
+        private void textBoxAlarmL_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Set a low level value";
+        }
+
+
         private void comboBoxSignalType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxMeasureType.Items.Clear();
-            comboBoxMeasureType.Text = "";
             //comboBoxMeasureType.SelectedIndex = 0;      //index fungerer ikke
 
             switch (comboBoxSignalType.Text)
@@ -406,7 +409,6 @@ namespace FirstWindowsFormsApp
                     comboBoxMeasureType.Items.AddRange(analogSignals);
                     panelUnit.Visible = true;
                     analogIndex++;
-
                     break;
 
                 case "Digital":
@@ -425,25 +427,60 @@ namespace FirstWindowsFormsApp
                     break;
             }
         }
+        /*
+        private void comboBoxMeasureType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxMeasure.Text)
+            {
+                case "Analog":
+                    comboBoxMeasureType.Items.AddRange(analogSignals);
+                    panelUnit.Visible = true;
+                    analogIndex++;
+                    break;
 
+                case "Digital":
+                    comboBoxMeasureType.Items.AddRange(digitalSignals);
+                    panelUnit.Visible = false;
+                    digitalIndex++;
+                    break;
+
+                case "Fieldbus":
+                    comboBoxMeasureType.Items.AddRange(fieldbusSignals);
+                    panelUnit.Visible = false;
+                    fieldbusIndex++;
+                    break;
+
+                default:
+                    break;
+            }
+        */
+        
         private void textBoxLRV_KeyPress(object sender, KeyPressEventArgs e)
         {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
             //try
             //{
-            //if (textBoxLRV.Text != (double)) ;
+            //if (textBoxLRV.Text != double)
+            //{
+            //textBoxLRV.Focus();
+
+            //}
 
         }
-
+        
         private void buttonSummary_Click(object sender, EventArgs e)
         {
-
-
-
             //DateTime sessionTime;
             System.TimeSpan sessionTime = DateTime.Now.Subtract(sessionStartTime);  //lager en lokal variabel "session time"
 
             //Add text in Summary Box
             AddTextInSummaryBox(sessionTime);
+
+           RegisterIndex = analogIndex + digitalIndex + fieldbusIndex;
 
             switch (comboBoxSignalType.Text)
             {
@@ -472,10 +509,6 @@ namespace FirstWindowsFormsApp
             }
 
 
-
-
-
-
             //Calculate span value
             //if (spanValue > 0)
             //{
@@ -496,7 +529,8 @@ namespace FirstWindowsFormsApp
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex ==2)
+            
+            if (tabControl1.SelectedIndex == 2)
             {
                 listBox1.Items.Clear();
                 listBox1.Items.AddRange(servers.ToArray());
@@ -518,9 +552,10 @@ namespace FirstWindowsFormsApp
             //client received
             byte[] buffer = new byte[1024];
             int bytesReceived = client.Receive(buffer);
-            textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived));
+
+            textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
             client.Close();
-            textBoxCommunication.AppendText("Connection closed...");
+            textBoxCommunication.AppendText("Connection closed..." + "\r\n");
         }
 
 
@@ -533,7 +568,7 @@ namespace FirstWindowsFormsApp
 
         private void buttonOpenFIle_Click(object sender, EventArgs e)
         {
-            string fileName="";
+            string fileName = "";
 
             openFileDialog1.InitialDirectory = "c:\\";
             openFileDialog1.Filter = "CSV files (*.csv)|*.txt|All files (*.*)|*.*";
@@ -543,12 +578,12 @@ namespace FirstWindowsFormsApp
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                fileName= openFileDialog1.FileName;
+                fileName = openFileDialog1.FileName;
                 //toolStripStatusLabel1.Text = fileName;
 
                 string message = "Are you sure you want to open this file?";
                 string caption = "Confirm filename";
-                MessageBoxButtons buttons= MessageBoxButtons.YesNo;
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 MessageBoxIcon icon = MessageBoxIcon.Question;
                 DialogResult result;
 
@@ -566,7 +601,7 @@ namespace FirstWindowsFormsApp
 
         private void buttonSaveToFile_Click(object sender, EventArgs e)
         {
-            if (textBoxRegister.TextLength>0)
+            if (textBoxRegister.TextLength > 0)
             {
                 StreamWriter outputFile = new StreamWriter("register.csv");
                 outputFile.WriteLine(textBoxRegister.Text);
@@ -587,17 +622,17 @@ namespace FirstWindowsFormsApp
 
         private void comboBoxInstrumentName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxInstrumentName.SelectedIndex > -1) 
+            if (comboBoxInstrumentName.SelectedIndex > -1)
             {
                 foreach (var instrument in instrumentList)
-                 {
+                {
                     if (instrument.SensorName == comboBoxInstrumentName.Text)
                     {
                         dateTimePickerRegisterDate.Value = instrument.RegisterDate;
                         maskedTextBoxSerialNumber.Text = instrument.SerialNumber;
                         comboBoxSignalType.Text = instrument.SignalType;
                         comboBoxMeasureType.Text = instrument.MeasuremeantType;
-                        listboxOptions.Text = instrument.Options;
+                        comboBoxOptions.Text = instrument.Options;
                         textBoxComment.Text = instrument.Comment;
                         lrvValue = instrument.LRV;
                         urvValue = instrument.URV;
@@ -607,23 +642,144 @@ namespace FirstWindowsFormsApp
                         break;
                     }
 
-                    }
+                }
             }
-                
-                {
-                    
 
-               
-            }
         }
+
+
+
+        private void buttonReadConfiguration_Click(object sender, EventArgs e)
+        {
+            string[] sensorConf;
+            string received;
+            received = sendToBackEnd("readconf");
+            sensorConf = received.Split(';');
+            textBoxCommunication.AppendText(sendToBackEnd(received) + "\r\n");
+
+            string caption = "";
+
+            foreach (string conf in sensorConf)
+            {
+                caption = conf + "\r\n";
+            }
+
+            MessageBox.Show(caption, "Sensor Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
+
+        private string sendToBackEnd(string command)
+        {
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            client.Connect(endPoint);
+
+            Trace.WriteLine("Connected to Server..." + "\r\n");
+
+            //client send
+            client.Send(Encoding.ASCII.GetBytes(command));
+
+            //client received
+            byte[] buffer = new byte[1024];
+            int bytesReceived = client.Receive(buffer);
+            string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
+
+            textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+            client.Close();
+            Trace.WriteLine("Connection closed..." + "\r\n"); 
+            return received;
+
+        }
+    private void buttonReadState_Click(object sender, EventArgs e)
+    {
+            string received;
+            received = sendToBackEnd("readstatus");
+            textBoxCommunication.AppendText(received + "\r\n");
     }
 
-}
+        private void buttonReadScaled_Click(object sender, EventArgs e)
+        {
+            string received;
+            received = sendToBackEnd("readscaled");
+            textBoxCommunication.AppendText(received + "\r\n");
+
+        }
+
+        private void buttonAddXY_Click(object sender, EventArgs e)
+        {
+            if (timerReadScaled.Enabled)
+            {
+                timerReadScaled.Stop();
+            }
+            else
+            {
+                timerReadScaled.Start();
+            }
+               
+        }
+
+        private void timerReadScaled_Tick(object sender, EventArgs e)
+        {
+            xTimeValue++;
+            double yValue = 0.0;
+
+            string received = sendToBackEnd("readscaled");
+            string[] revceivedParts = received.Split(';');
+            string receivedY = revceivedParts[1].Substring(0, revceivedParts[1].Length - 2);
+
+            yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
+
+            chart1.Series[0].Points.AddXY(DateTime.Now, yValue);
+        }
+        
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            textBoxRegister.Text = "";
+            comboBoxInstrumentName.Text = "";
+            maskedTextBoxSerialNumber.Text = "";
+            checkBoxRegistered.Checked = false;
+            dateTimePickerRegisterDate.Value = DateTime.Now;
+            comboBoxSignalType.SelectedIndex = -1;
+            comboBoxMeasureType.Items.Clear();
+            comboBoxOptions.SelectedIndex = -1;
+            textBoxComment.Text = "";
+            textBoxLRV.Text = "";
+            textBoxURV.Text = "";
+            textBoxUnit.Text= "";
+            textBoxAlarmH.Text = "";
+            textBoxAlarmL.Text = "";
+            panelUnit.Visible = true;
+        }
+
+        private void textBoxURV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (urvValue <= lrvValue)
+            {
+                textBoxURV.Focus();
+            }
+        }
+
+
+    }
+        
+    }
+
+
+
+
+
 
 
 
 
 // Hjelp til koding
+
+//Hvordan sjekke om instrument name ligger i listen og hvordan ikke legge til et instruemnt uten navn
+
+
+
+
 //Veiledning
 // if (spanValue > 0.0);
 
@@ -647,3 +803,8 @@ namespace FirstWindowsFormsApp
 // return true
 
 // RegisterIndex++  // for å øke indexen med 1
+
+
+
+//Finpuss:
+//Mouse Hover på knappene (vet ikke om jeg vil ha radiobuttons eller vanlige enda)

@@ -29,20 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRegistered = new System.Windows.Forms.TabPage();
+            this.comboBoxOptions = new System.Windows.Forms.ComboBox();
+            this.buttonRegisterNew = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.comboBoxInstrumentName = new System.Windows.Forms.ComboBox();
             this.buttonSaveToFile = new System.Windows.Forms.Button();
             this.buttonOpenFIle = new System.Windows.Forms.Button();
             this.comboBoxMeasureType = new System.Windows.Forms.ComboBox();
             this.buttonSummary = new System.Windows.Forms.Button();
-            this.groupBoxSelect = new System.Windows.Forms.GroupBox();
-            this.buttonRegisterNew = new System.Windows.Forms.Button();
-            this.radioButtonSaveChanges = new System.Windows.Forms.RadioButton();
-            this.radioButtonRegisterNew = new System.Windows.Forms.RadioButton();
-            this.radioButtonClear = new System.Windows.Forms.RadioButton();
             this.panelUnit = new System.Windows.Forms.Panel();
+            this.labelAlarmL = new System.Windows.Forms.Label();
+            this.textBoxAlarmL = new System.Windows.Forms.TextBox();
+            this.labelAlarmH = new System.Windows.Forms.Label();
+            this.textBoxAlarmH = new System.Windows.Forms.TextBox();
             this.textBoxLRV = new System.Windows.Forms.TextBox();
             this.labelLRV = new System.Windows.Forms.Label();
             this.textBoxURV = new System.Windows.Forms.TextBox();
@@ -58,8 +67,6 @@
             this.maskedTextBoxSerialNumber = new System.Windows.Forms.MaskedTextBox();
             this.labelComment = new System.Windows.Forms.Label();
             this.labelOptions = new System.Windows.Forms.Label();
-            this.listboxOptions = new System.Windows.Forms.ListBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.labelRegistered = new System.Windows.Forms.Label();
             this.labelSignalType = new System.Windows.Forms.Label();
             this.labelRegisterDate = new System.Windows.Forms.Label();
@@ -67,9 +74,12 @@
             this.dateTimePickerRegisterDate = new System.Windows.Forms.DateTimePicker();
             this.checkBoxRegistered = new System.Windows.Forms.CheckBox();
             this.labelSerialNumber = new System.Windows.Forms.Label();
-            this.textBoxLabelSensorName = new System.Windows.Forms.TextBox();
             this.labelSensorName = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.buttonReadScaled = new System.Windows.Forms.Button();
+            this.buttonReadState = new System.Windows.Forms.Button();
+            this.buttonWriteConfiguration = new System.Windows.Forms.Button();
+            this.buttonReadConfiguration = new System.Windows.Forms.Button();
             this.textBoxSend = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
@@ -79,8 +89,18 @@
             this.textBoxIP = new System.Windows.Forms.TextBox();
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageLists = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tabPageChart = new System.Windows.Forms.TabPage();
+            this.buttonAddXY = new System.Windows.Forms.Button();
+            this.labelY = new System.Windows.Forms.Label();
+            this.labelX = new System.Windows.Forms.Label();
+            this.textBoxYValue = new System.Windows.Forms.TextBox();
+            this.textBoxXValue = new System.Windows.Forms.TextBox();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.controlToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,21 +108,24 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.timerReadScaled = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPageRegistered.SuspendLayout();
-            this.groupBoxSelect.SuspendLayout();
             this.panelUnit.SuspendLayout();
             this.statusStripReady.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageConnection.SuspendLayout();
+            this.tabPageLists.SuspendLayout();
+            this.tabPageChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageRegistered);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPageConnection);
+            this.tabControl1.Controls.Add(this.tabPageLists);
+            this.tabControl1.Controls.Add(this.tabPageChart);
             this.tabControl1.Location = new System.Drawing.Point(0, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -113,12 +136,15 @@
             // 
             // tabPageRegistered
             // 
+            this.tabPageRegistered.Controls.Add(this.comboBoxOptions);
+            this.tabPageRegistered.Controls.Add(this.buttonRegisterNew);
+            this.tabPageRegistered.Controls.Add(this.buttonDelete);
+            this.tabPageRegistered.Controls.Add(this.buttonSaveChanges);
             this.tabPageRegistered.Controls.Add(this.comboBoxInstrumentName);
             this.tabPageRegistered.Controls.Add(this.buttonSaveToFile);
             this.tabPageRegistered.Controls.Add(this.buttonOpenFIle);
             this.tabPageRegistered.Controls.Add(this.comboBoxMeasureType);
             this.tabPageRegistered.Controls.Add(this.buttonSummary);
-            this.tabPageRegistered.Controls.Add(this.groupBoxSelect);
             this.tabPageRegistered.Controls.Add(this.panelUnit);
             this.tabPageRegistered.Controls.Add(this.textBoxSummary);
             this.tabPageRegistered.Controls.Add(this.labelMeasureTime);
@@ -128,7 +154,6 @@
             this.tabPageRegistered.Controls.Add(this.maskedTextBoxSerialNumber);
             this.tabPageRegistered.Controls.Add(this.labelComment);
             this.tabPageRegistered.Controls.Add(this.labelOptions);
-            this.tabPageRegistered.Controls.Add(this.listboxOptions);
             this.tabPageRegistered.Controls.Add(this.labelRegistered);
             this.tabPageRegistered.Controls.Add(this.labelSignalType);
             this.tabPageRegistered.Controls.Add(this.labelRegisterDate);
@@ -136,7 +161,6 @@
             this.tabPageRegistered.Controls.Add(this.dateTimePickerRegisterDate);
             this.tabPageRegistered.Controls.Add(this.checkBoxRegistered);
             this.tabPageRegistered.Controls.Add(this.labelSerialNumber);
-            this.tabPageRegistered.Controls.Add(this.textBoxLabelSensorName);
             this.tabPageRegistered.Controls.Add(this.labelSensorName);
             this.tabPageRegistered.Location = new System.Drawing.Point(4, 29);
             this.tabPageRegistered.Name = "tabPageRegistered";
@@ -147,24 +171,75 @@
             this.tabPageRegistered.UseVisualStyleBackColor = true;
             this.tabPageRegistered.MouseHover += new System.EventHandler(this.tabPage1_MouseHover);
             // 
+            // comboBoxOptions
+            // 
+            this.comboBoxOptions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOptions.FormattingEnabled = true;
+            this.comboBoxOptions.Items.AddRange(new object[] {
+            "None",
+            "Display",
+            "HART Protocol"});
+            this.comboBoxOptions.Location = new System.Drawing.Point(159, 253);
+            this.comboBoxOptions.Name = "comboBoxOptions";
+            this.comboBoxOptions.Size = new System.Drawing.Size(212, 28);
+            this.comboBoxOptions.TabIndex = 7;
+            this.comboBoxOptions.MouseHover += new System.EventHandler(this.comboBoxOptions_MouseHover);
+            // 
+            // buttonRegisterNew
+            // 
+            this.buttonRegisterNew.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.buttonRegisterNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonRegisterNew.Location = new System.Drawing.Point(396, 219);
+            this.buttonRegisterNew.Name = "buttonRegisterNew";
+            this.buttonRegisterNew.Size = new System.Drawing.Size(131, 39);
+            this.buttonRegisterNew.TabIndex = 14;
+            this.buttonRegisterNew.Text = "Register New";
+            this.buttonRegisterNew.UseVisualStyleBackColor = false;
+            this.buttonRegisterNew.Click += new System.EventHandler(this.buttonRegisterNew_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.buttonDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonDelete.Location = new System.Drawing.Point(396, 309);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(131, 39);
+            this.buttonDelete.TabIndex = 16;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonSaveChanges
+            // 
+            this.buttonSaveChanges.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.buttonSaveChanges.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonSaveChanges.Location = new System.Drawing.Point(396, 264);
+            this.buttonSaveChanges.Name = "buttonSaveChanges";
+            this.buttonSaveChanges.Size = new System.Drawing.Size(131, 39);
+            this.buttonSaveChanges.TabIndex = 15;
+            this.buttonSaveChanges.Text = "Save Changes";
+            this.buttonSaveChanges.UseVisualStyleBackColor = false;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
+            // 
             // comboBoxInstrumentName
             // 
             this.comboBoxInstrumentName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.comboBoxInstrumentName.FormattingEnabled = true;
-            this.comboBoxInstrumentName.Location = new System.Drawing.Point(159, 33);
+            this.comboBoxInstrumentName.Location = new System.Drawing.Point(159, 16);
             this.comboBoxInstrumentName.Name = "comboBoxInstrumentName";
             this.comboBoxInstrumentName.Size = new System.Drawing.Size(212, 36);
-            this.comboBoxInstrumentName.TabIndex = 25;
+            this.comboBoxInstrumentName.TabIndex = 1;
             this.comboBoxInstrumentName.SelectedIndexChanged += new System.EventHandler(this.comboBoxInstrumentName_SelectedIndexChanged);
+            this.comboBoxInstrumentName.MouseHover += new System.EventHandler(this.comboBoxInstrumentName_MouseHover);
             // 
             // buttonSaveToFile
             // 
             this.buttonSaveToFile.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonSaveToFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSaveToFile.Location = new System.Drawing.Point(611, 260);
+            this.buttonSaveToFile.Location = new System.Drawing.Point(806, 264);
             this.buttonSaveToFile.Name = "buttonSaveToFile";
-            this.buttonSaveToFile.Size = new System.Drawing.Size(148, 39);
-            this.buttonSaveToFile.TabIndex = 24;
+            this.buttonSaveToFile.Size = new System.Drawing.Size(143, 39);
+            this.buttonSaveToFile.TabIndex = 17;
             this.buttonSaveToFile.Text = "Save to File";
             this.buttonSaveToFile.UseVisualStyleBackColor = false;
             this.buttonSaveToFile.Click += new System.EventHandler(this.buttonSaveToFile_Click);
@@ -173,123 +248,103 @@
             // 
             this.buttonOpenFIle.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonOpenFIle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonOpenFIle.Location = new System.Drawing.Point(611, 309);
+            this.buttonOpenFIle.Location = new System.Drawing.Point(806, 309);
             this.buttonOpenFIle.Name = "buttonOpenFIle";
-            this.buttonOpenFIle.Size = new System.Drawing.Size(148, 39);
-            this.buttonOpenFIle.TabIndex = 23;
+            this.buttonOpenFIle.Size = new System.Drawing.Size(143, 39);
+            this.buttonOpenFIle.TabIndex = 18;
             this.buttonOpenFIle.Text = "Open File";
             this.buttonOpenFIle.UseVisualStyleBackColor = false;
             this.buttonOpenFIle.Click += new System.EventHandler(this.buttonOpenFIle_Click);
             // 
             // comboBoxMeasureType
             // 
+            this.comboBoxMeasureType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMeasureType.FormattingEnabled = true;
-            this.comboBoxMeasureType.Items.AddRange(new object[] {
-            "Analog",
-            "Digital",
-            "Fieldbus"});
-            this.comboBoxMeasureType.Location = new System.Drawing.Point(159, 202);
+            this.comboBoxMeasureType.Location = new System.Drawing.Point(159, 211);
             this.comboBoxMeasureType.Name = "comboBoxMeasureType";
             this.comboBoxMeasureType.Size = new System.Drawing.Size(212, 28);
             this.comboBoxMeasureType.TabIndex = 6;
+            this.comboBoxMeasureType.MouseHover += new System.EventHandler(this.comboBoxMeasureType_MouseHover);
             // 
             // buttonSummary
             // 
             this.buttonSummary.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.buttonSummary.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonSummary.Location = new System.Drawing.Point(810, 253);
+            this.buttonSummary.Location = new System.Drawing.Point(611, 264);
             this.buttonSummary.Name = "buttonSummary";
             this.buttonSummary.Size = new System.Drawing.Size(135, 39);
-            this.buttonSummary.TabIndex = 18;
+            this.buttonSummary.TabIndex = 19;
             this.buttonSummary.Text = "Summary";
             this.buttonSummary.UseVisualStyleBackColor = false;
             this.buttonSummary.Click += new System.EventHandler(this.buttonSummary_Click);
             // 
-            // groupBoxSelect
-            // 
-            this.groupBoxSelect.Controls.Add(this.buttonRegisterNew);
-            this.groupBoxSelect.Controls.Add(this.radioButtonSaveChanges);
-            this.groupBoxSelect.Controls.Add(this.radioButtonRegisterNew);
-            this.groupBoxSelect.Controls.Add(this.radioButtonClear);
-            this.groupBoxSelect.Location = new System.Drawing.Point(396, 164);
-            this.groupBoxSelect.Name = "groupBoxSelect";
-            this.groupBoxSelect.Size = new System.Drawing.Size(209, 184);
-            this.groupBoxSelect.TabIndex = 13;
-            this.groupBoxSelect.TabStop = false;
-            // 
-            // buttonRegisterNew
-            // 
-            this.buttonRegisterNew.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.buttonRegisterNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonRegisterNew.Location = new System.Drawing.Point(6, 139);
-            this.buttonRegisterNew.Name = "buttonRegisterNew";
-            this.buttonRegisterNew.Size = new System.Drawing.Size(183, 39);
-            this.buttonRegisterNew.TabIndex = 17;
-            this.buttonRegisterNew.Text = "Register New";
-            this.buttonRegisterNew.UseVisualStyleBackColor = false;
-            this.buttonRegisterNew.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // radioButtonSaveChanges
-            // 
-            this.radioButtonSaveChanges.AutoSize = true;
-            this.radioButtonSaveChanges.Location = new System.Drawing.Point(6, 61);
-            this.radioButtonSaveChanges.Name = "radioButtonSaveChanges";
-            this.radioButtonSaveChanges.Size = new System.Drawing.Size(121, 24);
-            this.radioButtonSaveChanges.TabIndex = 15;
-            this.radioButtonSaveChanges.Text = "Save Changes";
-            this.radioButtonSaveChanges.UseVisualStyleBackColor = true;
-            this.radioButtonSaveChanges.CheckedChanged += new System.EventHandler(this.radioButtonSaveChanges_CheckedChanged);
-            // 
-            // radioButtonRegisterNew
-            // 
-            this.radioButtonRegisterNew.AutoSize = true;
-            this.radioButtonRegisterNew.Checked = true;
-            this.radioButtonRegisterNew.Location = new System.Drawing.Point(6, 26);
-            this.radioButtonRegisterNew.Name = "radioButtonRegisterNew";
-            this.radioButtonRegisterNew.Size = new System.Drawing.Size(118, 24);
-            this.radioButtonRegisterNew.TabIndex = 14;
-            this.radioButtonRegisterNew.TabStop = true;
-            this.radioButtonRegisterNew.Text = "Register New";
-            this.radioButtonRegisterNew.UseVisualStyleBackColor = true;
-            this.radioButtonRegisterNew.CheckedChanged += new System.EventHandler(this.radioButtonRegisterNew_CheckedChanged);
-            // 
-            // radioButtonClear
-            // 
-            this.radioButtonClear.AutoSize = true;
-            this.radioButtonClear.Location = new System.Drawing.Point(6, 96);
-            this.radioButtonClear.Name = "radioButtonClear";
-            this.radioButtonClear.Size = new System.Drawing.Size(64, 24);
-            this.radioButtonClear.TabIndex = 16;
-            this.radioButtonClear.Text = "Clear";
-            this.radioButtonClear.UseVisualStyleBackColor = true;
-            this.radioButtonClear.CheckedChanged += new System.EventHandler(this.radioButtonDelete_CheckedChanged);
-            // 
             // panelUnit
             // 
+            this.panelUnit.Controls.Add(this.labelAlarmL);
+            this.panelUnit.Controls.Add(this.textBoxAlarmL);
+            this.panelUnit.Controls.Add(this.labelAlarmH);
+            this.panelUnit.Controls.Add(this.textBoxAlarmH);
             this.panelUnit.Controls.Add(this.textBoxLRV);
             this.panelUnit.Controls.Add(this.labelLRV);
             this.panelUnit.Controls.Add(this.textBoxURV);
             this.panelUnit.Controls.Add(this.labelUnit);
             this.panelUnit.Controls.Add(this.labelURV);
             this.panelUnit.Controls.Add(this.textBoxUnit);
-            this.panelUnit.Location = new System.Drawing.Point(396, 20);
+            this.panelUnit.Location = new System.Drawing.Point(396, 3);
             this.panelUnit.Name = "panelUnit";
-            this.panelUnit.Size = new System.Drawing.Size(202, 138);
+            this.panelUnit.Size = new System.Drawing.Size(209, 182);
             this.panelUnit.TabIndex = 9;
+            // 
+            // labelAlarmL
+            // 
+            this.labelAlarmL.AutoSize = true;
+            this.labelAlarmL.Location = new System.Drawing.Point(10, 146);
+            this.labelAlarmL.Name = "labelAlarmL";
+            this.labelAlarmL.Size = new System.Drawing.Size(60, 20);
+            this.labelAlarmL.TabIndex = 29;
+            this.labelAlarmL.Text = "Alarm L";
+            // 
+            // textBoxAlarmL
+            // 
+            this.textBoxAlarmL.Location = new System.Drawing.Point(82, 143);
+            this.textBoxAlarmL.MaxLength = 4;
+            this.textBoxAlarmL.Name = "textBoxAlarmL";
+            this.textBoxAlarmL.Size = new System.Drawing.Size(96, 27);
+            this.textBoxAlarmL.TabIndex = 13;
+            this.textBoxAlarmL.MouseHover += new System.EventHandler(this.textBoxAlarmL_MouseHover);
+            // 
+            // labelAlarmH
+            // 
+            this.labelAlarmH.AutoSize = true;
+            this.labelAlarmH.Location = new System.Drawing.Point(12, 113);
+            this.labelAlarmH.Name = "labelAlarmH";
+            this.labelAlarmH.Size = new System.Drawing.Size(64, 20);
+            this.labelAlarmH.TabIndex = 27;
+            this.labelAlarmH.Text = "Alarm H";
+            // 
+            // textBoxAlarmH
+            // 
+            this.textBoxAlarmH.Location = new System.Drawing.Point(82, 110);
+            this.textBoxAlarmH.MaxLength = 4;
+            this.textBoxAlarmH.Name = "textBoxAlarmH";
+            this.textBoxAlarmH.Size = new System.Drawing.Size(96, 27);
+            this.textBoxAlarmH.TabIndex = 12;
+            this.textBoxAlarmH.MouseHover += new System.EventHandler(this.textBoxAlarmH_MouseHover);
             // 
             // textBoxLRV
             // 
-            this.textBoxLRV.Location = new System.Drawing.Point(82, 28);
+            this.textBoxLRV.Location = new System.Drawing.Point(82, 3);
             this.textBoxLRV.MaxLength = 1234534;
             this.textBoxLRV.Name = "textBoxLRV";
             this.textBoxLRV.Size = new System.Drawing.Size(96, 27);
-            this.textBoxLRV.TabIndex = 10;
+            this.textBoxLRV.TabIndex = 9;
             this.textBoxLRV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxLRV_KeyPress);
+            this.textBoxLRV.MouseHover += new System.EventHandler(this.textBoxLRV_MouseHover);
             // 
             // labelLRV
             // 
             this.labelLRV.AutoSize = true;
-            this.labelLRV.Location = new System.Drawing.Point(17, 35);
+            this.labelLRV.Location = new System.Drawing.Point(17, 10);
             this.labelLRV.Name = "labelLRV";
             this.labelLRV.Size = new System.Drawing.Size(34, 20);
             this.labelLRV.TabIndex = 21;
@@ -297,16 +352,18 @@
             // 
             // textBoxURV
             // 
-            this.textBoxURV.Location = new System.Drawing.Point(82, 61);
+            this.textBoxURV.Location = new System.Drawing.Point(82, 36);
             this.textBoxURV.MaxLength = 4555555;
             this.textBoxURV.Name = "textBoxURV";
             this.textBoxURV.Size = new System.Drawing.Size(96, 27);
-            this.textBoxURV.TabIndex = 11;
+            this.textBoxURV.TabIndex = 10;
+            this.textBoxURV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxURV_KeyPress);
+            this.textBoxURV.MouseHover += new System.EventHandler(this.textBoxURV_MouseHover);
             // 
             // labelUnit
             // 
             this.labelUnit.AutoSize = true;
-            this.labelUnit.Location = new System.Drawing.Point(17, 102);
+            this.labelUnit.Location = new System.Drawing.Point(17, 77);
             this.labelUnit.Name = "labelUnit";
             this.labelUnit.Size = new System.Drawing.Size(36, 20);
             this.labelUnit.TabIndex = 25;
@@ -315,7 +372,7 @@
             // labelURV
             // 
             this.labelURV.AutoSize = true;
-            this.labelURV.Location = new System.Drawing.Point(17, 64);
+            this.labelURV.Location = new System.Drawing.Point(17, 39);
             this.labelURV.Name = "labelURV";
             this.labelURV.Size = new System.Drawing.Size(37, 20);
             this.labelURV.TabIndex = 24;
@@ -323,19 +380,21 @@
             // 
             // textBoxUnit
             // 
-            this.textBoxUnit.Location = new System.Drawing.Point(82, 99);
+            this.textBoxUnit.Location = new System.Drawing.Point(82, 74);
             this.textBoxUnit.MaxLength = 4;
             this.textBoxUnit.Name = "textBoxUnit";
             this.textBoxUnit.Size = new System.Drawing.Size(96, 27);
-            this.textBoxUnit.TabIndex = 12;
+            this.textBoxUnit.TabIndex = 11;
+            this.textBoxUnit.MouseHover += new System.EventHandler(this.textBoxUnit_MouseHover);
             // 
             // textBoxSummary
             // 
-            this.textBoxSummary.Location = new System.Drawing.Point(797, 23);
+            this.textBoxSummary.Location = new System.Drawing.Point(611, 134);
             this.textBoxSummary.Multiline = true;
             this.textBoxSummary.Name = "textBoxSummary";
+            this.textBoxSummary.ReadOnly = true;
             this.textBoxSummary.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxSummary.Size = new System.Drawing.Size(152, 226);
+            this.textBoxSummary.Size = new System.Drawing.Size(338, 122);
             this.textBoxSummary.TabIndex = 22;
             // 
             // labelMeasureTime
@@ -349,11 +408,12 @@
             // 
             // textBoxRegister
             // 
-            this.textBoxRegister.Location = new System.Drawing.Point(611, 23);
+            this.textBoxRegister.Location = new System.Drawing.Point(611, 3);
             this.textBoxRegister.Multiline = true;
             this.textBoxRegister.Name = "textBoxRegister";
+            this.textBoxRegister.ReadOnly = true;
             this.textBoxRegister.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxRegister.Size = new System.Drawing.Size(167, 226);
+            this.textBoxRegister.Size = new System.Drawing.Size(338, 125);
             this.textBoxRegister.TabIndex = 20;
             // 
             // statusStripReady
@@ -379,7 +439,7 @@
             this.textBoxComment.Location = new System.Drawing.Point(159, 303);
             this.textBoxComment.Multiline = true;
             this.textBoxComment.Name = "textBoxComment";
-            this.textBoxComment.Size = new System.Drawing.Size(212, 63);
+            this.textBoxComment.Size = new System.Drawing.Size(212, 45);
             this.textBoxComment.TabIndex = 8;
             this.textBoxComment.MouseHover += new System.EventHandler(this.textBoxComment_MouseHover);
             // 
@@ -395,7 +455,7 @@
             // labelComment
             // 
             this.labelComment.AutoSize = true;
-            this.labelComment.Location = new System.Drawing.Point(6, 303);
+            this.labelComment.Location = new System.Drawing.Point(10, 303);
             this.labelComment.Name = "labelComment";
             this.labelComment.Size = new System.Drawing.Size(74, 20);
             this.labelComment.TabIndex = 12;
@@ -409,26 +469,6 @@
             this.labelOptions.Size = new System.Drawing.Size(61, 20);
             this.labelOptions.TabIndex = 11;
             this.labelOptions.Text = "Options";
-            // 
-            // listboxOptions
-            // 
-            this.listboxOptions.ContextMenuStrip = this.contextMenuStrip1;
-            this.listboxOptions.FormattingEnabled = true;
-            this.listboxOptions.ItemHeight = 20;
-            this.listboxOptions.Items.AddRange(new object[] {
-            "None",
-            "Display"});
-            this.listboxOptions.Location = new System.Drawing.Point(159, 248);
-            this.listboxOptions.Name = "listboxOptions";
-            this.listboxOptions.Size = new System.Drawing.Size(212, 44);
-            this.listboxOptions.TabIndex = 7;
-            this.listboxOptions.MouseHover += new System.EventHandler(this.listboxOptions_MouseHover);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // labelRegistered
             // 
@@ -459,6 +499,7 @@
             // 
             // comboBoxSignalType
             // 
+            this.comboBoxSignalType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSignalType.FormattingEnabled = true;
             this.comboBoxSignalType.Items.AddRange(new object[] {
             "Analog",
@@ -482,7 +523,7 @@
             // checkBoxRegistered
             // 
             this.checkBoxRegistered.AutoSize = true;
-            this.checkBoxRegistered.Location = new System.Drawing.Point(159, 108);
+            this.checkBoxRegistered.Location = new System.Drawing.Point(159, 111);
             this.checkBoxRegistered.Name = "checkBoxRegistered";
             this.checkBoxRegistered.Size = new System.Drawing.Size(18, 17);
             this.checkBoxRegistered.TabIndex = 3;
@@ -498,14 +539,6 @@
             this.labelSerialNumber.TabIndex = 3;
             this.labelSerialNumber.Text = "Serial Number";
             // 
-            // textBoxLabelSensorName
-            // 
-            this.textBoxLabelSensorName.Location = new System.Drawing.Point(159, 0);
-            this.textBoxLabelSensorName.Name = "textBoxLabelSensorName";
-            this.textBoxLabelSensorName.Size = new System.Drawing.Size(212, 27);
-            this.textBoxLabelSensorName.TabIndex = 1;
-            this.textBoxLabelSensorName.MouseHover += new System.EventHandler(this.textBoxLabelSensorName_MouseHover);
-            // 
             // labelSensorName
             // 
             this.labelSensorName.AutoSize = true;
@@ -515,24 +548,67 @@
             this.labelSensorName.TabIndex = 0;
             this.labelSensorName.Text = "Instrument Name";
             // 
-            // tabPage2
+            // tabPageConnection
             // 
-            this.tabPage2.Controls.Add(this.textBoxSend);
-            this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.labelPort);
-            this.tabPage2.Controls.Add(this.labelIPAddress);
-            this.tabPage2.Controls.Add(this.checkBoxCaseSensitive);
-            this.tabPage2.Controls.Add(this.textBoxCommunication);
-            this.tabPage2.Controls.Add(this.textBoxIP);
-            this.tabPage2.Controls.Add(this.textBoxPort);
-            this.tabPage2.Controls.Add(this.buttonSend);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(955, 428);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Connection";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageConnection.Controls.Add(this.buttonReadScaled);
+            this.tabPageConnection.Controls.Add(this.buttonReadState);
+            this.tabPageConnection.Controls.Add(this.buttonWriteConfiguration);
+            this.tabPageConnection.Controls.Add(this.buttonReadConfiguration);
+            this.tabPageConnection.Controls.Add(this.textBoxSend);
+            this.tabPageConnection.Controls.Add(this.textBox3);
+            this.tabPageConnection.Controls.Add(this.labelPort);
+            this.tabPageConnection.Controls.Add(this.labelIPAddress);
+            this.tabPageConnection.Controls.Add(this.checkBoxCaseSensitive);
+            this.tabPageConnection.Controls.Add(this.textBoxCommunication);
+            this.tabPageConnection.Controls.Add(this.textBoxIP);
+            this.tabPageConnection.Controls.Add(this.textBoxPort);
+            this.tabPageConnection.Controls.Add(this.buttonSend);
+            this.tabPageConnection.Location = new System.Drawing.Point(4, 29);
+            this.tabPageConnection.Name = "tabPageConnection";
+            this.tabPageConnection.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageConnection.Size = new System.Drawing.Size(955, 428);
+            this.tabPageConnection.TabIndex = 1;
+            this.tabPageConnection.Text = "Connection";
+            this.tabPageConnection.UseVisualStyleBackColor = true;
+            // 
+            // buttonReadScaled
+            // 
+            this.buttonReadScaled.Location = new System.Drawing.Point(19, 257);
+            this.buttonReadScaled.Name = "buttonReadScaled";
+            this.buttonReadScaled.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadScaled.TabIndex = 12;
+            this.buttonReadScaled.Text = "Read Scaled";
+            this.buttonReadScaled.UseVisualStyleBackColor = true;
+            this.buttonReadScaled.Click += new System.EventHandler(this.buttonReadScaled_Click);
+            // 
+            // buttonReadState
+            // 
+            this.buttonReadState.Location = new System.Drawing.Point(19, 224);
+            this.buttonReadState.Name = "buttonReadState";
+            this.buttonReadState.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadState.TabIndex = 11;
+            this.buttonReadState.Text = "Read State";
+            this.buttonReadState.UseVisualStyleBackColor = true;
+            this.buttonReadState.Click += new System.EventHandler(this.buttonReadState_Click);
+            // 
+            // buttonWriteConfiguration
+            // 
+            this.buttonWriteConfiguration.Location = new System.Drawing.Point(19, 191);
+            this.buttonWriteConfiguration.Name = "buttonWriteConfiguration";
+            this.buttonWriteConfiguration.Size = new System.Drawing.Size(189, 27);
+            this.buttonWriteConfiguration.TabIndex = 10;
+            this.buttonWriteConfiguration.Text = "Write Configuration";
+            this.buttonWriteConfiguration.UseVisualStyleBackColor = true;
+            // 
+            // buttonReadConfiguration
+            // 
+            this.buttonReadConfiguration.Location = new System.Drawing.Point(19, 158);
+            this.buttonReadConfiguration.Name = "buttonReadConfiguration";
+            this.buttonReadConfiguration.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadConfiguration.TabIndex = 9;
+            this.buttonReadConfiguration.Text = "Read Configuration";
+            this.buttonReadConfiguration.UseVisualStyleBackColor = true;
+            this.buttonReadConfiguration.Click += new System.EventHandler(this.buttonReadConfiguration_Click);
             // 
             // textBoxSend
             // 
@@ -543,11 +619,11 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(119, 132);
+            this.textBox3.Location = new System.Drawing.Point(610, 324);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(195, 147);
+            this.textBox3.Size = new System.Drawing.Size(195, 81);
             this.textBox3.TabIndex = 7;
             // 
             // labelPort
@@ -571,7 +647,7 @@
             // checkBoxCaseSensitive
             // 
             this.checkBoxCaseSensitive.AutoSize = true;
-            this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 102);
+            this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 378);
             this.checkBoxCaseSensitive.Name = "checkBoxCaseSensitive";
             this.checkBoxCaseSensitive.Size = new System.Drawing.Size(124, 24);
             this.checkBoxCaseSensitive.TabIndex = 4;
@@ -580,11 +656,11 @@
             // 
             // textBoxCommunication
             // 
-            this.textBoxCommunication.Location = new System.Drawing.Point(387, 22);
+            this.textBoxCommunication.Location = new System.Drawing.Point(482, 19);
             this.textBoxCommunication.Multiline = true;
             this.textBoxCommunication.Name = "textBoxCommunication";
             this.textBoxCommunication.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxCommunication.Size = new System.Drawing.Size(235, 299);
+            this.textBoxCommunication.Size = new System.Drawing.Size(467, 299);
             this.textBoxCommunication.TabIndex = 3;
             // 
             // textBoxIP
@@ -604,23 +680,42 @@
             // 
             // buttonSend
             // 
-            this.buttonSend.Location = new System.Drawing.Point(119, 285);
+            this.buttonSend.Location = new System.Drawing.Point(6, 99);
             this.buttonSend.Name = "buttonSend";
-            this.buttonSend.Size = new System.Drawing.Size(195, 36);
+            this.buttonSend.Size = new System.Drawing.Size(121, 27);
             this.buttonSend.TabIndex = 0;
             this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
-            // tabPage1
+            // tabPageLists
             // 
-            this.tabPage1.Controls.Add(this.listBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(955, 428);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Lists";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageLists.Controls.Add(this.button1);
+            this.tabPageLists.Controls.Add(this.textBox1);
+            this.tabPageLists.Controls.Add(this.listBox1);
+            this.tabPageLists.Location = new System.Drawing.Point(4, 29);
+            this.tabPageLists.Name = "tabPageLists";
+            this.tabPageLists.Size = new System.Drawing.Size(955, 428);
+            this.tabPageLists.TabIndex = 2;
+            this.tabPageLists.Text = "Lists";
+            this.tabPageLists.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(538, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(669, 47);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(237, 212);
+            this.textBox1.TabIndex = 1;
             // 
             // listBox1
             // 
@@ -630,6 +725,94 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(205, 264);
             this.listBox1.TabIndex = 0;
+            // 
+            // tabPageChart
+            // 
+            this.tabPageChart.Controls.Add(this.buttonAddXY);
+            this.tabPageChart.Controls.Add(this.labelY);
+            this.tabPageChart.Controls.Add(this.labelX);
+            this.tabPageChart.Controls.Add(this.textBoxYValue);
+            this.tabPageChart.Controls.Add(this.textBoxXValue);
+            this.tabPageChart.Controls.Add(this.chart1);
+            this.tabPageChart.Location = new System.Drawing.Point(4, 29);
+            this.tabPageChart.Name = "tabPageChart";
+            this.tabPageChart.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageChart.Size = new System.Drawing.Size(955, 428);
+            this.tabPageChart.TabIndex = 3;
+            this.tabPageChart.Text = "Chart";
+            this.tabPageChart.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddXY
+            // 
+            this.buttonAddXY.Location = new System.Drawing.Point(805, 158);
+            this.buttonAddXY.Name = "buttonAddXY";
+            this.buttonAddXY.Size = new System.Drawing.Size(94, 29);
+            this.buttonAddXY.TabIndex = 5;
+            this.buttonAddXY.Text = "Add Point";
+            this.buttonAddXY.UseVisualStyleBackColor = true;
+            this.buttonAddXY.Click += new System.EventHandler(this.buttonAddXY_Click);
+            // 
+            // labelY
+            // 
+            this.labelY.AutoSize = true;
+            this.labelY.Location = new System.Drawing.Point(782, 105);
+            this.labelY.Name = "labelY";
+            this.labelY.Size = new System.Drawing.Size(17, 20);
+            this.labelY.TabIndex = 4;
+            this.labelY.Text = "Y";
+            // 
+            // labelX
+            // 
+            this.labelX.AutoSize = true;
+            this.labelX.Location = new System.Drawing.Point(782, 52);
+            this.labelX.Name = "labelX";
+            this.labelX.Size = new System.Drawing.Size(18, 20);
+            this.labelX.TabIndex = 3;
+            this.labelX.Text = "X";
+            // 
+            // textBoxYValue
+            // 
+            this.textBoxYValue.Location = new System.Drawing.Point(805, 105);
+            this.textBoxYValue.Name = "textBoxYValue";
+            this.textBoxYValue.Size = new System.Drawing.Size(125, 27);
+            this.textBoxYValue.TabIndex = 2;
+            // 
+            // textBoxXValue
+            // 
+            this.textBoxXValue.Location = new System.Drawing.Point(805, 55);
+            this.textBoxXValue.Name = "textBoxXValue";
+            this.textBoxXValue.Size = new System.Drawing.Size(125, 27);
+            this.textBoxXValue.TabIndex = 1;
+            // 
+            // chart1
+            // 
+            chartArea1.AxisX.LabelStyle.Format = "mm:ss";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(-4, 0);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(587, 419);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // menuStrip2
             // 
@@ -684,6 +867,11 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // timerReadScaled
+            // 
+            this.timerReadScaled.Interval = 3000;
+            this.timerReadScaled.Tick += new System.EventHandler(this.timerReadScaled_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -703,19 +891,21 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1KeyPress);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormMain_KeyPress);
             this.tabControl1.ResumeLayout(false);
             this.tabPageRegistered.ResumeLayout(false);
             this.tabPageRegistered.PerformLayout();
-            this.groupBoxSelect.ResumeLayout(false);
-            this.groupBoxSelect.PerformLayout();
             this.panelUnit.ResumeLayout(false);
             this.panelUnit.PerformLayout();
             this.statusStripReady.ResumeLayout(false);
             this.statusStripReady.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
+            this.tabPageConnection.ResumeLayout(false);
+            this.tabPageConnection.PerformLayout();
+            this.tabPageLists.ResumeLayout(false);
+            this.tabPageLists.PerformLayout();
+            this.tabPageChart.ResumeLayout(false);
+            this.tabPageChart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -728,17 +918,15 @@
         private MenuStrip menuStrip2;
         private TabControl tabControl1;
         private TabPage tabPageRegistered;
-        private TabPage tabPage2;
+        private TabPage tabPageConnection;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem controlToolStripMenuItem1;
-        private TextBox textBoxLabelSensorName;
         private Label labelSensorName;
         private Label labelSerialNumber;
         private CheckBox checkBoxRegistered;
         private DateTimePicker dateTimePickerRegisterDate;
         private Label labelComment;
         private Label labelOptions;
-        private ListBox listboxOptions;
         private Label labelRegistered;
         private Label labelSignalType;
         private Label labelRegisterDate;
@@ -746,9 +934,6 @@
         private ToolStripStatusLabel toolStripStatusLabel1;
         private TextBox textBoxComment;
         private MaskedTextBox maskedTextBoxSerialNumber;
-        private RadioButton radioButtonSaveChanges;
-        private RadioButton radioButtonClear;
-        private RadioButton radioButtonRegisterNew;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem closeToolStripMenuItem;
         private TextBox textBoxRegister;
@@ -765,12 +950,11 @@
         private TextBox textBoxLRV;
         private TextBox textBoxSummary;
         private Panel panelUnit;
-        private GroupBox groupBoxSelect;
         private Button buttonRegisterNew;
         private Button buttonSummary;
         private ComboBox comboBoxMeasureType;
         private CheckBox checkBoxCaseSensitive;
-        private TabPage tabPage1;
+        private TabPage tabPageLists;
         private ListBox listBox1;
         private TextBox textBox3;
         private Label labelPort;
@@ -782,5 +966,26 @@
         private OpenFileDialog openFileDialog1;
         private Button buttonSaveToFile;
         private ComboBox comboBoxInstrumentName;
+        private Button button1;
+        private TextBox textBox1;
+        private Button buttonDelete;
+        private Button buttonSaveChanges;
+        private Label labelAlarmL;
+        private TextBox textBoxAlarmL;
+        private Label labelAlarmH;
+        private TextBox textBoxAlarmH;
+        private Button buttonReadScaled;
+        private Button buttonReadState;
+        private Button buttonWriteConfiguration;
+        private Button buttonReadConfiguration;
+        private TabPage tabPageChart;
+        private Button buttonAddXY;
+        private Label labelY;
+        private Label labelX;
+        private TextBox textBoxYValue;
+        private TextBox textBoxXValue;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Timer timerReadScaled;
+        private ComboBox comboBoxOptions;
     }
 }
