@@ -47,8 +47,19 @@ namespace FirstWindowsFormsApp
 
         public FormMain()
         {
+            string[] ComPorts = SerialPort.GetPortNames();
             //string[] ComPorts = System.IO.Ports.SerialPort.GetPortNames();
-            //comboBoxComPort.Items.AddRange(ComPorts);
+
+            /*
+            foreach (string port in ComPorts)
+            {
+                comboBoxComPort.Items.AddRange(ComPorts);
+                //Console.WriteLine(port);
+            }
+            */
+
+
+            
             serialPort = new SerialPort();
             serialPort.PortName = "COM3";
             serialPort.BaudRate = 9600;
@@ -60,7 +71,7 @@ namespace FirstWindowsFormsApp
 
             //string[] ComPorts = System.IO.Ports.SerialPort.GetPortNames();
             
-            
+
             InitializeComponent();
 
 
@@ -73,7 +84,6 @@ namespace FirstWindowsFormsApp
 
                 }
             }
-
 
         }
 
@@ -95,6 +105,7 @@ namespace FirstWindowsFormsApp
 
             //Når jeg kommenterer bort dette blir lista laget i riktig form i listeboksen,
             //når jeg har det med blir det lagret nedover
+            //Trenger ikke å ha med dette til Arbiedsrav 1
             if (inputFile != null)
             {
                 while (!inputFile.EndOfStream)
@@ -131,6 +142,7 @@ namespace FirstWindowsFormsApp
     private void dataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         string message = serialPort.ReadLine();
+        Console.WriteLine(message);
         textBoxComReceived.AppendText(message);
     }
 
@@ -688,7 +700,6 @@ namespace FirstWindowsFormsApp
                 //client send
                 //textBoxCommunication.AppendText(command);
                 Console.WriteLine(command + "\r\n");
-                Console.WriteLine("HEI");
 
                 client.Send(Encoding.ASCII.GetBytes(command));
 
@@ -720,6 +731,7 @@ namespace FirstWindowsFormsApp
                 int bytesReceived = client.Receive(buffer);
                 string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
 
+                textBoxCommunication.AppendText(received);
                 textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
                 client.Close();
                 textBoxCommunication.AppendText("Connection closed..." + "\r\n");
@@ -780,7 +792,7 @@ namespace FirstWindowsFormsApp
                 //int bytesReceived = client.Receive(buffer);
                 string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
 
-                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+                //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
                 client.Close();
                 textBoxCommunication.AppendText("Connection closed..." + "\r\n");
 
@@ -913,6 +925,7 @@ namespace FirstWindowsFormsApp
             }
         }
 
+        /*
         private void buttonAddXY_Click(object sender, EventArgs e)
         {
 
@@ -926,6 +939,7 @@ namespace FirstWindowsFormsApp
             }
 
         }
+        */
 
         private void timerReadScaled_Tick(object sender, EventArgs e)
         {
@@ -1029,6 +1043,21 @@ namespace FirstWindowsFormsApp
             serialPort.Open();
             //serialPort.Write(textBoxSend.Text);
         }
+
+        private void buttonWriteConfiguration_Click(object sender, EventArgs e)
+        {
+            if (textBoxPassword.Text == "Password")
+            {
+                string received;
+                received = sendToBackEnd("readscaled");
+                textBoxCommunication.AppendText(received + "\r\n");
+            }
+            else
+            {
+                MessageBox.Show("Password was wrong!", "Incorrect password", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
         //

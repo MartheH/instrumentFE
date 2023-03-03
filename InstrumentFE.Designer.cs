@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 1000D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(2D, 500D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(4D, 0D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 1000D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(2D, 500D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(4D, 0D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRegistered = new System.Windows.Forms.TabPage();
@@ -78,6 +78,7 @@
             this.labelSerialNumber = new System.Windows.Forms.Label();
             this.labelSensorName = new System.Windows.Forms.Label();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonDisconnect = new System.Windows.Forms.Button();
             this.buttonComConnect = new System.Windows.Forms.Button();
             this.textBoxComReceived = new System.Windows.Forms.TextBox();
@@ -562,6 +563,7 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.textBoxPassword);
             this.tabPageConnection.Controls.Add(this.buttonDisconnect);
             this.tabPageConnection.Controls.Add(this.buttonComConnect);
             this.tabPageConnection.Controls.Add(this.textBoxComReceived);
@@ -589,6 +591,14 @@
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(296, 357);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(125, 27);
+            this.textBoxPassword.TabIndex = 31;
             // 
             // buttonDisconnect
             // 
@@ -710,6 +720,7 @@
             this.buttonWriteConfiguration.TabIndex = 6;
             this.buttonWriteConfiguration.Text = "Write Configuration";
             this.buttonWriteConfiguration.UseVisualStyleBackColor = true;
+            this.buttonWriteConfiguration.Click += new System.EventHandler(this.buttonWriteConfiguration_Click);
             // 
             // buttonReadConfiguration
             // 
@@ -749,7 +760,7 @@
             // checkBoxCaseSensitive
             // 
             this.checkBoxCaseSensitive.AutoSize = true;
-            this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 378);
+            this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 357);
             this.checkBoxCaseSensitive.Name = "checkBoxCaseSensitive";
             this.checkBoxCaseSensitive.Size = new System.Drawing.Size(124, 24);
             this.checkBoxCaseSensitive.TabIndex = 22;
@@ -772,6 +783,7 @@
             this.textBoxIP.Name = "textBoxIP";
             this.textBoxIP.Size = new System.Drawing.Size(140, 27);
             this.textBoxIP.TabIndex = 1;
+            this.textBoxIP.Text = "127.0.0.1";
             // 
             // textBoxPort
             // 
@@ -856,7 +868,6 @@
             this.buttonAddXY.TabIndex = 5;
             this.buttonAddXY.Text = "Add Point";
             this.buttonAddXY.UseVisualStyleBackColor = true;
-            this.buttonAddXY.Click += new System.EventHandler(this.buttonAddXY_Click);
             // 
             // labelY
             // 
@@ -892,25 +903,25 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.LabelStyle.Format = "mm:ss";
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.AxisX.LabelStyle.Format = "mm:ss";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Cursor = System.Windows.Forms.Cursors.AppStarting;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(-4, 0);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.Points.Add(dataPoint6);
-            series2.Points.Add(dataPoint7);
-            series2.Points.Add(dataPoint8);
-            series2.Points.Add(dataPoint9);
-            series2.Points.Add(dataPoint10);
-            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(963, 450);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -1103,5 +1114,6 @@
         private Label labelComPort;
         private ComboBox comboBoxBaud;
         private ComboBox comboBoxComPort;
+        private TextBox textBoxPassword;
     }
 }
