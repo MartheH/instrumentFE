@@ -32,17 +32,12 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 0D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(1D, 1000D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(2D, 500D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, 1000D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(4D, 0D);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRegistered = new System.Windows.Forms.TabPage();
             this.comboBoxOptions = new System.Windows.Forms.ComboBox();
             this.buttonRegisterNew = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
             this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.comboBoxInstrumentName = new System.Windows.Forms.ComboBox();
             this.buttonSaveToFile = new System.Windows.Forms.Button();
@@ -51,9 +46,9 @@
             this.buttonSummary = new System.Windows.Forms.Button();
             this.panelUnit = new System.Windows.Forms.Panel();
             this.labelAlarmL = new System.Windows.Forms.Label();
-            this.textBoxAlarmL = new System.Windows.Forms.TextBox();
             this.labelAlarmH = new System.Windows.Forms.Label();
             this.textBoxAlarmH = new System.Windows.Forms.TextBox();
+            this.textBoxAlarmL = new System.Windows.Forms.TextBox();
             this.textBoxLRV = new System.Windows.Forms.TextBox();
             this.labelLRV = new System.Windows.Forms.Label();
             this.textBoxURV = new System.Windows.Forms.TextBox();
@@ -78,8 +73,8 @@
             this.labelSerialNumber = new System.Windows.Forms.Label();
             this.labelSensorName = new System.Windows.Forms.Label();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.buttonDisconnect = new System.Windows.Forms.Button();
             this.buttonComConnect = new System.Windows.Forms.Button();
             this.textBoxComReceived = new System.Windows.Forms.TextBox();
             this.labelBaudRate = new System.Windows.Forms.Label();
@@ -101,16 +96,13 @@
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.tabPageLists = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.listBoxGraph = new System.Windows.Forms.ListBox();
             this.listBoxServers = new System.Windows.Forms.ListBox();
             this.tabPageGraph = new System.Windows.Forms.TabPage();
-            this.buttonAddXY = new System.Windows.Forms.Button();
-            this.labelY = new System.Windows.Forms.Label();
-            this.labelX = new System.Windows.Forms.Label();
-            this.textBoxYValue = new System.Windows.Forms.TextBox();
-            this.textBoxXValue = new System.Windows.Forms.TextBox();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.listBoxGraphYvals = new System.Windows.Forms.ListBox();
+            this.buttonStopMonitoring = new System.Windows.Forms.Button();
+            this.buttonStartMonitoring = new System.Windows.Forms.Button();
+            this.chartArduino = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -128,7 +120,7 @@
             this.statusStripConnection.SuspendLayout();
             this.tabPageLists.SuspendLayout();
             this.tabPageGraph.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartArduino)).BeginInit();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,7 +141,7 @@
             // 
             this.tabPageRegistered.Controls.Add(this.comboBoxOptions);
             this.tabPageRegistered.Controls.Add(this.buttonRegisterNew);
-            this.tabPageRegistered.Controls.Add(this.buttonDelete);
+            this.tabPageRegistered.Controls.Add(this.buttonClear);
             this.tabPageRegistered.Controls.Add(this.buttonSaveChanges);
             this.tabPageRegistered.Controls.Add(this.comboBoxInstrumentName);
             this.tabPageRegistered.Controls.Add(this.buttonSaveToFile);
@@ -208,17 +200,17 @@
             this.buttonRegisterNew.UseVisualStyleBackColor = false;
             this.buttonRegisterNew.Click += new System.EventHandler(this.buttonRegisterNew_Click);
             // 
-            // buttonDelete
+            // buttonClear
             // 
-            this.buttonDelete.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.buttonDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonDelete.Location = new System.Drawing.Point(396, 309);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(131, 39);
-            this.buttonDelete.TabIndex = 16;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonClear.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.buttonClear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonClear.Location = new System.Drawing.Point(396, 304);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(131, 39);
+            this.buttonClear.TabIndex = 16;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = false;
+            this.buttonClear.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonSaveChanges
             // 
@@ -292,9 +284,9 @@
             // panelUnit
             // 
             this.panelUnit.Controls.Add(this.labelAlarmL);
-            this.panelUnit.Controls.Add(this.textBoxAlarmL);
             this.panelUnit.Controls.Add(this.labelAlarmH);
             this.panelUnit.Controls.Add(this.textBoxAlarmH);
+            this.panelUnit.Controls.Add(this.textBoxAlarmL);
             this.panelUnit.Controls.Add(this.textBoxLRV);
             this.panelUnit.Controls.Add(this.labelLRV);
             this.panelUnit.Controls.Add(this.textBoxURV);
@@ -309,26 +301,16 @@
             // labelAlarmL
             // 
             this.labelAlarmL.AutoSize = true;
-            this.labelAlarmL.Location = new System.Drawing.Point(10, 143);
+            this.labelAlarmL.Location = new System.Drawing.Point(10, 110);
             this.labelAlarmL.Name = "labelAlarmL";
             this.labelAlarmL.Size = new System.Drawing.Size(60, 20);
             this.labelAlarmL.TabIndex = 29;
             this.labelAlarmL.Text = "Alarm L";
             // 
-            // textBoxAlarmL
-            // 
-            this.textBoxAlarmL.Location = new System.Drawing.Point(82, 140);
-            this.textBoxAlarmL.MaxLength = 5;
-            this.textBoxAlarmL.Name = "textBoxAlarmL";
-            this.textBoxAlarmL.Size = new System.Drawing.Size(96, 27);
-            this.textBoxAlarmL.TabIndex = 13;
-            this.textBoxAlarmL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAlarmL_KeyPress);
-            this.textBoxAlarmL.MouseHover += new System.EventHandler(this.textBoxAlarmL_MouseHover);
-            // 
             // labelAlarmH
             // 
             this.labelAlarmH.AutoSize = true;
-            this.labelAlarmH.Location = new System.Drawing.Point(12, 109);
+            this.labelAlarmH.Location = new System.Drawing.Point(12, 143);
             this.labelAlarmH.Name = "labelAlarmH";
             this.labelAlarmH.Size = new System.Drawing.Size(64, 20);
             this.labelAlarmH.TabIndex = 27;
@@ -336,13 +318,23 @@
             // 
             // textBoxAlarmH
             // 
-            this.textBoxAlarmH.Location = new System.Drawing.Point(82, 106);
+            this.textBoxAlarmH.Location = new System.Drawing.Point(82, 140);
             this.textBoxAlarmH.MaxLength = 5;
             this.textBoxAlarmH.Name = "textBoxAlarmH";
             this.textBoxAlarmH.Size = new System.Drawing.Size(96, 27);
-            this.textBoxAlarmH.TabIndex = 12;
+            this.textBoxAlarmH.TabIndex = 13;
             this.textBoxAlarmH.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAlarmH_KeyPress);
             this.textBoxAlarmH.MouseHover += new System.EventHandler(this.textBoxAlarmH_MouseHover);
+            // 
+            // textBoxAlarmL
+            // 
+            this.textBoxAlarmL.Location = new System.Drawing.Point(82, 107);
+            this.textBoxAlarmL.MaxLength = 5;
+            this.textBoxAlarmL.Name = "textBoxAlarmL";
+            this.textBoxAlarmL.Size = new System.Drawing.Size(96, 27);
+            this.textBoxAlarmL.TabIndex = 12;
+            this.textBoxAlarmL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxAlarmL_KeyPress);
+            this.textBoxAlarmL.MouseHover += new System.EventHandler(this.textBoxAlarmL_MouseHover);
             // 
             // textBoxLRV
             // 
@@ -563,8 +555,8 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.labelPassword);
             this.tabPageConnection.Controls.Add(this.textBoxPassword);
-            this.tabPageConnection.Controls.Add(this.buttonDisconnect);
             this.tabPageConnection.Controls.Add(this.buttonComConnect);
             this.tabPageConnection.Controls.Add(this.textBoxComReceived);
             this.tabPageConnection.Controls.Add(this.labelBaudRate);
@@ -592,24 +584,22 @@
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
+            // labelPassword
+            // 
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(232, 393);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(70, 20);
+            this.labelPassword.TabIndex = 32;
+            this.labelPassword.Text = "Password";
+            // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(296, 357);
+            this.textBoxPassword.Location = new System.Drawing.Point(328, 390);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(125, 27);
             this.textBoxPassword.TabIndex = 31;
-            // 
-            // buttonDisconnect
-            // 
-            this.buttonDisconnect.BackColor = System.Drawing.Color.Silver;
-            this.buttonDisconnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonDisconnect.Location = new System.Drawing.Point(719, 135);
-            this.buttonDisconnect.Name = "buttonDisconnect";
-            this.buttonDisconnect.Size = new System.Drawing.Size(142, 36);
-            this.buttonDisconnect.TabIndex = 30;
-            this.buttonDisconnect.Text = "Disconnect";
-            this.buttonDisconnect.UseVisualStyleBackColor = false;
             // 
             // buttonComConnect
             // 
@@ -708,7 +698,7 @@
             this.buttonReadState.Name = "buttonReadState";
             this.buttonReadState.Size = new System.Drawing.Size(189, 27);
             this.buttonReadState.TabIndex = 7;
-            this.buttonReadState.Text = "Read State";
+            this.buttonReadState.Text = "Read Status";
             this.buttonReadState.UseVisualStyleBackColor = true;
             this.buttonReadState.Click += new System.EventHandler(this.buttonReadState_Click);
             // 
@@ -807,8 +797,7 @@
             // 
             // tabPageLists
             // 
-            this.tabPageLists.Controls.Add(this.button1);
-            this.tabPageLists.Controls.Add(this.textBox1);
+            this.tabPageLists.Controls.Add(this.listBoxGraph);
             this.tabPageLists.Controls.Add(this.listBoxServers);
             this.tabPageLists.Location = new System.Drawing.Point(4, 29);
             this.tabPageLists.Name = "tabPageLists";
@@ -817,23 +806,14 @@
             this.tabPageLists.Text = "Lists";
             this.tabPageLists.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // listBoxGraph
             // 
-            this.button1.Location = new System.Drawing.Point(538, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(669, 47);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(237, 212);
-            this.textBox1.TabIndex = 1;
+            this.listBoxGraph.FormattingEnabled = true;
+            this.listBoxGraph.ItemHeight = 20;
+            this.listBoxGraph.Location = new System.Drawing.Point(506, 24);
+            this.listBoxGraph.Name = "listBoxGraph";
+            this.listBoxGraph.Size = new System.Drawing.Size(405, 264);
+            this.listBoxGraph.TabIndex = 1;
             // 
             // listBoxServers
             // 
@@ -846,12 +826,10 @@
             // 
             // tabPageGraph
             // 
-            this.tabPageGraph.Controls.Add(this.buttonAddXY);
-            this.tabPageGraph.Controls.Add(this.labelY);
-            this.tabPageGraph.Controls.Add(this.labelX);
-            this.tabPageGraph.Controls.Add(this.textBoxYValue);
-            this.tabPageGraph.Controls.Add(this.textBoxXValue);
-            this.tabPageGraph.Controls.Add(this.chart1);
+            this.tabPageGraph.Controls.Add(this.listBoxGraphYvals);
+            this.tabPageGraph.Controls.Add(this.buttonStopMonitoring);
+            this.tabPageGraph.Controls.Add(this.buttonStartMonitoring);
+            this.tabPageGraph.Controls.Add(this.chartArduino);
             this.tabPageGraph.Location = new System.Drawing.Point(4, 29);
             this.tabPageGraph.Name = "tabPageGraph";
             this.tabPageGraph.Padding = new System.Windows.Forms.Padding(3);
@@ -860,71 +838,55 @@
             this.tabPageGraph.Text = "Graph";
             this.tabPageGraph.UseVisualStyleBackColor = true;
             // 
-            // buttonAddXY
+            // listBoxGraphYvals
             // 
-            this.buttonAddXY.Location = new System.Drawing.Point(805, 158);
-            this.buttonAddXY.Name = "buttonAddXY";
-            this.buttonAddXY.Size = new System.Drawing.Size(94, 29);
-            this.buttonAddXY.TabIndex = 5;
-            this.buttonAddXY.Text = "Add Point";
-            this.buttonAddXY.UseVisualStyleBackColor = true;
+            this.listBoxGraphYvals.FormattingEnabled = true;
+            this.listBoxGraphYvals.HorizontalScrollbar = true;
+            this.listBoxGraphYvals.ItemHeight = 20;
+            this.listBoxGraphYvals.Location = new System.Drawing.Point(782, 156);
+            this.listBoxGraphYvals.Name = "listBoxGraphYvals";
+            this.listBoxGraphYvals.Size = new System.Drawing.Size(167, 264);
+            this.listBoxGraphYvals.TabIndex = 8;
             // 
-            // labelY
+            // buttonStopMonitoring
             // 
-            this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(782, 105);
-            this.labelY.Name = "labelY";
-            this.labelY.Size = new System.Drawing.Size(17, 20);
-            this.labelY.TabIndex = 4;
-            this.labelY.Text = "Y";
+            this.buttonStopMonitoring.Location = new System.Drawing.Point(782, 77);
+            this.buttonStopMonitoring.Name = "buttonStopMonitoring";
+            this.buttonStopMonitoring.Size = new System.Drawing.Size(167, 29);
+            this.buttonStopMonitoring.TabIndex = 7;
+            this.buttonStopMonitoring.Text = "Stop Monitor";
+            this.buttonStopMonitoring.UseVisualStyleBackColor = true;
+            this.buttonStopMonitoring.Click += new System.EventHandler(this.buttonStopMonitoring_Click);
             // 
-            // labelX
+            // buttonStartMonitoring
             // 
-            this.labelX.AutoSize = true;
-            this.labelX.Location = new System.Drawing.Point(782, 52);
-            this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(18, 20);
-            this.labelX.TabIndex = 3;
-            this.labelX.Text = "X";
+            this.buttonStartMonitoring.Location = new System.Drawing.Point(782, 42);
+            this.buttonStartMonitoring.Name = "buttonStartMonitoring";
+            this.buttonStartMonitoring.Size = new System.Drawing.Size(167, 29);
+            this.buttonStartMonitoring.TabIndex = 6;
+            this.buttonStartMonitoring.Text = "Start Monitoring";
+            this.buttonStartMonitoring.UseVisualStyleBackColor = true;
+            this.buttonStartMonitoring.Click += new System.EventHandler(this.buttonStartMonitoring_Click);
             // 
-            // textBoxYValue
-            // 
-            this.textBoxYValue.Location = new System.Drawing.Point(805, 105);
-            this.textBoxYValue.Name = "textBoxYValue";
-            this.textBoxYValue.Size = new System.Drawing.Size(125, 27);
-            this.textBoxYValue.TabIndex = 2;
-            // 
-            // textBoxXValue
-            // 
-            this.textBoxXValue.Location = new System.Drawing.Point(805, 55);
-            this.textBoxXValue.Name = "textBoxXValue";
-            this.textBoxXValue.Size = new System.Drawing.Size(125, 27);
-            this.textBoxXValue.TabIndex = 1;
-            // 
-            // chart1
+            // chartArduino
             // 
             chartArea1.AxisX.LabelStyle.Format = "mm:ss";
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Cursor = System.Windows.Forms.Cursors.AppStarting;
+            this.chartArduino.ChartAreas.Add(chartArea1);
+            this.chartArduino.Cursor = System.Windows.Forms.Cursors.AppStarting;
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(-4, 0);
-            this.chart1.Name = "chart1";
+            this.chartArduino.Legends.Add(legend1);
+            this.chartArduino.Location = new System.Drawing.Point(-4, 0);
+            this.chartArduino.Name = "chartArduino";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(963, 450);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
+            series1.Name = "Lysintensitet";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
+            this.chartArduino.Series.Add(series1);
+            this.chartArduino.Size = new System.Drawing.Size(963, 450);
+            this.chartArduino.TabIndex = 0;
+            this.chartArduino.Text = "Arduino Graph";
             // 
             // contextMenuStrip1
             // 
@@ -941,7 +903,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(975, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(978, 28);
             this.menuStrip2.TabIndex = 6;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -987,7 +949,7 @@
             // 
             // timerReadScaled
             // 
-            this.timerReadScaled.Interval = 3000;
+            this.timerReadScaled.Interval = 5000;
             this.timerReadScaled.Tick += new System.EventHandler(this.timerReadScaled_Tick);
             // 
             // FormMain
@@ -995,7 +957,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(975, 522);
+            this.ClientSize = new System.Drawing.Size(978, 522);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1021,10 +983,8 @@
             this.statusStripConnection.ResumeLayout(false);
             this.statusStripConnection.PerformLayout();
             this.tabPageLists.ResumeLayout(false);
-            this.tabPageLists.PerformLayout();
             this.tabPageGraph.ResumeLayout(false);
-            this.tabPageGraph.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartArduino)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -1084,9 +1044,7 @@
         private OpenFileDialog openFileDialog1;
         private Button buttonSaveToFile;
         private ComboBox comboBoxInstrumentName;
-        private Button button1;
-        private TextBox textBox1;
-        private Button buttonDelete;
+        private Button buttonClear;
         private Button buttonSaveChanges;
         private Label labelAlarmL;
         private TextBox textBoxAlarmL;
@@ -1097,17 +1055,11 @@
         private Button buttonWriteConfiguration;
         private Button buttonReadConfiguration;
         private TabPage tabPageGraph;
-        private Button buttonAddXY;
-        private Label labelY;
-        private Label labelX;
-        private TextBox textBoxYValue;
-        private TextBox textBoxXValue;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartArduino;
         private System.Windows.Forms.Timer timerReadScaled;
         private ComboBox comboBoxOptions;
         private StatusStrip statusStripConnection;
         private ToolStripStatusLabel statusLabelConnection;
-        private Button buttonDisconnect;
         private Button buttonComConnect;
         private TextBox textBoxComReceived;
         private Label labelBaudRate;
@@ -1115,5 +1067,10 @@
         private ComboBox comboBoxBaud;
         private ComboBox comboBoxComPort;
         private TextBox textBoxPassword;
+        private Button buttonStopMonitoring;
+        private Button buttonStartMonitoring;
+        private ListBox listBoxGraph;
+        private Label labelPassword;
+        private ListBox listBoxGraphYvals;
     }
 }

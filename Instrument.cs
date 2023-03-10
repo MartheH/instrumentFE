@@ -32,38 +32,49 @@ namespace FirstWindowsFormsApp
         public double URV { get; set; }
         public string Unit { get; set; }
 
-        public Instrument(string sensorName,
-                           string serialNumber,
-                           string signalType,
-                           string measuremeantType,
-                           string options = null,
-                           string comment = null,
-                           double lrv = 0.0,
-                           double urv = 0.0,
-                           string unit = null)
+        public double AlarmLow { get; set; }
+
+        public double AlarmHigh { get; set; }
+
+        public Instrument(  string RegisterDate,
+                           string SensorName,
+                           string SerialNumber,
+                           string SignalType,
+                           string MeasuremeantType,
+                           string Options,
+                           string Comment)
+                           //double lrv = 0.0,        //disse kan vel ikke være null? Feilmedling hvis jeg tar vekk nullene. Hvorfor?
+                           //double urv = 0.0,        //disse kan vel ikke være null?
+                           //string unit = null,      
+                           //double alarmLow = 0.0,   //disse kan vel ikke være null?     
+                           //double alarmHigh = 0.0) //disse kan vel ikke være null?
         {
             this.RegisterDate = DateTime.Now;
-            this.SensorName = sensorName;
-            this.SerialNumber = serialNumber;
-            this.SignalType = signalType;
-            this.MeasuremeantType = measuremeantType;
-            this.Options = options;
-            this.Comment = comment;
-            this.LRV = lrv;
-            this.URV = urv;
-            this.Unit = unit;
+            this.SensorName = SensorName;
+            this.SerialNumber = SerialNumber;
+            this.SignalType = SignalType;
+            this.MeasuremeantType = MeasuremeantType;
+            this.Options = Options;
+            this.Comment = Comment;
+            //this.LRV = lrv;
+            //this.URV = urv;
+            //this.Unit = unit;
+            //this.AlarmLow = alarmLow;
+            //this.AlarmHigh = alarmHigh;
         }
-
-        public Instrument(string registerDate,
+        /*
+        public Instrument(string registerDate,          //Hvorfor to "Instrument"
                           string sensorName,
                           string serialNumber,
                           string signalType,
                           string measuremeantType,
                           string options = null,
                           string comment = null,
-                          double lrv = 0.0,
-                          double urv = 0.0,
-                          string unit = null)
+                          double lrv = 0.0,         //disse kan vel ikke være null?
+                          double urv = 0.0,         //disse kan vel ikke være null?
+                          string unit = null,
+                          double alarmLow = 0.0,    //disse kan vel ikke være null?
+                          double alarmHigh = 0.0)   //legge til alarm l og alarm h
         {
             this.RegisterDate = Convert.ToDateTime(registerDate);
             this.SensorName = sensorName;
@@ -75,9 +86,47 @@ namespace FirstWindowsFormsApp
             this.LRV = lrv;
             this.URV = urv;
             this.Unit = unit;
+            this.AlarmLow = alarmLow;
+            this.AlarmHigh = alarmHigh;
         }
+        */
+        //
+        public Instrument(string RegisterDate,          //Hvorfor to "Instrument"
+                         string SensorName,
+                         string SerialNumber,
+                         string SignalType,
+                         string MeasuremeantType,
+                         string Options,
+                         string Comment,
+                         double LRV,         //disse kan vel ikke være null?
+                         double URV,         //disse kan vel ikke være null?
+                         string Unit,
+                         double AlarmLow,    //disse kan vel ikke være null?
+                         double AlarmHigh)   //legge til alarm l og alarm h
+        {
+            this.RegisterDate = Convert.ToDateTime(RegisterDate);
+            this.SensorName = SensorName;
+            this.SerialNumber = SerialNumber;
+            this.SignalType = SignalType;
+            this.MeasuremeantType = MeasuremeantType;
+            this.Options = Options;
+            this.Comment = Comment;
+            this.LRV = LRV;
+            this.URV = URV;
+            this.Unit = Unit;
+            this.AlarmLow = AlarmLow;
+            this.AlarmHigh = AlarmHigh;
 
-        public double Span()
+        }
+        //
+
+
+
+
+
+
+
+            public double Span()            // 0 refrenced? Hvorfor?
         {
             return URV - LRV;
         }
@@ -92,7 +141,9 @@ namespace FirstWindowsFormsApp
                                             + ";" + Comment
                                             + ";" + Convert.ToString(LRV, CultureInfo.InvariantCulture)
                                             + ";" + Convert.ToString(URV, CultureInfo.InvariantCulture)
-                                            + ";" + Unit;
+                                            + ";" + Unit
+                                            + ";" + AlarmLow
+                                            + ";" + AlarmHigh;
         }
     }
 }

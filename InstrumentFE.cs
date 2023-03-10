@@ -30,6 +30,8 @@ namespace FirstWindowsFormsApp
         double lrvValue = 0.0;
         double urvValue = 0.0;
         double spanValue = 0.0;
+        double alarmLvalue = 0.0;
+        double alamrHvalue = 0.0;
 
         int RegisterIndex = 0;
         int analogIndex = 0;
@@ -47,18 +49,7 @@ namespace FirstWindowsFormsApp
 
         public FormMain()
         {
-            string[] ComPorts = SerialPort.GetPortNames();
-            //string[] ComPorts = System.IO.Ports.SerialPort.GetPortNames();
-
-            /*
-            foreach (string port in ComPorts)
-            {
-                comboBoxComPort.Items.AddRange(ComPorts);
-                //Console.WriteLine(port);
-            }
-            */
-
-
+            
             
             serialPort = new SerialPort();
             serialPort.PortName = "COM3";
@@ -70,8 +61,18 @@ namespace FirstWindowsFormsApp
             serialPort.DataReceived += dataReceived;
 
             //string[] ComPorts = System.IO.Ports.SerialPort.GetPortNames();
-            
+            //string[] ComPorts = SerialPort.GetPortNames();
+            //string[] ComPorts = System.IO.Ports.SerialPort.GetPortNames();
 
+            //comboBoxComPort.Items.Add(ComPorts);
+            /*
+
+            foreach (string port in ComPorts)
+            {
+                comboBoxComPort.Items.AddRange(ComPorts);
+                //Console.WriteLine(port);
+            }
+            */
             InitializeComponent();
 
 
@@ -105,7 +106,9 @@ namespace FirstWindowsFormsApp
 
             //Når jeg kommenterer bort dette blir lista laget i riktig form i listeboksen,
             //når jeg har det med blir det lagret nedover
+
             //Trenger ikke å ha med dette til Arbiedsrav 1
+            /*
             if (inputFile != null)
             {
                 while (!inputFile.EndOfStream)
@@ -135,17 +138,20 @@ namespace FirstWindowsFormsApp
                 inputFile.Close();
 
             }
-
+            */
         }
-
-
+            
+        
     private void dataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         string message = serialPort.ReadLine();
+        //string messsage = "COM3";
         Console.WriteLine(message);
-        textBoxComReceived.AppendText(message);
+        Console.WriteLine("Funker!");
+        textBoxComReceived.AppendText("Hei" + message);
+        Console.WriteLine("Funker bra");
     }
-
+        
 
     // funker ikke
     private void FormMain_KeyPress(object sender, KeyPressEventArgs e)
@@ -182,7 +188,7 @@ namespace FirstWindowsFormsApp
 
             if (!NewSensorName())
             {
-                return;
+                MessageBox.Show("This instrument already exist");
             }
 
 
@@ -200,13 +206,11 @@ namespace FirstWindowsFormsApp
                     textBoxLRV.Focus();
                 }
 
-
                 else if (textBoxURV.Text == "")
                 {
                     MessageBox.Show("Missing URV-range");
                     textBoxURV.Focus();
                 }
-
 
                 else if (Convert.ToDouble(textBoxURV.Text) <= Convert.ToDouble(textBoxLRV.Text))
                 {
@@ -252,24 +256,65 @@ namespace FirstWindowsFormsApp
             textBoxRegister.Text = "";
             //listBoxServers.Items.Clear();
             //if (NewInstrument(textBoxLabelSensorName.Text))
+
             if (NewInstrument(comboBoxInstrumentName.Text))
             {
+                if (comboBoxSignalType.Text == "Analog")
+                {
+                    Instrument instrument = new Instrument(dateTimePickerRegisterDate.Text,
+                                                            comboBoxInstrumentName.Text,
+                                                            maskedTextBoxSerialNumber.Text,
+                                                            comboBoxSignalType.Text,
+                                                            comboBoxMeasureType.Text,
+                                                            comboBoxOptions.Text,
+                                                            textBoxComment.Text,
+                                                            Convert.ToDouble(textBoxLRV.Text),
+                                                            Convert.ToDouble(textBoxURV.Text),
+                                                            //textBoxLRV.Text,
+                                                            //textBoxURV.Text,
+                                                            //lrvValue,
+                                                            //urvValue,
+                                                            textBoxUnit.Text,
+                                                            Convert.ToDouble(textBoxAlarmL.Text),
+                                                            Convert.ToDouble(textBoxAlarmH.Text)                                                        //alarmLvalue,
+                                                                                                                                                        //alamrHvalue
+                                                            );
+                    //instrumentList.Add(instrument);
+                    textBoxRegister.AppendText(instrument.ToString());
+                    //listBoxServers.Append(instrument);
+                    //listBoxServers.Items.Add(instrument.ToString());
+                    listBoxServers.Items.Add(instrument);
+                    //listBoxServers.Items.AddRange(instrument);
+                }
 
-                Instrument instrument = new Instrument(comboBoxInstrumentName.Text,
-                                                        maskedTextBoxSerialNumber.Text,
-                                                        comboBoxSignalType.Text,
-                                                        comboBoxMeasureType.Text,
-                                                        comboBoxOptions.Text,
-                                                        textBoxComment.Text,
-                                                        lrvValue,
-                                                        urvValue,
-                                                        textBoxUnit.Text);
-                //instrumentList.Add(instrument);
-                textBoxRegister.AppendText(instrument.ToString());
-                //listBoxServers.Append(instrument);
-                //listBoxServers.Items.Add(instrument.ToString());
-                listBoxServers.Items.Add(instrument);
-                //listBoxServers.Items.AddRange(instrument);
+                else
+                {
+                    Instrument instrument = new Instrument(dateTimePickerRegisterDate.Text,
+                                                            comboBoxInstrumentName.Text,
+                                                            maskedTextBoxSerialNumber.Text,
+                                                            comboBoxSignalType.Text,
+                                                            comboBoxMeasureType.Text,
+                                                            comboBoxOptions.Text,
+                                                            textBoxComment.Text
+                                                            //Convert.ToDouble(textBoxLRV.Text),
+                                                            //Convert.ToDouble(textBoxURV.Text),
+                                                            //textBoxLRV.Text,
+                                                            //textBoxURV.Text,
+                                                            //lrvValue,
+                                                            //urvValue,
+                                                            //textBoxUnit.Text
+                                                            //Convert.ToDouble(textBoxAlarmL.Text),
+                                                            //Convert.ToDouble(textBoxAlarmH.Text)                                                        //alarmLvalue,
+                                                                                                                                                        //alamrHvalue
+                                                            );
+                    //instrumentList.Add(instrument);
+                    textBoxRegister.AppendText(instrument.ToString());
+                    //listBoxServers.Append(instrument);
+                    //listBoxServers.Items.Add(instrument.ToString());
+                    listBoxServers.Items.Add(instrument);
+                    //listBoxServers.Items.AddRange(instrument);
+
+                }
             }
         }
 
@@ -295,7 +340,6 @@ namespace FirstWindowsFormsApp
             AddTextInTextRegister();
 
         }
-
 
 
         // MouseHover
@@ -491,45 +535,40 @@ namespace FirstWindowsFormsApp
                 textBoxCommunication.AppendText("Connected to Server.");
                 statusLabelConnection.Text = "Connected";
                 statusStripConnection.BackColor = Color.Green;
-
-
-
+                //statusStripConnection.BackColor = SystemColors.Window;
                 //client send
                 client.Send(Encoding.ASCII.GetBytes(textBoxSend.Text));
 
-
+                
                 //client received
                 byte[] buffer = new byte[1024];
                 int bytesReceived = client.Receive(buffer);
                 textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
 
+                //Lage if-setning så bare comport blir lagt til i 
+
+                string ComPortReceived = Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n";
+                string[] ComportReceivedParts = ComPortReceived.Split(' ');      //finne ut hvirdan jeg skal splitte
+                string ComPortParts = ComportReceivedParts[2].Substring(0, ComportReceivedParts[2].Length);
+
+                if(ComportReceivedParts.Length > 0 & ComportReceivedParts[0] == "Portname")
+                {
+                    comboBoxComPort.Items.Add(ComPortParts);
+                }
+                
+                //comboBoxComPort.Items.Add(ComPortReceived);
+                //string ComportParts= ComportReceivedParts[2].Substring(0, ComportReceivedParts[2].Length);
+                //comboBoxComPort.Items.Add(ComportParts);
+                //string[] ComportReceivedParts = ComPortReceived.Split("");
+                //string ComportParts = ComportReceivedParts[1].Substring(0, ComportReceivedParts[1].Length - 4);
+                //comboBoxComPort.Items.Add(ComportParts);
+                //comboBoxComPort.Items.Add(ComPortReceived);
+
+                //
                 client.Close();
                 //textBoxCommunication.AppendText("Connection closed..." + "\r\n");
 
-
-                //}
-                /*
-                else
-                {
-                    MessageBox.Show("Nooooooooooooooooooooooo connection");
-                }
-                */
             }
-            /*
-            statusLabelConnection.Text = "Not connected";
-            statusStripConnection.BackColor = Color.Red;
-            MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            textBoxIP.Focus();
-            */
-
-            /*
-            else if (textBoxCommunication.Text == "")
-            {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
-                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            */
 
             else
             {
@@ -540,57 +579,8 @@ namespace FirstWindowsFormsApp
 
             }
 
-            //IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
-            //Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            //try
-            //{
-            //statusLabelConnection.Text = "Connected";
-            //statusStripConnection.BackColor = Color.Green;
-
-            //client.Connect(endPoint);
-            //client.Connect(endPoint);
-            //statusLabelConnection.Text = "Connected";
-            //statusStripConnection.BackColor = Color.Green;      //endrer ikke farge --> fungerer ikke
-
-            //}
-
-            //catch(FormatException) 
-            //{
-            //   Exception err = new Exception("No connection");
-            //    throw(err);
-            //}
-
-            //textBoxCommunication.AppendText("Connected to Server.");
-            //statusLabelConnection.Text = "Connected";
-            //statusStripConnection.BackColor = Color.Green;
-            //statusLabelConnection.Text = "Disconnected";
-            //statusStripConnection.BackColor = Color.Red;
-
-            /*
-            if(textBoxCommunication.Text == "Client disconnected...")
-            {
-                statusLabelConnection.Text = "Disconnected";
-                statusStripConnection.BackColor = Color.Red;
-            }
-            */
-
-            //client send
-            //client.Send(Encoding.ASCII.GetBytes(textBoxSend.Text));
-
-
-            //client received
-            //byte[] buffer = new byte[1024];
-            //int bytesReceived = client.Receive(buffer);     //hjep med denne
-            //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
-
-            //client.Close();
-            //textBoxCommunication.AppendText("Connection closed..." + "\r\n");
-
-
         }
-
-
+        
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
@@ -631,11 +621,12 @@ namespace FirstWindowsFormsApp
             }
         }
 
+        //
         private void buttonSaveToFile_Click(object sender, EventArgs e)
         {
             if (textBoxRegister.TextLength > 0)
             {
-                StreamWriter outputFile = new StreamWriter("register.csv");
+                StreamWriter outputFile = new StreamWriter("register.csv");     //får ikke lagret til fil
                 outputFile.WriteLine(textBoxRegister.Text);
                 outputFile.Close();
             }
@@ -680,51 +671,27 @@ namespace FirstWindowsFormsApp
         }
 
 
-
         private string sendToBackEnd(string command)
+        //private string sendToBackEnd(string command)
         {
-
-            /*
-            if (endPoint == null)
-            {
-                return "No connection to Arduino";
-            }
-            */
 
             if (textBoxIP.Text == "127.0.0.1")
             {
 
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                client.Connect(endPoint);
                 Trace.WriteLine("Connected to server..." + "\r\n");
                 //client send
-                //textBoxCommunication.AppendText(command);
-                Console.WriteLine(command + "\r\n");
+                textBoxCommunication.AppendText(command);
+                //Console.WriteLine(command + "\r\n");
 
                 client.Send(Encoding.ASCII.GetBytes(command));
 
 
                 //client received
                 byte[] buffer = new byte[1024];
-                //int bytesReceived = client.Receive(buffer);
-                //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
-
-                //textBoxCommunication.AppendText(Convert.ToString(buffer));
-                //Console.WriteLine(buffer);
-
-                /*
-                //client send
-                client.Send(Encoding.ASCII.GetBytes("readscaled"));
-                */
-
-                //client.Close();
-                //textBoxCommunication.AppendText("Connection closed..." + "\r\n");
-                /*
-                if (buffer.Length <= 0)
-                {
-                    return "Client not connected";
-                }
-                */
+                
                 //Hvis bytes som kommer inn er null --> "Not connected to Arduino"
                 //if (buffer.Length <= 0)
                 //{
@@ -737,9 +704,7 @@ namespace FirstWindowsFormsApp
                 textBoxCommunication.AppendText("Connection closed..." + "\r\n");
                 //Trace.WriteLine("Connection closed..." + "\r\n");
                 return received;
-                //}
-
-                //return "Connected";
+                
             }
 
             else
@@ -749,20 +714,104 @@ namespace FirstWindowsFormsApp
                 MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "No connection";
             }
-
-            /*
-            else
-            {
-                textBoxIP.Focus();
-                return "feil";
-            }
-            */
         }
 
 
 
         private void buttonReadConfiguration_Click(object sender, EventArgs e)
         {
+            textBoxCommunication.Clear();
+            if (textBoxIP.Text == "127.0.0.1")
+            {
+                string[] sensorConf;
+                //string received;
+
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
+                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Trace.WriteLine("Connected to server..." + "\r\n");
+
+
+
+                client.Connect(endPoint);
+                textBoxCommunication.AppendText("Connected to Server.");
+                statusLabelConnection.Text = "Connected";
+                statusStripConnection.BackColor = Color.Green;
+
+                //client send
+                client.Send(Encoding.ASCII.GetBytes("readconf"));
+
+                //client received
+                byte[] buffer = new byte[1024];
+                int bytesReceived = client.Receive(buffer);
+                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+                
+                //string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
+
+                client.Close();
+                textBoxCommunication.AppendText("Connection closed..." + "\r\n");
+
+
+            }
+
+
+            else
+            {
+                statusLabelConnection.Text = "Not connected";
+                statusStripConnection.BackColor = Color.Red;
+                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxIP.Focus();
+
+            }
+
+        }
+       
+
+        private void buttonReadState_Click(object sender, EventArgs e)
+        {
+            textBoxCommunication.Clear();
+           
+            if (textBoxIP.Text == "127.0.0.1")
+            {
+                string[] sensorConf;
+                //string received;
+
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
+                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Trace.WriteLine("Connected to server..." + "\r\n");
+
+
+
+                client.Connect(endPoint);
+                textBoxCommunication.AppendText("Connected to Server.");
+                statusLabelConnection.Text = "Connected";
+                statusStripConnection.BackColor = Color.Green;
+
+                //client send
+                client.Send(Encoding.ASCII.GetBytes("readstatus"));
+
+                //client received
+                byte[] buffer = new byte[1024];
+                int bytesReceived = client.Receive(buffer);
+                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+
+                //string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
+
+                //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+                client.Close();
+                textBoxCommunication.AppendText("Connection closed..." + "\r\n");
+            }
+            else
+            {
+                statusLabelConnection.Text = "Not connected";
+                statusStripConnection.BackColor = Color.Red;
+                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxIP.Focus();
+            }  
+        }
+
+        private void buttonReadScaled_Click(object sender, EventArgs e)
+        {
+            textBoxCommunication.Clear();
             if (textBoxIP.Text == "127.0.0.1")
             {
                 string[] sensorConf;
@@ -787,16 +836,9 @@ namespace FirstWindowsFormsApp
                 int bytesReceived = client.Receive(buffer);
                 textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
 
-                //received = "readconf";
-
-                //int bytesReceived = client.Receive(buffer);
-                string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
-
-                //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
                 client.Close();
                 textBoxCommunication.AppendText("Connection closed..." + "\r\n");
-
-
+                
             }
 
 
@@ -810,119 +852,6 @@ namespace FirstWindowsFormsApp
             }
 
 
-
-            //textBoxCommunication.AppendText("Connection closed..." + "\r\n");
-            /*
-            if (buffer.Length <= 0)
-            {
-                return "Client not connected";
-            }
-            */
-            //Hvis bytes som kommer inn er null --> "Not connected to Arduino"
-            //if (buffer.Length <= 0)
-            //{
-
-            //Trace.WriteLine("Connection closed..." + "\r\n");
-            //return received;
-            //}
-
-            //return "Connected";
-        }
-        /*
-            else
-            {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
-                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //return "No connection";
-            }
-
-        */
-
-
-
-
-
-
-
-
-
-        /*
-
-        received = sendToBackEnd("readconf");
-
-            sensorConf = received.Split(';');
-            textBoxCommunication.AppendText(sendToBackEnd(received) + "\r\n");
-            statusLabelConnection.Text = "Connected";
-            statusStripConnection.BackColor = Color.Green;
-
-            string caption = "";
-
-            foreach (string conf in sensorConf)
-            {
-                caption = conf + "\r\n";
-            }
-
-            /*
-            if (received == null)
-            {
-                MessageBox.Show("Noooo connection");
-            }
-
-            */
-
-
-        /*
-            else
-            {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
-                MessageBox.Show("You have written the wrong IP-Address. Write a new one.", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxIP.Focus();
-
-                //MessageBox.Show(caption, "Sensor Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            }
-            */
-
-
-        private void buttonReadState_Click(object sender, EventArgs e)
-        {
-            if (textBoxIP.Text == "127.0.0.1")
-            {
-                statusLabelConnection.Text = "Connected";
-                statusStripConnection.BackColor = Color.Green;
-                string received;
-                received = sendToBackEnd("readstatus");
-                textBoxCommunication.AppendText(received + "\r\n");
-
-            }
-            else
-            {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
-                MessageBox.Show("You have written the wrong IP-Address. Write a new one.", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxIP.Focus();
-            }
-        }
-
-        private void buttonReadScaled_Click(object sender, EventArgs e)
-        {
-            if (textBoxIP.Text == "127.0.0.1")
-            {
-                statusLabelConnection.Text = "Connected";
-                statusStripConnection.BackColor = Color.Green;
-                string received;
-                received = sendToBackEnd("readscaled");
-                textBoxCommunication.AppendText(received + "\r\n");
-            }
-            else
-            {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
-                MessageBox.Show("You have written the wrong IP-Address. Write a new one.", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBoxIP.Focus();
-            }
         }
 
         /*
@@ -944,15 +873,20 @@ namespace FirstWindowsFormsApp
         private void timerReadScaled_Tick(object sender, EventArgs e)
         {
             xTimeValue++;
+            //xTimeValue = DateTime.UtcNow.ToUniversalTime();
+            DateTime timeNow = DateTime.Now;
             double yValue = 0.0;
 
             string received = sendToBackEnd("readscaled");
-            string[] revceivedParts = received.Split(';');
-            string receivedY = revceivedParts[1].Substring(0, revceivedParts[1].Length - 2);
+            string receivedY = received.Substring(0, received.Length - 2);
 
             yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
 
-            chart1.Series[0].Points.AddXY(DateTime.Now, yValue);
+            //chartArduino.Series[0].Points.AddXY(xTimeValue, yValue);
+            double adding = chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue);
+            //string.Format("({0:0.00}", yValue);
+            //listBoxGraphYvals.Items.Add(string.Format("{0:0.00}", yValue));
+            listBoxGraphYvals.Items.Add(yValue);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -1041,11 +975,95 @@ namespace FirstWindowsFormsApp
                 return;
             }
             serialPort.Open();
-            //serialPort.Write(textBoxSend.Text);
+            serialPort.Write(textBoxSend.Text);
+            textBoxComReceived.AppendText("Hei på deg");
+            //serialPort.Close();    //må jeg ha med close? Får ikke ut grafen.
         }
 
         private void buttonWriteConfiguration_Click(object sender, EventArgs e)
         {
+            /*
+            textBoxCommunication.Clear();
+            if (textBoxIP.Text == "127.0.0.1" & textBoxPassword.Text == "Password")
+            {
+                string instrumentConfig = "";
+
+
+                instrumentConfig = "writeconf>password>" + comboBoxInstrumentName.Text
+                                                         + ";" + textBoxLRV.Text
+                                                         + ";" + textBoxURV.Text
+                                                         + ";" + textBoxAlarmL.Text
+                                                         + ";" + textBoxAlarmH.Text;
+
+
+
+                sendToBackEnd(instrumentConfig);
+            }
+            */
+            //
+            
+            
+            textBoxCommunication.Clear();
+            if (textBoxIP.Text == "127.0.0.1" & textBoxPassword.Text == "Password")
+            {
+                //string received;
+
+                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
+                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Trace.WriteLine("Connected to server..." + "\r\n");
+
+
+
+                client.Connect(endPoint);
+                textBoxCommunication.AppendText("Connected to Server.");
+                statusLabelConnection.Text = "Connected";
+                statusStripConnection.BackColor = Color.Green;
+
+                //
+                string instrumentConfig = "";
+
+                instrumentConfig = "writeconf>password>" + comboBoxInstrumentName.Text
+                                                         + ";" + textBoxLRV.Text
+                                                         + ";" + textBoxURV.Text
+                                                         + ";" + textBoxAlarmL.Text
+                                                         + ";" + textBoxAlarmH.Text;
+                //string[] sensorConf;
+                
+                //
+
+                //client send
+                client.Send(Encoding.ASCII.GetBytes(instrumentConfig));
+                //client.Send(Encoding.ASCII.GetBytes("writeconf"));
+
+                //client received
+                byte[] buffer = new byte[1024];
+                int bytesReceived = client.Receive(buffer);
+                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+
+
+                //received = "readconf";
+
+                //int bytesReceived = client.Receive(buffer);
+                string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
+
+                //textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+                client.Close();
+                textBoxCommunication.AppendText("Connection closed..." + "\r\n");
+            }
+
+
+            else
+            {
+                statusLabelConnection.Text = "Not connected";
+                statusStripConnection.BackColor = Color.Red;
+                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textBoxIP.Focus();
+
+            }
+
+
+            /*
+
             if (textBoxPassword.Text == "Password")
             {
                 string received;
@@ -1056,7 +1074,70 @@ namespace FirstWindowsFormsApp
             {
                 MessageBox.Show("Password was wrong!", "Incorrect password", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            */
         }
+
+        //Fungerer ikke å skrive ut grafen
+        private void buttonStartMonitoring_Click(object sender, EventArgs e)
+        {
+            /*
+            timerReadScaled.Start();
+            
+            using (StreamWriter writer = new StreamWriter("output.txt", true))
+            {
+                foreach (DataPoint point in chartArduino.Series[0].Points)
+                {
+                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
+                }
+            }
+
+            */
+
+            timerReadScaled.Start();
+            /*
+            using (StreamWriter writer = new StreamWriter("output.txt", true))
+            {
+                foreach (DataPoint point in chartArduino.Series[0].Points)
+                {
+                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
+                }
+            }
+            /*
+
+            if (timerReadScaled.Enabled)
+            {
+                timerReadScaled.Stop();
+            }
+            else
+            {
+                timerReadScaled.Start();
+                
+                using (StreamWriter writer = new StreamWriter("output.txt", true))
+                {
+                    foreach (DataPoint point in chartArduino.Series[0].Points)
+                    {
+                        writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
+                    }
+                }
+            }
+            */
+
+        }
+
+        private void buttonStopMonitoring_Click(object sender, EventArgs e)
+        {
+            timerReadScaled.Stop();
+            //listBoxGraph.Items.Add();
+            using (StreamWriter writer = new StreamWriter("output.txt", true))
+            {
+                foreach (DataPoint point in chartArduino.Series[0].Points)
+                {
+                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
+                }
+            }
+
+        }
+
 
 
 
@@ -1145,3 +1226,8 @@ namespace FirstWindowsFormsApp
 
 
 //Kan ikke ha en connect knapp + 4 andre. Ta vekk connect og bare ha knappene
+
+
+
+//Får ikke til å lagre til fil
+//Får ikke opp grafen
