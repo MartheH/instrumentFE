@@ -104,7 +104,6 @@
             this.listBoxGraph = new System.Windows.Forms.ListBox();
             this.listBoxServers = new System.Windows.Forms.ListBox();
             this.tabPageGraph = new System.Windows.Forms.TabPage();
-            this.listBoxGraphYvals = new System.Windows.Forms.ListBox();
             this.buttonStopMonitoring = new System.Windows.Forms.Button();
             this.chartArduino = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -882,7 +881,6 @@
             // 
             // tabPageGraph
             // 
-            this.tabPageGraph.Controls.Add(this.listBoxGraphYvals);
             this.tabPageGraph.Controls.Add(this.buttonStopMonitoring);
             this.tabPageGraph.Controls.Add(this.chartArduino);
             this.tabPageGraph.Location = new System.Drawing.Point(4, 29);
@@ -893,20 +891,11 @@
             this.tabPageGraph.Text = "Graph";
             this.tabPageGraph.UseVisualStyleBackColor = true;
             // 
-            // listBoxGraphYvals
-            // 
-            this.listBoxGraphYvals.FormattingEnabled = true;
-            this.listBoxGraphYvals.ItemHeight = 20;
-            this.listBoxGraphYvals.Location = new System.Drawing.Point(767, 142);
-            this.listBoxGraphYvals.Name = "listBoxGraphYvals";
-            this.listBoxGraphYvals.Size = new System.Drawing.Size(182, 244);
-            this.listBoxGraphYvals.TabIndex = 8;
-            // 
             // buttonStopMonitoring
             // 
-            this.buttonStopMonitoring.Location = new System.Drawing.Point(767, 95);
+            this.buttonStopMonitoring.Location = new System.Drawing.Point(757, 93);
             this.buttonStopMonitoring.Name = "buttonStopMonitoring";
-            this.buttonStopMonitoring.Size = new System.Drawing.Size(182, 29);
+            this.buttonStopMonitoring.Size = new System.Drawing.Size(192, 29);
             this.buttonStopMonitoring.TabIndex = 7;
             this.buttonStopMonitoring.Text = "Stop Monitor";
             this.buttonStopMonitoring.UseVisualStyleBackColor = true;
@@ -1112,7 +1101,6 @@
         private ComboBox comboBoxComPort;
         private Button buttonStopMonitoring;
         private ListBox listBoxGraph;
-        private ListBox listBoxGraphYvals;
         private Label labelNumericValue;
         private TextBox textBoxStartMonitor;
         private Button buttonStartMonitoring;

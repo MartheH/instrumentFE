@@ -51,8 +51,6 @@ namespace FirstWindowsFormsApp
             serialPort.DataBits = 8;
             serialPort.StopBits = StopBits.One;
             serialPort.Handshake = Handshake.None;
-            //serialPort.DataReceived += dataReceived;
-            //
             InitializeComponent();
 
             IPAddress[] addresslist = Dns.GetHostAddresses(Dns.GetHostName());
@@ -73,24 +71,12 @@ namespace FirstWindowsFormsApp
             statusLabelSensorData.Text = "Ready";
             comboBoxSignalType.Text = "";
             textBoxRegister.Text = "";
-            //comboBoxMeasureType.Text = "";
-            
+
             //Load instrument.csv file
             string instrumentLine = "";
             string[] instrumentLineParts;
             var inputFile = new StreamReader(fileNameInstrumentList);   
-        }
-     /*  
-    private void dataReceived(object sender, SerialDataReceivedEventArgs e)
-    {
-        //string message = serialPort.ReadLine();
-        //string messsage = "COM3";
-        //Console.WriteLine(message);
-        //Console.WriteLine("Funker!");
-        //textBoxComReceived.AppendText("Hei" + message);
-        //Console.WriteLine("Funker bra");
-    }
-      */  
+        } 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -229,7 +215,6 @@ namespace FirstWindowsFormsApp
 
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
-            //textBoxRegister.Text = "";
             AddTextInTextRegister();
         }
 
@@ -312,7 +297,6 @@ namespace FirstWindowsFormsApp
         private void comboBoxSignalType_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxMeasureType.Items.Clear();
-            //comboBoxMeasureType.SelectedIndex = 0;      //index fungerer ikke
 
             switch (comboBoxSignalType.Text)
             {
@@ -341,7 +325,6 @@ namespace FirstWindowsFormsApp
        
         private void buttonSummary_Click(object sender, EventArgs e)
         {
-            //DateTime sessionTime;
             System.TimeSpan sessionTime = DateTime.Now.Subtract(sessionStartTime);
             AddTextInSummaryBox(sessionTime);
             RegisterIndex = analogIndex + digitalIndex + fieldbusIndex;
@@ -374,7 +357,7 @@ namespace FirstWindowsFormsApp
 
         private void AddTextInSummaryBox(TimeSpan sessionTime)
         {
-            textBoxSummary.AppendText("Session time: " + sessionTime.TotalSeconds.ToString() + "s \r\n");   // beregner sessiontime i sekunder
+            textBoxSummary.AppendText("Session time: " + sessionTime.TotalSeconds.ToString() + "s \r\n");
             textBoxSummary.AppendText("Number of sensors registered: " + RegisterIndex + "s \r\n");
             textBoxSummary.AppendText("Number of analog sensors " + analogIndex + "\r\n");
             textBoxSummary.AppendText("Number of digital sensors " + digitalIndex + "\r\n");
@@ -402,7 +385,7 @@ namespace FirstWindowsFormsApp
 
 
                 string ComPortReceived = Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n";
-                string[] ComportReceivedParts = ComPortReceived.Split(' ');      //finne ut hvirdan jeg skal splitte
+                string[] ComportReceivedParts = ComPortReceived.Split(' ');
                 string ComPortParts = ComportReceivedParts[2].Substring(0, ComportReceivedParts[2].Length-2);
 
                 if (ComportReceivedParts.Length > 0 & ComportReceivedParts[0] == "Portname")
@@ -515,7 +498,6 @@ namespace FirstWindowsFormsApp
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(endPoint);
-                //Trace.WriteLine("Connected to server..." + "\r\n");
                 client.Send(Encoding.ASCII.GetBytes(command));
 
                 //client received
@@ -530,8 +512,8 @@ namespace FirstWindowsFormsApp
 
             else
             {
-                //statusLabelConnection.Text = "Not connected";
-                //statusStripConnection.BackColor = Color.Red;
+                statusLabelConnection.Text = "Not connected";
+                statusStripConnection.BackColor = Color.Red;
                 MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "No connection";
             }
@@ -550,7 +532,6 @@ namespace FirstWindowsFormsApp
                 string[] sensorConf;
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                //Trace.WriteLine("Connected to server..." + "\r\n");
                 client.Connect(endPoint);
                 textBoxCommunication.AppendText("Connected to Server." + "\r\n");
                 //client send
@@ -581,27 +562,16 @@ namespace FirstWindowsFormsApp
         {
             SendToArduino("readscaled");
         }
-        //public string timeNow { get; set; }
 
         private void timerReadScaled_Tick(object sender, EventArgs e)
         {
-            //xTimeValue++;
-            //double listindex = 0;
-            //xTimeValue = DateTime.UtcNow.ToUniversalTime();
             DateTime timeNow = DateTime.Now;
             
             double yValue = 0.0;
             string received = sendToBackEnd("readscaled");
             string receivedY = received.Substring(0, received.Length - 1);
-
             yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
-
             chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue + "\r\n");
-            //listindex += 1;
-
-            //string.Format("({0:0.00}", yValue);
-            //listBoxGraphYvals.Items.Add(string.Format("{0:0.00}", yValue));
-            listBoxGraphYvals.Items.Add("Scaled: "+yValue + "\r\n" + "Time: " + timeNow + "\r\n");
             listBoxGraph.Items.Add("Scaled: " + yValue + "\r\n" + "Time: " + timeNow + "\r\n");
         }
         
@@ -718,7 +688,6 @@ namespace FirstWindowsFormsApp
 
         private void buttonStopMonitoring_Click(object sender, EventArgs e)
         {
-            listBoxGraphYvals.Items.Add("Closing monitor...");
             timerReadScaled.Stop();
 
             string message = "Do you want to save to file?";
@@ -737,7 +706,7 @@ namespace FirstWindowsFormsApp
                     {
                         xTimeValue ++;
                         writer.WriteLine("Time: " + point.AxisLabel + "Scaled value: " + point.YValues[0]);
-                        writer.WriteLine("List-index: " + xTimeValue);      //Hva skal være i "List value"?
+                        writer.WriteLine("List-index: " + xTimeValue);
                     }
                 }
                 MessageBox.Show("Sucessfully saved to file called output");
