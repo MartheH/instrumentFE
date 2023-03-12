@@ -44,7 +44,6 @@ namespace FirstWindowsFormsApp
 
         public FormMain()
         {
-            // Skal dette være med?
             serialPort = new SerialPort();
             serialPort.PortName = "COM3";
             serialPort.BaudRate = 5000;
@@ -52,7 +51,7 @@ namespace FirstWindowsFormsApp
             serialPort.DataBits = 8;
             serialPort.StopBits = StopBits.One;
             serialPort.Handshake = Handshake.None;
-            serialPort.DataReceived += dataReceived;
+            //serialPort.DataReceived += dataReceived;
             //
             InitializeComponent();
 
@@ -81,7 +80,7 @@ namespace FirstWindowsFormsApp
             string[] instrumentLineParts;
             var inputFile = new StreamReader(fileNameInstrumentList);   
         }
-       
+     /*  
     private void dataReceived(object sender, SerialDataReceivedEventArgs e)
     {
         //string message = serialPort.ReadLine();
@@ -91,7 +90,7 @@ namespace FirstWindowsFormsApp
         //textBoxComReceived.AppendText("Hei" + message);
         //Console.WriteLine("Funker bra");
     }
-        
+      */  
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -390,7 +389,7 @@ namespace FirstWindowsFormsApp
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 client.Connect(endPoint);
-                textBoxCommunication.AppendText("Connected to Server.");
+                textBoxCommunication.AppendText("Connected to Server." + "\r\n");
                 statusLabelConnection.Text = "Connected";
                 panelMonitor.Visible = true;
                 statusStripConnection.BackColor = Color.Green;
@@ -517,7 +516,6 @@ namespace FirstWindowsFormsApp
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(endPoint);
                 //Trace.WriteLine("Connected to server..." + "\r\n");
-                textBoxCommunication.AppendText(command);
                 client.Send(Encoding.ASCII.GetBytes(command));
 
                 //client received
@@ -525,17 +523,15 @@ namespace FirstWindowsFormsApp
                 int bytesReceived = client.Receive(buffer);
                 string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
                 string receivedPart = received.Substring(0, received.Length - 1);
-                textBoxCommunication.AppendText(receivedPart);
-                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
+                textBoxCommunication.AppendText(receivedPart + "\r\n");
                 client.Close();
-                textBoxCommunication.AppendText("Connection closed..." + "\r\n");
                 return received;
             }
 
             else
             {
-                statusLabelConnection.Text = "Not connected";
-                statusStripConnection.BackColor = Color.Red;
+                //statusLabelConnection.Text = "Not connected";
+                //statusStripConnection.BackColor = Color.Red;
                 MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "No connection";
             }
@@ -556,7 +552,7 @@ namespace FirstWindowsFormsApp
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 //Trace.WriteLine("Connected to server..." + "\r\n");
                 client.Connect(endPoint);
-                textBoxCommunication.AppendText("Connected to Server.");
+                textBoxCommunication.AppendText("Connected to Server." + "\r\n");
                 //client send
                 client.Send(Encoding.ASCII.GetBytes(commandSend));
                 //client received
@@ -589,7 +585,7 @@ namespace FirstWindowsFormsApp
 
         private void timerReadScaled_Tick(object sender, EventArgs e)
         {
-            xTimeValue++;
+            //xTimeValue++;
             //double listindex = 0;
             //xTimeValue = DateTime.UtcNow.ToUniversalTime();
             DateTime timeNow = DateTime.Now;
@@ -600,16 +596,13 @@ namespace FirstWindowsFormsApp
 
             yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
 
-            chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue);
+            chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue + "\r\n");
             //listindex += 1;
 
             //string.Format("({0:0.00}", yValue);
             //listBoxGraphYvals.Items.Add(string.Format("{0:0.00}", yValue));
-            listBoxGraphYvals.Items.Add("Scaled: "+yValue + "\r\n" + "Time: " + timeNow + " Scaled: " + yValue + "\r\n");
-            listBoxGraph.Items.Add("Scaled: " + yValue + "\r\n" + "Time: " + timeNow + " Scaled: " + yValue + "\r\n");
-            //listBoxGraph.Items.Add();
-            //listBoxGraph.Items.Add("Listindex: "+ listindex + "Listvalue: " + xTimeValue + "In");
-
+            listBoxGraphYvals.Items.Add("Scaled: "+yValue + "\r\n" + "Time: " + timeNow + "\r\n");
+            listBoxGraph.Items.Add("Scaled: " + yValue + "\r\n" + "Time: " + timeNow + "\r\n");
         }
         
 
@@ -695,64 +688,31 @@ namespace FirstWindowsFormsApp
         private void buttonWriteConfiguration_Click(object sender, EventArgs e)
         {
             textBoxCommunication.Clear();
-            if (textBoxPassword.Text == "")
-            {
-                MessageBox.Show("Write in the password to write configuration");
-                textBoxPassword.Focus();
-            }
             
             if (textBoxIP.Text == "127.0.0.1" & textBoxPassword.Text == "Password")
             {
-                string instrumentConfig = "";
+                if (comboBoxInstrumentName.Text != "" | textBoxLRV.Text != "" | textBoxURV.Text != "" | textBoxAlarmL.Text != "" | textBoxAlarmH.Text != "")
+                {
+                    string instrumentConfig = "";
 
-                instrumentConfig = "writeconf>password>" + comboBoxInstrumentName.Text
-                                                         + ";" + textBoxLRV.Text
-                                                         + ";" + textBoxURV.Text
-                                                         + ";" + textBoxAlarmL.Text
-                                                         + ";" + textBoxAlarmH.Text;
+                    instrumentConfig = "writeconf>password>" + comboBoxInstrumentName.Text
+                                                             + ";" + textBoxLRV.Text
+                                                             + ";" + textBoxURV.Text
+                                                             + ";" + textBoxAlarmL.Text
+                                                             + ";" + textBoxAlarmH.Text;
 
-                sendToBackEnd(instrumentConfig);
-                textBoxCommunication.AppendText("Sucessfully written to configuration");
+                    sendToBackEnd(instrumentConfig);
+                    textBoxCommunication.AppendText("Sucessfully written to configuration" + "\r\n");
+                }
+                else
+                {
+                    MessageBox.Show("Could not write to configuration", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            /*
-            textBoxCommunication.Clear();
-            if (textBoxIP.Text == "127.0.0.1" & textBoxPassword.Text == "Password")
-            {
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
-                Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                Trace.WriteLine("Connected to server..." + "\r\n");
-
-                client.Connect(endPoint);
-                textBoxCommunication.AppendText("Connected to Server.");
-                statusLabelConnection.Text = "Connected";
-                statusStripConnection.BackColor = Color.Green;
-
-                //
-                string instrumentConfig = "";
-
-                instrumentConfig = "writeconf>password>" + comboBoxInstrumentName.Text
-                                                         + ";" + textBoxLRV.Text
-                                                         + ";" + textBoxURV.Text
-                                                         + ";" + textBoxAlarmL.Text
-                                                         + ";" + textBoxAlarmH.Text;
-
-                //client send
-                client.Send(Encoding.ASCII.GetBytes(instrumentConfig));
-
-                //client received
-                byte[] buffer = new byte[1024];
-                int bytesReceived = client.Receive(buffer);
-                textBoxCommunication.AppendText("Received: " + Encoding.ASCII.GetString(buffer, 0, bytesReceived) + "\r\n");
-
-                string received = Encoding.ASCII.GetString(buffer, 0, bytesReceived);
-                client.Close();
-                textBoxCommunication.AppendText("Connection closed..." + "\r\n");
-            }
-            */
 
             else
             {
-                MessageBox.Show("Instrument is not connected", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Could not write to configuration", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

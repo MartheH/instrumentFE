@@ -99,6 +99,7 @@
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.buttonGetComPort = new System.Windows.Forms.Button();
             this.tabPageLists = new System.Windows.Forms.TabPage();
+            this.labelInstrument = new System.Windows.Forms.Label();
             this.labelNumericValue = new System.Windows.Forms.Label();
             this.listBoxGraph = new System.Windows.Forms.ListBox();
             this.listBoxServers = new System.Windows.Forms.ListBox();
@@ -832,6 +833,7 @@
             // 
             // tabPageLists
             // 
+            this.tabPageLists.Controls.Add(this.labelInstrument);
             this.tabPageLists.Controls.Add(this.labelNumericValue);
             this.tabPageLists.Controls.Add(this.listBoxGraph);
             this.tabPageLists.Controls.Add(this.listBoxServers);
@@ -841,6 +843,15 @@
             this.tabPageLists.TabIndex = 2;
             this.tabPageLists.Text = "Lists";
             this.tabPageLists.UseVisualStyleBackColor = true;
+            // 
+            // labelInstrument
+            // 
+            this.labelInstrument.AutoSize = true;
+            this.labelInstrument.Location = new System.Drawing.Point(8, 24);
+            this.labelInstrument.Name = "labelInstrument";
+            this.labelInstrument.Size = new System.Drawing.Size(152, 20);
+            this.labelInstrument.TabIndex = 3;
+            this.labelInstrument.Text = "Listed instrumentdata";
             // 
             // labelNumericValue
             // 
@@ -857,7 +868,7 @@
             this.listBoxGraph.ItemHeight = 20;
             this.listBoxGraph.Location = new System.Drawing.Point(507, 59);
             this.listBoxGraph.Name = "listBoxGraph";
-            this.listBoxGraph.Size = new System.Drawing.Size(405, 264);
+            this.listBoxGraph.Size = new System.Drawing.Size(445, 264);
             this.listBoxGraph.TabIndex = 1;
             // 
             // listBoxServers
@@ -866,7 +877,7 @@
             this.listBoxServers.ItemHeight = 20;
             this.listBoxServers.Location = new System.Drawing.Point(8, 59);
             this.listBoxServers.Name = "listBoxServers";
-            this.listBoxServers.Size = new System.Drawing.Size(405, 264);
+            this.listBoxServers.Size = new System.Drawing.Size(474, 264);
             this.listBoxServers.TabIndex = 0;
             // 
             // tabPageGraph
@@ -886,16 +897,16 @@
             // 
             this.listBoxGraphYvals.FormattingEnabled = true;
             this.listBoxGraphYvals.ItemHeight = 20;
-            this.listBoxGraphYvals.Location = new System.Drawing.Point(748, 142);
+            this.listBoxGraphYvals.Location = new System.Drawing.Point(767, 142);
             this.listBoxGraphYvals.Name = "listBoxGraphYvals";
-            this.listBoxGraphYvals.Size = new System.Drawing.Size(201, 244);
+            this.listBoxGraphYvals.Size = new System.Drawing.Size(182, 244);
             this.listBoxGraphYvals.TabIndex = 8;
             // 
             // buttonStopMonitoring
             // 
-            this.buttonStopMonitoring.Location = new System.Drawing.Point(748, 95);
+            this.buttonStopMonitoring.Location = new System.Drawing.Point(767, 95);
             this.buttonStopMonitoring.Name = "buttonStopMonitoring";
-            this.buttonStopMonitoring.Size = new System.Drawing.Size(201, 29);
+            this.buttonStopMonitoring.Size = new System.Drawing.Size(182, 29);
             this.buttonStopMonitoring.TabIndex = 7;
             this.buttonStopMonitoring.Text = "Stop Monitor";
             this.buttonStopMonitoring.UseVisualStyleBackColor = true;
@@ -1112,5 +1123,6 @@
         private Panel panelConf;
         private Button buttonReadScaled_;
         private TextBox textBoxComReceived;
+        private Label labelInstrument;
     }
 }
