@@ -73,24 +73,27 @@
             this.labelSerialNumber = new System.Windows.Forms.Label();
             this.labelSensorName = new System.Windows.Forms.Label();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
-            this.labelPassword = new System.Windows.Forms.Label();
+            this.panelConf = new System.Windows.Forms.Panel();
+            this.buttonReadScaled_ = new System.Windows.Forms.Button();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.buttonComConnect = new System.Windows.Forms.Button();
-            this.textBoxComReceived = new System.Windows.Forms.TextBox();
-            this.labelBitRate = new System.Windows.Forms.Label();
-            this.labelComPort = new System.Windows.Forms.Label();
-            this.comboBoxBit = new System.Windows.Forms.ComboBox();
-            this.comboBoxComPort = new System.Windows.Forms.ComboBox();
-            this.statusStripConnection = new System.Windows.Forms.StatusStrip();
-            this.statusLabelConnection = new System.Windows.Forms.ToolStripStatusLabel();
-            this.buttonReadScaled = new System.Windows.Forms.Button();
-            this.buttonReadState = new System.Windows.Forms.Button();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.buttonWriteConfiguration = new System.Windows.Forms.Button();
             this.buttonReadConfiguration = new System.Windows.Forms.Button();
-            this.textBoxSend = new System.Windows.Forms.TextBox();
+            this.buttonReadState = new System.Windows.Forms.Button();
+            this.buttonReadScaled = new System.Windows.Forms.Button();
+            this.panelMonitor = new System.Windows.Forms.Panel();
+            this.textBoxComReceived = new System.Windows.Forms.TextBox();
+            this.comboBoxComPort = new System.Windows.Forms.ComboBox();
+            this.textBoxStartMonitor = new System.Windows.Forms.TextBox();
+            this.comboBoxBit = new System.Windows.Forms.ComboBox();
+            this.buttonStartMonitoring = new System.Windows.Forms.Button();
+            this.labelComPort = new System.Windows.Forms.Label();
+            this.labelBitRate = new System.Windows.Forms.Label();
+            this.buttonComConnect = new System.Windows.Forms.Button();
+            this.statusStripConnection = new System.Windows.Forms.StatusStrip();
+            this.statusLabelConnection = new System.Windows.Forms.ToolStripStatusLabel();
             this.labelPort = new System.Windows.Forms.Label();
             this.labelIPAddress = new System.Windows.Forms.Label();
-            this.checkBoxCaseSensitive = new System.Windows.Forms.CheckBox();
             this.textBoxCommunication = new System.Windows.Forms.TextBox();
             this.textBoxIP = new System.Windows.Forms.TextBox();
             this.textBoxPort = new System.Windows.Forms.TextBox();
@@ -102,7 +105,6 @@
             this.tabPageGraph = new System.Windows.Forms.TabPage();
             this.listBoxGraphYvals = new System.Windows.Forms.ListBox();
             this.buttonStopMonitoring = new System.Windows.Forms.Button();
-            this.buttonStartMonitoring = new System.Windows.Forms.Button();
             this.chartArduino = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
@@ -118,6 +120,8 @@
             this.panelUnit.SuspendLayout();
             this.statusStripSensorData.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
+            this.panelConf.SuspendLayout();
+            this.panelMonitor.SuspendLayout();
             this.statusStripConnection.SuspendLayout();
             this.tabPageLists.SuspendLayout();
             this.tabPageGraph.SuspendLayout();
@@ -556,23 +560,11 @@
             // 
             // tabPageConnection
             // 
-            this.tabPageConnection.Controls.Add(this.labelPassword);
-            this.tabPageConnection.Controls.Add(this.textBoxPassword);
-            this.tabPageConnection.Controls.Add(this.buttonComConnect);
-            this.tabPageConnection.Controls.Add(this.textBoxComReceived);
-            this.tabPageConnection.Controls.Add(this.labelBitRate);
-            this.tabPageConnection.Controls.Add(this.labelComPort);
-            this.tabPageConnection.Controls.Add(this.comboBoxBit);
-            this.tabPageConnection.Controls.Add(this.comboBoxComPort);
+            this.tabPageConnection.Controls.Add(this.panelConf);
+            this.tabPageConnection.Controls.Add(this.panelMonitor);
             this.tabPageConnection.Controls.Add(this.statusStripConnection);
-            this.tabPageConnection.Controls.Add(this.buttonReadScaled);
-            this.tabPageConnection.Controls.Add(this.buttonReadState);
-            this.tabPageConnection.Controls.Add(this.buttonWriteConfiguration);
-            this.tabPageConnection.Controls.Add(this.buttonReadConfiguration);
-            this.tabPageConnection.Controls.Add(this.textBoxSend);
             this.tabPageConnection.Controls.Add(this.labelPort);
             this.tabPageConnection.Controls.Add(this.labelIPAddress);
-            this.tabPageConnection.Controls.Add(this.checkBoxCaseSensitive);
             this.tabPageConnection.Controls.Add(this.textBoxCommunication);
             this.tabPageConnection.Controls.Add(this.textBoxIP);
             this.tabPageConnection.Controls.Add(this.textBoxPort);
@@ -585,62 +577,128 @@
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
-            // labelPassword
+            // panelConf
             // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(232, 393);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(70, 20);
-            this.labelPassword.TabIndex = 32;
-            this.labelPassword.Text = "Password";
+            this.panelConf.Controls.Add(this.buttonReadScaled_);
+            this.panelConf.Controls.Add(this.textBoxPassword);
+            this.panelConf.Controls.Add(this.labelPassword);
+            this.panelConf.Controls.Add(this.buttonWriteConfiguration);
+            this.panelConf.Controls.Add(this.buttonReadConfiguration);
+            this.panelConf.Controls.Add(this.buttonReadState);
+            this.panelConf.Controls.Add(this.buttonReadScaled);
+            this.panelConf.Location = new System.Drawing.Point(19, 162);
+            this.panelConf.Name = "panelConf";
+            this.panelConf.Size = new System.Drawing.Size(240, 255);
+            this.panelConf.TabIndex = 40;
+            // 
+            // buttonReadScaled_
+            // 
+            this.buttonReadScaled_.Location = new System.Drawing.Point(13, 18);
+            this.buttonReadScaled_.Name = "buttonReadScaled_";
+            this.buttonReadScaled_.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadScaled_.TabIndex = 39;
+            this.buttonReadScaled_.Text = "Read Scaled";
+            this.buttonReadScaled_.UseVisualStyleBackColor = true;
+            this.buttonReadScaled_.Click += new System.EventHandler(this.buttonReadScaled__Click);
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(328, 390);
+            this.textBoxPassword.Location = new System.Drawing.Point(89, 160);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(125, 27);
-            this.textBoxPassword.TabIndex = 31;
+            this.textBoxPassword.Size = new System.Drawing.Size(142, 27);
+            this.textBoxPassword.TabIndex = 37;
             // 
-            // buttonComConnect
+            // labelPassword
             // 
-            this.buttonComConnect.BackColor = System.Drawing.Color.Silver;
-            this.buttonComConnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonComConnect.Location = new System.Drawing.Point(540, 135);
-            this.buttonComConnect.Name = "buttonComConnect";
-            this.buttonComConnect.Size = new System.Drawing.Size(162, 36);
-            this.buttonComConnect.TabIndex = 29;
-            this.buttonComConnect.Text = "Connect";
-            this.buttonComConnect.UseVisualStyleBackColor = false;
-            this.buttonComConnect.Click += new System.EventHandler(this.buttonComConnect_Click);
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(13, 163);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(70, 20);
+            this.labelPassword.TabIndex = 38;
+            this.labelPassword.Text = "Password";
+            // 
+            // buttonWriteConfiguration
+            // 
+            this.buttonWriteConfiguration.BackColor = System.Drawing.Color.Transparent;
+            this.buttonWriteConfiguration.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonWriteConfiguration.Location = new System.Drawing.Point(11, 117);
+            this.buttonWriteConfiguration.Name = "buttonWriteConfiguration";
+            this.buttonWriteConfiguration.Size = new System.Drawing.Size(189, 27);
+            this.buttonWriteConfiguration.TabIndex = 36;
+            this.buttonWriteConfiguration.Text = "Write Configuration";
+            this.buttonWriteConfiguration.UseVisualStyleBackColor = false;
+            this.buttonWriteConfiguration.Click += new System.EventHandler(this.buttonWriteConfiguration_Click);
+            // 
+            // buttonReadConfiguration
+            // 
+            this.buttonReadConfiguration.Location = new System.Drawing.Point(11, 51);
+            this.buttonReadConfiguration.Name = "buttonReadConfiguration";
+            this.buttonReadConfiguration.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadConfiguration.TabIndex = 5;
+            this.buttonReadConfiguration.Text = "Read Configuration";
+            this.buttonReadConfiguration.UseVisualStyleBackColor = true;
+            this.buttonReadConfiguration.Click += new System.EventHandler(this.buttonReadConfiguration_Click);
+            // 
+            // buttonReadState
+            // 
+            this.buttonReadState.Location = new System.Drawing.Point(11, 84);
+            this.buttonReadState.Name = "buttonReadState";
+            this.buttonReadState.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadState.TabIndex = 7;
+            this.buttonReadState.Text = "Read Status";
+            this.buttonReadState.UseVisualStyleBackColor = true;
+            this.buttonReadState.Click += new System.EventHandler(this.buttonReadState_Click);
+            // 
+            // buttonReadScaled
+            // 
+            this.buttonReadScaled.Location = new System.Drawing.Point(11, 117);
+            this.buttonReadScaled.Name = "buttonReadScaled";
+            this.buttonReadScaled.Size = new System.Drawing.Size(189, 27);
+            this.buttonReadScaled.TabIndex = 8;
+            this.buttonReadScaled.Text = "Read Scaled";
+            this.buttonReadScaled.UseVisualStyleBackColor = true;
+            // 
+            // panelMonitor
+            // 
+            this.panelMonitor.Controls.Add(this.textBoxComReceived);
+            this.panelMonitor.Controls.Add(this.comboBoxComPort);
+            this.panelMonitor.Controls.Add(this.textBoxStartMonitor);
+            this.panelMonitor.Controls.Add(this.comboBoxBit);
+            this.panelMonitor.Controls.Add(this.buttonStartMonitoring);
+            this.panelMonitor.Controls.Add(this.labelComPort);
+            this.panelMonitor.Controls.Add(this.labelBitRate);
+            this.panelMonitor.Controls.Add(this.buttonComConnect);
+            this.panelMonitor.Location = new System.Drawing.Point(517, 6);
+            this.panelMonitor.Name = "panelMonitor";
+            this.panelMonitor.Size = new System.Drawing.Size(435, 348);
+            this.panelMonitor.TabIndex = 35;
             // 
             // textBoxComReceived
             // 
-            this.textBoxComReceived.Location = new System.Drawing.Point(540, 190);
-            this.textBoxComReceived.Multiline = true;
+            this.textBoxComReceived.Location = new System.Drawing.Point(273, 135);
             this.textBoxComReceived.Name = "textBoxComReceived";
             this.textBoxComReceived.ReadOnly = true;
-            this.textBoxComReceived.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxComReceived.Size = new System.Drawing.Size(390, 212);
-            this.textBoxComReceived.TabIndex = 28;
+            this.textBoxComReceived.Size = new System.Drawing.Size(125, 27);
+            this.textBoxComReceived.TabIndex = 35;
             // 
-            // labelBitRate
+            // comboBoxComPort
             // 
-            this.labelBitRate.AutoSize = true;
-            this.labelBitRate.Location = new System.Drawing.Point(523, 84);
-            this.labelBitRate.Name = "labelBitRate";
-            this.labelBitRate.Size = new System.Drawing.Size(61, 20);
-            this.labelBitRate.TabIndex = 27;
-            this.labelBitRate.Text = "Bit Rate";
+            this.comboBoxComPort.FormattingEnabled = true;
+            this.comboBoxComPort.Location = new System.Drawing.Point(98, 6);
+            this.comboBoxComPort.Name = "comboBoxComPort";
+            this.comboBoxComPort.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxComPort.TabIndex = 24;
             // 
-            // labelComPort
+            // textBoxStartMonitor
             // 
-            this.labelComPort.AutoSize = true;
-            this.labelComPort.Location = new System.Drawing.Point(525, 22);
-            this.labelComPort.Name = "labelComPort";
-            this.labelComPort.Size = new System.Drawing.Size(70, 20);
-            this.labelComPort.TabIndex = 26;
-            this.labelComPort.Text = "Com Port";
+            this.textBoxStartMonitor.Location = new System.Drawing.Point(14, 233);
+            this.textBoxStartMonitor.Multiline = true;
+            this.textBoxStartMonitor.Name = "textBoxStartMonitor";
+            this.textBoxStartMonitor.ReadOnly = true;
+            this.textBoxStartMonitor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxStartMonitor.Size = new System.Drawing.Size(235, 88);
+            this.textBoxStartMonitor.TabIndex = 34;
             // 
             // comboBoxBit
             // 
@@ -652,18 +710,50 @@
             "19200",
             "38400",
             "57600"});
-            this.comboBoxBit.Location = new System.Drawing.Point(609, 76);
+            this.comboBoxBit.Location = new System.Drawing.Point(98, 68);
             this.comboBoxBit.Name = "comboBoxBit";
             this.comboBoxBit.Size = new System.Drawing.Size(151, 28);
             this.comboBoxBit.TabIndex = 25;
             // 
-            // comboBoxComPort
+            // buttonStartMonitoring
             // 
-            this.comboBoxComPort.FormattingEnabled = true;
-            this.comboBoxComPort.Location = new System.Drawing.Point(609, 14);
-            this.comboBoxComPort.Name = "comboBoxComPort";
-            this.comboBoxComPort.Size = new System.Drawing.Size(151, 28);
-            this.comboBoxComPort.TabIndex = 24;
+            this.buttonStartMonitoring.Location = new System.Drawing.Point(14, 188);
+            this.buttonStartMonitoring.Name = "buttonStartMonitoring";
+            this.buttonStartMonitoring.Size = new System.Drawing.Size(235, 29);
+            this.buttonStartMonitoring.TabIndex = 33;
+            this.buttonStartMonitoring.Text = "Start Monitoring";
+            this.buttonStartMonitoring.UseVisualStyleBackColor = true;
+            this.buttonStartMonitoring.Click += new System.EventHandler(this.buttonStartMonitoring_Click);
+            // 
+            // labelComPort
+            // 
+            this.labelComPort.AutoSize = true;
+            this.labelComPort.Location = new System.Drawing.Point(14, 14);
+            this.labelComPort.Name = "labelComPort";
+            this.labelComPort.Size = new System.Drawing.Size(70, 20);
+            this.labelComPort.TabIndex = 26;
+            this.labelComPort.Text = "Com Port";
+            // 
+            // labelBitRate
+            // 
+            this.labelBitRate.AutoSize = true;
+            this.labelBitRate.Location = new System.Drawing.Point(12, 76);
+            this.labelBitRate.Name = "labelBitRate";
+            this.labelBitRate.Size = new System.Drawing.Size(61, 20);
+            this.labelBitRate.TabIndex = 27;
+            this.labelBitRate.Text = "Bit Rate";
+            // 
+            // buttonComConnect
+            // 
+            this.buttonComConnect.BackColor = System.Drawing.Color.Silver;
+            this.buttonComConnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonComConnect.Location = new System.Drawing.Point(12, 131);
+            this.buttonComConnect.Name = "buttonComConnect";
+            this.buttonComConnect.Size = new System.Drawing.Size(245, 33);
+            this.buttonComConnect.TabIndex = 29;
+            this.buttonComConnect.Text = "Connect";
+            this.buttonComConnect.UseVisualStyleBackColor = false;
+            this.buttonComConnect.Click += new System.EventHandler(this.buttonComConnect_Click);
             // 
             // statusStripConnection
             // 
@@ -683,53 +773,6 @@
             this.statusLabelConnection.Size = new System.Drawing.Size(169, 20);
             this.statusLabelConnection.Text = "Waiting for connection...";
             // 
-            // buttonReadScaled
-            // 
-            this.buttonReadScaled.Location = new System.Drawing.Point(19, 324);
-            this.buttonReadScaled.Name = "buttonReadScaled";
-            this.buttonReadScaled.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadScaled.TabIndex = 8;
-            this.buttonReadScaled.Text = "Read Scaled";
-            this.buttonReadScaled.UseVisualStyleBackColor = true;
-            this.buttonReadScaled.Click += new System.EventHandler(this.buttonReadScaled_Click);
-            // 
-            // buttonReadState
-            // 
-            this.buttonReadState.Location = new System.Drawing.Point(19, 291);
-            this.buttonReadState.Name = "buttonReadState";
-            this.buttonReadState.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadState.TabIndex = 7;
-            this.buttonReadState.Text = "Read Status";
-            this.buttonReadState.UseVisualStyleBackColor = true;
-            this.buttonReadState.Click += new System.EventHandler(this.buttonReadState_Click);
-            // 
-            // buttonWriteConfiguration
-            // 
-            this.buttonWriteConfiguration.Location = new System.Drawing.Point(19, 258);
-            this.buttonWriteConfiguration.Name = "buttonWriteConfiguration";
-            this.buttonWriteConfiguration.Size = new System.Drawing.Size(189, 27);
-            this.buttonWriteConfiguration.TabIndex = 6;
-            this.buttonWriteConfiguration.Text = "Write Configuration";
-            this.buttonWriteConfiguration.UseVisualStyleBackColor = true;
-            this.buttonWriteConfiguration.Click += new System.EventHandler(this.buttonWriteConfiguration_Click);
-            // 
-            // buttonReadConfiguration
-            // 
-            this.buttonReadConfiguration.Location = new System.Drawing.Point(19, 225);
-            this.buttonReadConfiguration.Name = "buttonReadConfiguration";
-            this.buttonReadConfiguration.Size = new System.Drawing.Size(189, 27);
-            this.buttonReadConfiguration.TabIndex = 5;
-            this.buttonReadConfiguration.Text = "Read Configuration";
-            this.buttonReadConfiguration.UseVisualStyleBackColor = true;
-            this.buttonReadConfiguration.Click += new System.EventHandler(this.buttonReadConfiguration_Click);
-            // 
-            // textBoxSend
-            // 
-            this.textBoxSend.Location = new System.Drawing.Point(119, 174);
-            this.textBoxSend.Name = "textBoxSend";
-            this.textBoxSend.Size = new System.Drawing.Size(125, 27);
-            this.textBoxSend.TabIndex = 22;
-            // 
             // labelPort
             // 
             this.labelPort.AutoSize = true;
@@ -747,16 +790,6 @@
             this.labelIPAddress.Size = new System.Drawing.Size(78, 20);
             this.labelIPAddress.TabIndex = 5;
             this.labelIPAddress.Text = "IP Address";
-            // 
-            // checkBoxCaseSensitive
-            // 
-            this.checkBoxCaseSensitive.AutoSize = true;
-            this.checkBoxCaseSensitive.Location = new System.Drawing.Point(19, 357);
-            this.checkBoxCaseSensitive.Name = "checkBoxCaseSensitive";
-            this.checkBoxCaseSensitive.Size = new System.Drawing.Size(124, 24);
-            this.checkBoxCaseSensitive.TabIndex = 22;
-            this.checkBoxCaseSensitive.Text = "Case Sensitive";
-            this.checkBoxCaseSensitive.UseVisualStyleBackColor = true;
             // 
             // textBoxCommunication
             // 
@@ -793,7 +826,7 @@
             this.buttonGetComPort.Name = "buttonGetComPort";
             this.buttonGetComPort.Size = new System.Drawing.Size(240, 36);
             this.buttonGetComPort.TabIndex = 3;
-            this.buttonGetComPort.Text = "Connect";
+            this.buttonGetComPort.Text = "Get Com Port";
             this.buttonGetComPort.UseVisualStyleBackColor = false;
             this.buttonGetComPort.Click += new System.EventHandler(this.buttonConnect_Click_1);
             // 
@@ -840,7 +873,6 @@
             // 
             this.tabPageGraph.Controls.Add(this.listBoxGraphYvals);
             this.tabPageGraph.Controls.Add(this.buttonStopMonitoring);
-            this.tabPageGraph.Controls.Add(this.buttonStartMonitoring);
             this.tabPageGraph.Controls.Add(this.chartArduino);
             this.tabPageGraph.Location = new System.Drawing.Point(4, 29);
             this.tabPageGraph.Name = "tabPageGraph";
@@ -854,30 +886,20 @@
             // 
             this.listBoxGraphYvals.FormattingEnabled = true;
             this.listBoxGraphYvals.ItemHeight = 20;
-            this.listBoxGraphYvals.Location = new System.Drawing.Point(782, 146);
+            this.listBoxGraphYvals.Location = new System.Drawing.Point(748, 142);
             this.listBoxGraphYvals.Name = "listBoxGraphYvals";
-            this.listBoxGraphYvals.Size = new System.Drawing.Size(167, 244);
+            this.listBoxGraphYvals.Size = new System.Drawing.Size(201, 244);
             this.listBoxGraphYvals.TabIndex = 8;
             // 
             // buttonStopMonitoring
             // 
-            this.buttonStopMonitoring.Location = new System.Drawing.Point(782, 92);
+            this.buttonStopMonitoring.Location = new System.Drawing.Point(748, 95);
             this.buttonStopMonitoring.Name = "buttonStopMonitoring";
-            this.buttonStopMonitoring.Size = new System.Drawing.Size(167, 29);
+            this.buttonStopMonitoring.Size = new System.Drawing.Size(201, 29);
             this.buttonStopMonitoring.TabIndex = 7;
             this.buttonStopMonitoring.Text = "Stop Monitor";
             this.buttonStopMonitoring.UseVisualStyleBackColor = true;
             this.buttonStopMonitoring.Click += new System.EventHandler(this.buttonStopMonitoring_Click);
-            // 
-            // buttonStartMonitoring
-            // 
-            this.buttonStartMonitoring.Location = new System.Drawing.Point(782, 45);
-            this.buttonStartMonitoring.Name = "buttonStartMonitoring";
-            this.buttonStartMonitoring.Size = new System.Drawing.Size(167, 29);
-            this.buttonStartMonitoring.TabIndex = 6;
-            this.buttonStartMonitoring.Text = "Start Monitoring";
-            this.buttonStartMonitoring.UseVisualStyleBackColor = true;
-            this.buttonStartMonitoring.Click += new System.EventHandler(this.buttonStartMonitoring_Click);
             // 
             // chartArduino
             // 
@@ -895,7 +917,7 @@
             series1.Name = "Lysintensitet";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Time;
             this.chartArduino.Series.Add(series1);
-            this.chartArduino.Size = new System.Drawing.Size(963, 450);
+            this.chartArduino.Size = new System.Drawing.Size(959, 450);
             this.chartArduino.TabIndex = 0;
             this.chartArduino.Text = "Arduino Graph";
             // 
@@ -981,7 +1003,6 @@
             this.Text = "FirstWFA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormMain_KeyPress);
             this.tabControl1.ResumeLayout(false);
             this.tabPageRegistered.ResumeLayout(false);
             this.tabPageRegistered.PerformLayout();
@@ -991,6 +1012,10 @@
             this.statusStripSensorData.PerformLayout();
             this.tabPageConnection.ResumeLayout(false);
             this.tabPageConnection.PerformLayout();
+            this.panelConf.ResumeLayout(false);
+            this.panelConf.PerformLayout();
+            this.panelMonitor.ResumeLayout(false);
+            this.panelMonitor.PerformLayout();
             this.statusStripConnection.ResumeLayout(false);
             this.statusStripConnection.PerformLayout();
             this.tabPageLists.ResumeLayout(false);
@@ -1044,12 +1069,10 @@
         private Button buttonRegisterNew;
         private Button buttonSummary;
         private ComboBox comboBoxMeasureType;
-        private CheckBox checkBoxCaseSensitive;
         private TabPage tabPageLists;
         private ListBox listBoxServers;
         private Label labelPort;
         private Label labelIPAddress;
-        private TextBox textBoxSend;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem1;
         private Button buttonOpenFIle;
@@ -1064,7 +1087,6 @@
         private TextBox textBoxAlarmH;
         private Button buttonReadScaled;
         private Button buttonReadState;
-        private Button buttonWriteConfiguration;
         private Button buttonReadConfiguration;
         private TabPage tabPageGraph;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartArduino;
@@ -1073,17 +1095,22 @@
         private StatusStrip statusStripConnection;
         private ToolStripStatusLabel statusLabelConnection;
         private Button buttonComConnect;
-        private TextBox textBoxComReceived;
         private Label labelBitRate;
         private Label labelComPort;
         private ComboBox comboBoxBit;
         private ComboBox comboBoxComPort;
-        private TextBox textBoxPassword;
         private Button buttonStopMonitoring;
-        private Button buttonStartMonitoring;
         private ListBox listBoxGraph;
-        private Label labelPassword;
         private ListBox listBoxGraphYvals;
         private Label labelNumericValue;
+        private TextBox textBoxStartMonitor;
+        private Button buttonStartMonitoring;
+        private Panel panelMonitor;
+        private Label labelPassword;
+        private TextBox textBoxPassword;
+        private Button buttonWriteConfiguration;
+        private Panel panelConf;
+        private Button buttonReadScaled_;
+        private TextBox textBoxComReceived;
     }
 }
