@@ -29,8 +29,6 @@ namespace FirstWindowsFormsApp
         double lrvValue = 0.0;
         double urvValue = 0.0;
         double spanValue = 0.0;
-        double alarmLvalue = 0.0;
-        double alamrHvalue = 0.0;
         int RegisterIndex = 0;
         int analogIndex = 0;
         int digitalIndex = 0;
@@ -70,12 +68,7 @@ namespace FirstWindowsFormsApp
             sessionStartTime = DateTime.Now;
             statusLabelSensorData.Text = "Ready";
             comboBoxSignalType.Text = "";
-            textBoxRegister.Text = "";
-
-            //Load instrument.csv file
-            string instrumentLine = "";
-            string[] instrumentLineParts;
-            var inputFile = new StreamReader(fileNameInstrumentList);   
+            textBoxRegister.Text = ""; 
         } 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
