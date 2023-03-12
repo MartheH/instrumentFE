@@ -91,6 +91,8 @@ namespace FirstWindowsFormsApp
         }
         */
         //
+
+        //Analog instrument
         public Instrument(string RegisterDate,          //Hvorfor to "Instrument"
                          string SensorName,
                          string SerialNumber,

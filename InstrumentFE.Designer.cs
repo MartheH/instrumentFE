@@ -96,6 +96,7 @@
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.tabPageLists = new System.Windows.Forms.TabPage();
+            this.labelNumericValue = new System.Windows.Forms.Label();
             this.listBoxGraph = new System.Windows.Forms.ListBox();
             this.listBoxServers = new System.Windows.Forms.ListBox();
             this.tabPageGraph = new System.Windows.Forms.TabPage();
@@ -774,6 +775,7 @@
             this.textBoxIP.Size = new System.Drawing.Size(140, 27);
             this.textBoxIP.TabIndex = 1;
             this.textBoxIP.Text = "127.0.0.1";
+            this.textBoxIP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIP_KeyPress);
             // 
             // textBoxPort
             // 
@@ -797,6 +799,7 @@
             // 
             // tabPageLists
             // 
+            this.tabPageLists.Controls.Add(this.labelNumericValue);
             this.tabPageLists.Controls.Add(this.listBoxGraph);
             this.tabPageLists.Controls.Add(this.listBoxServers);
             this.tabPageLists.Location = new System.Drawing.Point(4, 29);
@@ -806,11 +809,20 @@
             this.tabPageLists.Text = "Lists";
             this.tabPageLists.UseVisualStyleBackColor = true;
             // 
+            // labelNumericValue
+            // 
+            this.labelNumericValue.AutoSize = true;
+            this.labelNumericValue.Location = new System.Drawing.Point(507, 24);
+            this.labelNumericValue.Name = "labelNumericValue";
+            this.labelNumericValue.Size = new System.Drawing.Size(183, 20);
+            this.labelNumericValue.TabIndex = 2;
+            this.labelNumericValue.Text = "Numeric value from graph";
+            // 
             // listBoxGraph
             // 
             this.listBoxGraph.FormattingEnabled = true;
             this.listBoxGraph.ItemHeight = 20;
-            this.listBoxGraph.Location = new System.Drawing.Point(506, 24);
+            this.listBoxGraph.Location = new System.Drawing.Point(507, 59);
             this.listBoxGraph.Name = "listBoxGraph";
             this.listBoxGraph.Size = new System.Drawing.Size(405, 264);
             this.listBoxGraph.TabIndex = 1;
@@ -819,7 +831,7 @@
             // 
             this.listBoxServers.FormattingEnabled = true;
             this.listBoxServers.ItemHeight = 20;
-            this.listBoxServers.Location = new System.Drawing.Point(8, 24);
+            this.listBoxServers.Location = new System.Drawing.Point(8, 59);
             this.listBoxServers.Name = "listBoxServers";
             this.listBoxServers.Size = new System.Drawing.Size(405, 264);
             this.listBoxServers.TabIndex = 0;
@@ -841,16 +853,15 @@
             // listBoxGraphYvals
             // 
             this.listBoxGraphYvals.FormattingEnabled = true;
-            this.listBoxGraphYvals.HorizontalScrollbar = true;
             this.listBoxGraphYvals.ItemHeight = 20;
-            this.listBoxGraphYvals.Location = new System.Drawing.Point(782, 156);
+            this.listBoxGraphYvals.Location = new System.Drawing.Point(782, 146);
             this.listBoxGraphYvals.Name = "listBoxGraphYvals";
-            this.listBoxGraphYvals.Size = new System.Drawing.Size(167, 264);
+            this.listBoxGraphYvals.Size = new System.Drawing.Size(167, 244);
             this.listBoxGraphYvals.TabIndex = 8;
             // 
             // buttonStopMonitoring
             // 
-            this.buttonStopMonitoring.Location = new System.Drawing.Point(782, 77);
+            this.buttonStopMonitoring.Location = new System.Drawing.Point(782, 92);
             this.buttonStopMonitoring.Name = "buttonStopMonitoring";
             this.buttonStopMonitoring.Size = new System.Drawing.Size(167, 29);
             this.buttonStopMonitoring.TabIndex = 7;
@@ -860,7 +871,7 @@
             // 
             // buttonStartMonitoring
             // 
-            this.buttonStartMonitoring.Location = new System.Drawing.Point(782, 42);
+            this.buttonStartMonitoring.Location = new System.Drawing.Point(782, 45);
             this.buttonStartMonitoring.Name = "buttonStartMonitoring";
             this.buttonStartMonitoring.Size = new System.Drawing.Size(167, 29);
             this.buttonStartMonitoring.TabIndex = 6;
@@ -983,6 +994,7 @@
             this.statusStripConnection.ResumeLayout(false);
             this.statusStripConnection.PerformLayout();
             this.tabPageLists.ResumeLayout(false);
+            this.tabPageLists.PerformLayout();
             this.tabPageGraph.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chartArduino)).EndInit();
             this.menuStrip2.ResumeLayout(false);
@@ -1072,5 +1084,6 @@
         private ListBox listBoxGraph;
         private Label labelPassword;
         private ListBox listBoxGraphYvals;
+        private Label labelNumericValue;
     }
 }

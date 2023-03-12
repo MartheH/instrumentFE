@@ -12,6 +12,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml.Serialization;
 using System.IO.Ports;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Data;
+using System.IO;
 
 namespace FirstWindowsFormsApp
 {
@@ -98,12 +100,12 @@ namespace FirstWindowsFormsApp
             comboBoxSignalType.Text = "";
             textBoxRegister.Text = "";
             //comboBoxMeasureType.Text = "";
-
+            /*
             //Load instrument.csv file
             string instrumentLine = "";
             string[] instrumentLineParts;
             var inputFile = new StreamReader(fileNameInstrumentList);
-
+            */
             //Når jeg kommenterer bort dette blir lista laget i riktig form i listeboksen,
             //når jeg har det med blir det lagret nedover
 
@@ -186,19 +188,13 @@ namespace FirstWindowsFormsApp
                 comboBoxInstrumentName.Focus();
             }
 
-            if (!NewSensorName())
+            else if (!NewSensorName())
             {
                 MessageBox.Show("This instrument already exist");
             }
 
 
-            if (comboBoxInstrumentName.SelectedIndex < 0)
-            {
-                //MessageBox.Show("Missing instruement name");
-                //comboBoxInstrumentName.Focus();
-            }
-
-            if (comboBoxSignalType.Text == "Analog")
+            else if (comboBoxSignalType.Text == "Analog")
             {
                 if (textBoxLRV.Text == "")
                 {
@@ -214,15 +210,37 @@ namespace FirstWindowsFormsApp
 
                 else if (Convert.ToDouble(textBoxURV.Text) <= Convert.ToDouble(textBoxLRV.Text))
                 {
-                    MessageBox.Show("The URV-value can not be lower than LRV-value. Enter a new URV-value.");
+                    MessageBox.Show("The URV-value can not be lower than LRV-value.");
+                    textBoxURV.Focus();
+                }
+
+                else if (textBoxAlarmH.Text == "")
+                {
+                    MessageBox.Show("Missing value on alarm high");
+                    textBoxURV.Focus();
+                }
+
+                else if (textBoxAlarmL.Text == "")
+                {
+                    MessageBox.Show("Missing value on alarm low");
+                    textBoxURV.Focus();
+                }
+
+                else if (Convert.ToDouble(textBoxAlarmH.Text) <= Convert.ToDouble(textBoxAlarmL.Text))
+                {
+                    MessageBox.Show("The alarm high- value can not be lower than the alarm low- value.");
                     textBoxURV.Focus();
                 }
             }
 
+            else if (!comboBoxInstrumentName.Items.Contains(comboBoxInstrumentName.Text))
+            {
+                comboBoxInstrumentName.Items.Add(comboBoxInstrumentName.Text);
+            }
             //instrumentList.Add(instrument);    //For å legge til en liste i listeboksen
 
             AddTextInTextRegister();
-
+            //comboBoxInstrumentName.Items.Add(comboBoxInstrumentName.Text);
             //List<InstrumentBE> instrumentList = new List<InstrumentBE>();
 
         }
@@ -252,8 +270,6 @@ namespace FirstWindowsFormsApp
 
         private void AddTextInTextRegister()
         {
-
-            textBoxRegister.Text = "";
             //listBoxServers.Items.Clear();
             //if (NewInstrument(textBoxLabelSensorName.Text))
 
@@ -261,7 +277,7 @@ namespace FirstWindowsFormsApp
             {
                 if (comboBoxSignalType.Text == "Analog")
                 {
-                    Instrument instrument = new Instrument(dateTimePickerRegisterDate.Text,
+                    Instrument instrument = new Instrument( dateTimePickerRegisterDate.Text,
                                                             comboBoxInstrumentName.Text,
                                                             maskedTextBoxSerialNumber.Text,
                                                             comboBoxSignalType.Text,
@@ -276,15 +292,11 @@ namespace FirstWindowsFormsApp
                                                             //urvValue,
                                                             textBoxUnit.Text,
                                                             Convert.ToDouble(textBoxAlarmL.Text),
-                                                            Convert.ToDouble(textBoxAlarmH.Text)                                                        //alarmLvalue,
-                                                                                                                                                        //alamrHvalue
+                                                            Convert.ToDouble(textBoxAlarmH.Text)                                                                                            //alamrHvalue
                                                             );
-                    //instrumentList.Add(instrument);
+
                     textBoxRegister.AppendText(instrument.ToString());
-                    //listBoxServers.Append(instrument);
-                    //listBoxServers.Items.Add(instrument.ToString());
                     listBoxServers.Items.Add(instrument);
-                    //listBoxServers.Items.AddRange(instrument);
                 }
 
                 else
@@ -296,24 +308,10 @@ namespace FirstWindowsFormsApp
                                                             comboBoxMeasureType.Text,
                                                             comboBoxOptions.Text,
                                                             textBoxComment.Text
-                                                            //Convert.ToDouble(textBoxLRV.Text),
-                                                            //Convert.ToDouble(textBoxURV.Text),
-                                                            //textBoxLRV.Text,
-                                                            //textBoxURV.Text,
-                                                            //lrvValue,
-                                                            //urvValue,
-                                                            //textBoxUnit.Text
-                                                            //Convert.ToDouble(textBoxAlarmL.Text),
-                                                            //Convert.ToDouble(textBoxAlarmH.Text)                                                        //alarmLvalue,
-                                                                                                                                                        //alamrHvalue
                                                             );
-                    //instrumentList.Add(instrument);
-                    textBoxRegister.AppendText(instrument.ToString());
-                    //listBoxServers.Append(instrument);
-                    //listBoxServers.Items.Add(instrument.ToString());
-                    listBoxServers.Items.Add(instrument);
-                    //listBoxServers.Items.AddRange(instrument);
 
+                    textBoxRegister.AppendText(instrument.ToString());
+                    listBoxServers.Items.Add(instrument);
                 }
             }
         }
@@ -448,18 +446,8 @@ namespace FirstWindowsFormsApp
                     break;
             }
         }
-
-        private void textBoxLRV_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-
-        }
-
+       
+        
         private void buttonSummary_Click(object sender, EventArgs e)
         {
             //DateTime sessionTime;
@@ -612,11 +600,14 @@ namespace FirstWindowsFormsApp
                 result = MessageBox.Show(this, message, caption, buttons, icon);
                 if (result == DialogResult.Yes)
                 {
+                    comboBoxInstrumentName.Items.Clear();
                     var inputFile = new StreamReader(fileName);
                     textBoxRegister.Text = inputFile.ReadToEnd();
-                    inputFile.Close();
 
-                    //MessageBox.Show("Filename = " + fileName);
+                    //Hvordan hente ut instrumentnavn fra fil og legge de inn i lisyeboksen "comboboxinstrumentname"
+                    //listBoxServers.Items.Add(inputFile.ToSt());
+                    //comboBoxInstrumentName.Items.Add(inputFile.Read());
+                    inputFile.Close();
                 }
             }
         }
@@ -626,7 +617,13 @@ namespace FirstWindowsFormsApp
         {
             if (textBoxRegister.TextLength > 0)
             {
-                StreamWriter outputFile = new StreamWriter("register.csv");     //får ikke lagret til fil
+                //StreamWriter outputFile = new StreamWriter("instruments.csv");     //får ikke lagret til fil
+                StreamWriter outputFile = new StreamWriter("Instrument.ssc");
+                string[] splits = textBoxRegister.Text.Split(";");
+                string split = splits[0].Substring(0, 11);
+                //string ComPortParts = ComportReceivedParts[2].Substring(0, ComportReceivedParts[2].Length);
+
+                //outputFile.WriteLine(split);
                 outputFile.WriteLine(textBoxRegister.Text);
                 outputFile.Close();
             }
@@ -854,27 +851,16 @@ namespace FirstWindowsFormsApp
 
         }
 
-        /*
-        private void buttonAddXY_Click(object sender, EventArgs e)
-        {
-
-            if (timerReadScaled.Enabled)
-            {
-                timerReadScaled.Stop();
-            }
-            else
-            {
-                timerReadScaled.Start();
-            }
-
-        }
-        */
+        public string timeNow { get; set; }
 
         private void timerReadScaled_Tick(object sender, EventArgs e)
         {
-            xTimeValue++;
+            //xTimeValue++;
+            //double listindex = 0;
             //xTimeValue = DateTime.UtcNow.ToUniversalTime();
             DateTime timeNow = DateTime.Now;
+            
+
             double yValue = 0.0;
 
             string received = sendToBackEnd("readscaled");
@@ -882,12 +868,17 @@ namespace FirstWindowsFormsApp
 
             yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
 
-            //chartArduino.Series[0].Points.AddXY(xTimeValue, yValue);
-            double adding = chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue);
+            chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue);
+            //listindex += 1;
+
             //string.Format("({0:0.00}", yValue);
             //listBoxGraphYvals.Items.Add(string.Format("{0:0.00}", yValue));
-            listBoxGraphYvals.Items.Add(yValue);
+            listBoxGraphYvals.Items.Add("Scaled: "+yValue);
+            listBoxGraph.Items.Add("Time: " + timeNow + " Scaled: " + yValue);
+            //listBoxGraph.Items.Add("Listindex: "+ listindex + "Listvalue: " + xTimeValue + "In");
+
         }
+        
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -910,49 +901,34 @@ namespace FirstWindowsFormsApp
 
         // Hentet fra nettet, må skrives om
 
-        private void textBoxURV_KeyPress(object sender, KeyPressEventArgs e)
+        
+        private static void WriteOnlyNumbers(KeyPressEventArgs e)
         {
-            //urvValue= e.KeyChar;
-
-
-
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
         }
 
+        private void textBoxURV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            WriteOnlyNumbers(e);
+        }
+
+        private void textBoxLRV_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            WriteOnlyNumbers(e);
+
+        }
         private void textBoxAlarmH_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if(Convert.ToDouble(textBoxAlarmH.Text) )
-
-            /*
-            if(e.KeyChar < 0 || e.KeyChar < Convert.ToInt64(textBoxAlarmL.Text)) 
-            {   
-                e.Handled = true;
-            }
-            
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            */
+            WriteOnlyNumbers(e);
 
         }
 
         private void textBoxAlarmL_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*
-            if (e.KeyChar < 0 || e.KeyChar > Convert.ToDouble(textBoxAlarmL.Text))
-            {
-                e.Handled = true;
-            }
-            
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-            */
+            WriteOnlyNumbers(e);
         }
 
         private void buttonComConnect_Click(object sender, EventArgs e)
@@ -1077,73 +1053,44 @@ namespace FirstWindowsFormsApp
             */
         }
 
-        //Fungerer ikke å skrive ut grafen
         private void buttonStartMonitoring_Click(object sender, EventArgs e)
         {
-            /*
+            listBoxGraphYvals.Items.Add("Starting monitor...");
             timerReadScaled.Start();
-            
-            using (StreamWriter writer = new StreamWriter("output.txt", true))
-            {
-                foreach (DataPoint point in chartArduino.Series[0].Points)
-                {
-                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
-                }
-            }
-
-            */
-
-            timerReadScaled.Start();
-            /*
-            using (StreamWriter writer = new StreamWriter("output.txt", true))
-            {
-                foreach (DataPoint point in chartArduino.Series[0].Points)
-                {
-                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
-                }
-            }
-            /*
-
-            if (timerReadScaled.Enabled)
-            {
-                timerReadScaled.Stop();
-            }
-            else
-            {
-                timerReadScaled.Start();
-                
-                using (StreamWriter writer = new StreamWriter("output.txt", true))
-                {
-                    foreach (DataPoint point in chartArduino.Series[0].Points)
-                    {
-                        writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
-                    }
-                }
-            }
-            */
-
         }
 
         private void buttonStopMonitoring_Click(object sender, EventArgs e)
         {
+            listBoxGraphYvals.Items.Add("Closing monitor...");
             timerReadScaled.Stop();
-            //listBoxGraph.Items.Add();
-            using (StreamWriter writer = new StreamWriter("output.txt", true))
+
+            string message = "Do you want to save to file?";
+            string caption = "Save values to file";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            MessageBoxIcon icon = MessageBoxIcon.Question;
+            DialogResult save;
+
+            save = MessageBox.Show(this, message, caption, buttons, icon);
+
+            if(save == DialogResult.Yes)
             {
-                foreach (DataPoint point in chartArduino.Series[0].Points)
+                using (StreamWriter writer = new StreamWriter("output.txt", true))
                 {
-                    writer.WriteLine(point.XValue.ToString("Values") + "" + point.YValues[0].ToString("Values"));
+                    foreach (DataPoint point in chartArduino.Series[0].Points)
+                    {
+                        xTimeValue ++;
+                        writer.WriteLine("Time: " + point.AxisLabel + "Scaled value: " + point.YValues[0]);     //skriver bare ut klokkeslett. Skal jeg skrive dato?
+                        writer.WriteLine("List-index: " + xTimeValue + "List value: " + point.XValue.ToString("Hei"));      //Hva skal være i "List value"?
+                    }
                 }
             }
 
         }
 
-
-
-
-        //
-
-
+        private void textBoxIP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            WriteOnlyNumbers(e);
+        }
 
         /*
         private void buttonRegSaveDel_Click(object sender, EventArgs e)
@@ -1163,7 +1110,7 @@ namespace FirstWindowsFormsApp
         }
         */
 
-    }   
+    }
 }
 
 
