@@ -146,15 +146,15 @@ namespace FirstWindowsFormsApp
         
     private void dataReceived(object sender, SerialDataReceivedEventArgs e)
     {
-        string message = serialPort.ReadLine();
+        //string message = serialPort.ReadLine();
         //string messsage = "COM3";
-        Console.WriteLine(message);
-        Console.WriteLine("Funker!");
-        textBoxComReceived.AppendText("Hei" + message);
-        Console.WriteLine("Funker bra");
+        //Console.WriteLine(message);
+        //Console.WriteLine("Funker!");
+        //textBoxComReceived.AppendText("Hei" + message);
+        //Console.WriteLine("Funker bra");
     }
         
-
+     
     // funker ikke
     private void FormMain_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -173,7 +173,7 @@ namespace FirstWindowsFormsApp
             }
         }
 
-
+        
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -415,7 +415,7 @@ namespace FirstWindowsFormsApp
         {
             statusLabelSensorData.Text = "Set a low level value";
         }
-
+        
 
         private void comboBoxSignalType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -510,9 +510,8 @@ namespace FirstWindowsFormsApp
         private void buttonConnect_Click_1(object sender, EventArgs e)
         {
 
-            if (textBoxIP.Text == "127.0.0.1")
+            if (textBoxIP.Text == "127.0.0.1" & textBoxPort.Text == "5000")
             {
-
                 IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(textBoxIP.Text), Convert.ToInt32(textBoxPort.Text));
                 Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -525,9 +524,12 @@ namespace FirstWindowsFormsApp
                 statusStripConnection.BackColor = Color.Green;
                 //statusStripConnection.BackColor = SystemColors.Window;
                 //client send
-                client.Send(Encoding.ASCII.GetBytes(textBoxSend.Text));
 
-                
+                //
+                //client.Send(Encoding.ASCII.GetBytes(textBoxSend.Text));
+                client.Send(Encoding.ASCII.GetBytes("comport"));
+                //
+
                 //client received
                 byte[] buffer = new byte[1024];
                 int bytesReceived = client.Receive(buffer);
@@ -669,7 +671,6 @@ namespace FirstWindowsFormsApp
 
 
         private string sendToBackEnd(string command)
-        //private string sendToBackEnd(string command)
         {
 
             if (textBoxIP.Text == "127.0.0.1")
@@ -868,13 +869,13 @@ namespace FirstWindowsFormsApp
 
             yValue = Convert.ToDouble(receivedY, CultureInfo.InvariantCulture);
 
-            chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue);
+            chartArduino.Series[0].Points.AddXY(timeNow.ToString("HH:mm:ss"), yValue + "\r\n");
             //listindex += 1;
 
             //string.Format("({0:0.00}", yValue);
             //listBoxGraphYvals.Items.Add(string.Format("{0:0.00}", yValue));
-            listBoxGraphYvals.Items.Add("Scaled: "+yValue);
-            listBoxGraph.Items.Add("Time: " + timeNow + " Scaled: " + yValue);
+            listBoxGraphYvals.Items.Add("Scaled: "+yValue + "\r\n" + "Time: " + timeNow + " Scaled: " + yValue + "\r\n");
+            //listBoxGraph.Items.Add();
             //listBoxGraph.Items.Add("Listindex: "+ listindex + "Listvalue: " + xTimeValue + "In");
 
         }
@@ -940,20 +941,25 @@ namespace FirstWindowsFormsApp
 
             else
             {
+                MessageBox.Show("You must choose a COM Port", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxBaud.Text != "")
+            if (comboBoxBit.Text != "")
             {
-                serialPort.BaudRate = Convert.ToInt32(comboBoxBaud.Text);
+                serialPort.BaudRate = Convert.ToInt32(comboBoxBit.Text);
             }
             else
             {
+                MessageBox.Show("You must choose a Bitrate", "No connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             serialPort.Open();
             serialPort.Write(textBoxSend.Text);
+            //listBoxGraphYvals.Items.Add("Starting monitor...");
+            //timerReadScaled.Start();
+
             textBoxComReceived.AppendText("Hei på deg");
-            //serialPort.Close();    //må jeg ha med close? Får ikke ut grafen.
+            serialPort.Close();    //må jeg ha med close? Får ikke ut grafen.
         }
 
         private void buttonWriteConfiguration_Click(object sender, EventArgs e)
@@ -1092,6 +1098,7 @@ namespace FirstWindowsFormsApp
             WriteOnlyNumbers(e);
         }
 
+
         /*
         private void buttonRegSaveDel_Click(object sender, EventArgs e)
         {
@@ -1112,14 +1119,6 @@ namespace FirstWindowsFormsApp
 
     }
 }
-
-
-
-
-
-
-
-
 
 
 // Hjelp til koding

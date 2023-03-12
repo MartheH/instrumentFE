@@ -77,9 +77,9 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonComConnect = new System.Windows.Forms.Button();
             this.textBoxComReceived = new System.Windows.Forms.TextBox();
-            this.labelBaudRate = new System.Windows.Forms.Label();
+            this.labelBitRate = new System.Windows.Forms.Label();
             this.labelComPort = new System.Windows.Forms.Label();
-            this.comboBoxBaud = new System.Windows.Forms.ComboBox();
+            this.comboBoxBit = new System.Windows.Forms.ComboBox();
             this.comboBoxComPort = new System.Windows.Forms.ComboBox();
             this.statusStripConnection = new System.Windows.Forms.StatusStrip();
             this.statusLabelConnection = new System.Windows.Forms.ToolStripStatusLabel();
@@ -94,7 +94,7 @@
             this.textBoxCommunication = new System.Windows.Forms.TextBox();
             this.textBoxIP = new System.Windows.Forms.TextBox();
             this.textBoxPort = new System.Windows.Forms.TextBox();
-            this.buttonConnect = new System.Windows.Forms.Button();
+            this.buttonGetComPort = new System.Windows.Forms.Button();
             this.tabPageLists = new System.Windows.Forms.TabPage();
             this.labelNumericValue = new System.Windows.Forms.Label();
             this.listBoxGraph = new System.Windows.Forms.ListBox();
@@ -560,9 +560,9 @@
             this.tabPageConnection.Controls.Add(this.textBoxPassword);
             this.tabPageConnection.Controls.Add(this.buttonComConnect);
             this.tabPageConnection.Controls.Add(this.textBoxComReceived);
-            this.tabPageConnection.Controls.Add(this.labelBaudRate);
+            this.tabPageConnection.Controls.Add(this.labelBitRate);
             this.tabPageConnection.Controls.Add(this.labelComPort);
-            this.tabPageConnection.Controls.Add(this.comboBoxBaud);
+            this.tabPageConnection.Controls.Add(this.comboBoxBit);
             this.tabPageConnection.Controls.Add(this.comboBoxComPort);
             this.tabPageConnection.Controls.Add(this.statusStripConnection);
             this.tabPageConnection.Controls.Add(this.buttonReadScaled);
@@ -576,7 +576,7 @@
             this.tabPageConnection.Controls.Add(this.textBoxCommunication);
             this.tabPageConnection.Controls.Add(this.textBoxIP);
             this.tabPageConnection.Controls.Add(this.textBoxPort);
-            this.tabPageConnection.Controls.Add(this.buttonConnect);
+            this.tabPageConnection.Controls.Add(this.buttonGetComPort);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 29);
             this.tabPageConnection.Name = "tabPageConnection";
             this.tabPageConnection.Padding = new System.Windows.Forms.Padding(3);
@@ -624,14 +624,14 @@
             this.textBoxComReceived.Size = new System.Drawing.Size(390, 212);
             this.textBoxComReceived.TabIndex = 28;
             // 
-            // labelBaudRate
+            // labelBitRate
             // 
-            this.labelBaudRate.AutoSize = true;
-            this.labelBaudRate.Location = new System.Drawing.Point(523, 84);
-            this.labelBaudRate.Name = "labelBaudRate";
-            this.labelBaudRate.Size = new System.Drawing.Size(77, 20);
-            this.labelBaudRate.TabIndex = 27;
-            this.labelBaudRate.Text = "Baud Rate";
+            this.labelBitRate.AutoSize = true;
+            this.labelBitRate.Location = new System.Drawing.Point(523, 84);
+            this.labelBitRate.Name = "labelBitRate";
+            this.labelBitRate.Size = new System.Drawing.Size(61, 20);
+            this.labelBitRate.TabIndex = 27;
+            this.labelBitRate.Text = "Bit Rate";
             // 
             // labelComPort
             // 
@@ -642,20 +642,20 @@
             this.labelComPort.TabIndex = 26;
             this.labelComPort.Text = "Com Port";
             // 
-            // comboBoxBaud
+            // comboBoxBit
             // 
-            this.comboBoxBaud.FormattingEnabled = true;
-            this.comboBoxBaud.Items.AddRange(new object[] {
+            this.comboBoxBit.FormattingEnabled = true;
+            this.comboBoxBit.Items.AddRange(new object[] {
             "2400",
             "4800",
             "9600",
             "19200",
             "38400",
             "57600"});
-            this.comboBoxBaud.Location = new System.Drawing.Point(609, 76);
-            this.comboBoxBaud.Name = "comboBoxBaud";
-            this.comboBoxBaud.Size = new System.Drawing.Size(151, 28);
-            this.comboBoxBaud.TabIndex = 25;
+            this.comboBoxBit.Location = new System.Drawing.Point(609, 76);
+            this.comboBoxBit.Name = "comboBoxBit";
+            this.comboBoxBit.Size = new System.Drawing.Size(151, 28);
+            this.comboBoxBit.TabIndex = 25;
             // 
             // comboBoxComPort
             // 
@@ -785,17 +785,17 @@
             this.textBoxPort.TabIndex = 2;
             this.textBoxPort.Text = "5000";
             // 
-            // buttonConnect
+            // buttonGetComPort
             // 
-            this.buttonConnect.BackColor = System.Drawing.Color.Silver;
-            this.buttonConnect.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonConnect.Location = new System.Drawing.Point(19, 120);
-            this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(240, 36);
-            this.buttonConnect.TabIndex = 3;
-            this.buttonConnect.Text = "Connect";
-            this.buttonConnect.UseVisualStyleBackColor = false;
-            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click_1);
+            this.buttonGetComPort.BackColor = System.Drawing.Color.Silver;
+            this.buttonGetComPort.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonGetComPort.Location = new System.Drawing.Point(19, 120);
+            this.buttonGetComPort.Name = "buttonGetComPort";
+            this.buttonGetComPort.Size = new System.Drawing.Size(240, 36);
+            this.buttonGetComPort.TabIndex = 3;
+            this.buttonGetComPort.Text = "Connect";
+            this.buttonGetComPort.UseVisualStyleBackColor = false;
+            this.buttonGetComPort.Click += new System.EventHandler(this.buttonConnect_Click_1);
             // 
             // tabPageLists
             // 
@@ -1031,7 +1031,7 @@
         private TextBox textBoxCommunication;
         private TextBox textBoxIP;
         private TextBox textBoxPort;
-        private Button buttonConnect;
+        private Button buttonGetComPort;
         private Label labelMeasureTime;
         private Label labelUnit;
         private Label labelURV;
@@ -1074,9 +1074,9 @@
         private ToolStripStatusLabel statusLabelConnection;
         private Button buttonComConnect;
         private TextBox textBoxComReceived;
-        private Label labelBaudRate;
+        private Label labelBitRate;
         private Label labelComPort;
-        private ComboBox comboBoxBaud;
+        private ComboBox comboBoxBit;
         private ComboBox comboBoxComPort;
         private TextBox textBoxPassword;
         private Button buttonStopMonitoring;
